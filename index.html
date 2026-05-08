@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Pacifico&family=Fredoka+One&display=swap" rel="stylesheet">
     <style>
         body {
-            background: #ffe5ec; /* Pinkish background */
+            background: #ffe5ec;
             display: flex; justify-content: center; align-items: center;
             height: 100vh; margin: 0; font-family: 'Dancing Script', cursive; overflow: hidden;
         }
@@ -15,122 +15,129 @@
         .paper {
             background: #fff9e6; background-image: url('https://www.transparenttextures.com/patterns/old-map.png');
             padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            min-height: 450px; display: flex; flex-direction: column; justify-content: center; position: relative;
+            min-height: 480px; display: flex; flex-direction: column; justify-content: center; position: relative;
         }
         .page { display: none; animation: fadeIn 0.8s; }
         .active { display: flex; flex-direction: column; align-items: center; }
         
-        /* Typography */
-        h1 { color: #ff4d6d; font-family: 'Pacifico', cursive; margin-bottom: 10px; }
-        .type-msg { font-size: 22px; color: #5d4037; min-height: 100px; line-height: 1.4; margin-bottom: 20px; }
-        .annoy-text { font-family: 'Fredoka One', cursive; color: #c9184a; font-size: 28px; }
-
-        /* Images & GIF */
-        .gf-img { width: 100%; border-radius: 10px; border: 5px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-top: 15px; }
-        .cat-gif { width: 180px; margin-top: 15px; }
-
-        /* Gift System */
-        .gift-box { font-size: 70px; cursor: pointer; transition: 0.3s; margin: 20px 0; }
-        .gift-items { display: flex; gap: 25px; font-size: 60px; display: none; margin-top: 10px; }
-        .gift-item { cursor: pointer; transform: scale(1); transition: 0.2s; }
-        .gift-item:hover { transform: scale(1.2); }
-        .sweet-msg { font-size: 19px; color: #ff4d6d; height: 25px; margin-top: 10px; font-weight: bold; }
-
+        h1 { color: #ff4d6d; font-family: 'Pacifico', cursive; }
         .btn {
-            background: #ff4d6d; color: white; border: none; padding: 12px 30px;
-            border-radius: 50px; cursor: pointer; font-size: 18px; font-family: 'Arial', sans-serif;
-            box-shadow: 0 4px 10px rgba(255, 77, 109, 0.3);
+            background: #ff4d6d; color: white; border: none; padding: 12px 25px;
+            border-radius: 50px; cursor: pointer; font-size: 18px; margin: 10px;
         }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .gf-img { width: 100%; border-radius: 10px; border: 5px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-top: 10px; }
+        
+        /* Specific Styles */
+        .how-dare { font-family: 'Fredoka One', cursive; color: red; font-size: 40px; }
+        .letter-text { text-align: left; font-size: 18px; color: #5d4037; line-height: 1.4; }
+        .cake-bg { background: url('https://img.freepik.com/free-vector/birthday-cake-with-candles_23-2147503113.jpg?size=338&ext=jpg') no-repeat center; background-size: contain; }
+        .typewriter { font-size: 20px; color: #c9184a; min-height: 60px; font-weight: bold; }
+        .final-text { font-family: 'Fredoka One', cursive; font-size: 35px; color: #ff4d6d; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="paper">
+    <div class="paper" id="main-paper">
         
-        <div id="p0" class="page active">
-            <h1>Birthday Queen! 👑</h1>
-            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHYwdWp3eGZ3eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/KztT2c4u8mYYUiMKdJ/giphy.gif" style="width:150px; margin-bottom:20px;">
-            <button class="btn" onclick="startTypewriter()">PLS ACCEPT THE GIFT ✨</button>
-        </div>
-
-        <div id="p1" class="page">
-            <h1>A Message For You 📜</h1>
-            <div id="tw-text" class="type-msg"></div>
-            <button class="btn" id="next1" style="display:none;" onclick="nextPage('p2')">Check Your Gift 🎁</button>
+        <div id="p1" class="page active">
+            <h1>PLS ACCEPT THE GIFT ✨</h1>
+            <div style="display:flex;">
+                <button class="btn" onclick="nextPage('p3')">YES</button>
+                <button class="btn" onclick="nextPage('p2')">NO</button>
+            </div>
         </div>
 
         <div id="p2" class="page">
-            <h1>Open Your Package! 🎁</h1>
-            <div class="gift-box" id="box" onclick="openBox()">📦</div>
-            <div class="gift-items" id="items">
-                <div class="gift-item" onclick="showSweet('Cake')">🎂</div>
-                <div class="gift-item" onclick="showSweet('Chocolate')">🍫</div>
-            </div>
-            <div id="status-msg" class="sweet-msg"></div>
-            <button class="btn" id="next2" style="display:none; margin-top: 20px;" onclick="startQueenTransition()">Next ➡️</button>
+            <h1 class="how-dare">HOW DARE YOU? 😡</h1>
+            <button class="btn" onclick="nextPage('p1')">Back ⬅️</button>
         </div>
 
         <div id="p3" class="page">
-            <h1>Birthday Queen 👸</h1>
-            <img src="gf_pic.jpg" class="gf-img" onerror="this.src='https://via.placeholder.com/300x250?text=Upload+Her+Photo+Here'">
-            <p style="color: #5d4037; font-size: 18px; margin-top: 15px;">You look so beautiful today! ✨</p>
+            <h1>You have a package! 📦</h1>
+            <div style="font-size: 80px; cursor: pointer;" onclick="openBox()">🎁</div>
+            <p>Click the box to open</p>
         </div>
 
         <div id="p4" class="page">
-            <h1 class="annoy-text">I want to annoy you forever! ❤️</h1>
-            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHYwdWp3eGZ3eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/4N1wOi78ZGzSB6H7vK/giphy.gif" class="cat-gif">
-            <p style="font-size: 18px; color: #ff4d6d; margin-top: 10px;">Happy Birthday, Sweetie! 🥰</p>
+            <h1>A Special Letter 📜</h1>
+            <div class="letter-text">
+                প্রিয় জান,<br>
+                আজ তোমার জন্মদিন, আর আমি খুব খুশি। তুমি আমার জীবনে আসার পর সবকিছু অনেক সুন্দর হয়ে গেছে। তোমার হাসিটা যেন সারাজীবন এমন মিষ্টি থাকে। সবসময় পাশে থেকো, অনেক অনেক ভালোবাসা নিও। (তোর বাকি ১০ লাইন এখানে লিখে দিস...)
+            </div>
+            <button class="btn" id="letter-next" style="display:none;" onclick="showCakePage()">Next ➡️</button>
+        </div>
+
+        <div id="p5" class="page">
+            <h1 style="font-size: 40px; color: #ff4d6d;">Happy Birthday Jaan! ❤️</h1>
+            <p>Wait for it... ✨</p>
+        </div>
+
+        <div id="p6" class="page">
+            <h1>My Prayers 🤲</h1>
+            <div id="tw-wish" class="typewriter"></div>
+            <button class="btn" id="wish-next" style="display:none;" onclick="showQueenPage()">Next ➡️</button>
+        </div>
+
+        <div id="p7" class="page">
+            <h1>Birthday Queen 👸</h1>
+            <img src="gf_pic.jpg" class="gf-img" onerror="this.src='https://via.placeholder.com/300x250?text=Upload+Her+Photo'">
+        </div>
+
+        <div id="p8" class="page">
+            <h1 class="final-text">I WANT TO ANNOY YOU FOREVER! ❤️</h1>
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHYwdWp3eGZ3eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/KztT2c4u8mYYUiMKdJ/giphy.gif" style="width:200px;">
         </div>
 
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 <script>
     function nextPage(id) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
         document.getElementById(id).classList.add('active');
     }
 
-    // Typewriter Logic
-    const msg = "আজকের এই দিনটা তোমার মতোই স্পেশাল। তোমার সব স্বপ্ন সত্যি হোক আর হাসিটা যেন সারাজীবন এমন মিষ্টি থাকে! শুভ জন্মদিন! ❤️";
-    let i = 0;
-    function startTypewriter() {
-        nextPage('p1');
-        type();
-    }
-    function type() {
-        if (i < msg.length) {
-            document.getElementById("tw-text").innerHTML += msg.charAt(i);
-            i++;
-            setTimeout(type, 80);
-        } else {
-            document.getElementById("next1").style.display = "block";
-        }
-    }
-
-    // Gift Box Logic
     function openBox() {
-        document.getElementById('box').style.display = 'none';
-        document.getElementById('items').style.display = 'flex';
-        document.getElementById('status-msg').innerText = "Pick one! ✨";
-    }
-
-    function showSweet(item) {
-        document.getElementById('status-msg').innerText = item + " is sweet, but you are sweeter! 🥰";
-        document.getElementById('next2').style.display = 'block';
-        confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
-    }
-
-    // Auto Transition (10 Sec)
-    function startQueenTransition() {
-        nextPage('p3');
+        nextPage('p4');
+        // লেটার পেজে ১০ সেকেন্ড পর নেক্সট বাটন আসবে
         setTimeout(() => {
-            nextPage('p4'); // ১০ সেকেন্ড পর লাস্ট পেজ
+            document.getElementById('letter-next').style.display = 'block';
         }, 10000);
+    }
+
+    function showCakePage() {
+        nextPage('p5');
+        document.getElementById('main-paper').classList.add('cake-bg');
+        // ৫ সেকেন্ড পর অটোমেটিক উইশ পেজে যাবে
+        setTimeout(() => {
+            document.getElementById('main-paper').classList.remove('cake-bg');
+            showWishPage();
+        }, 5000);
+    }
+
+    function showWishPage() {
+        nextPage('p6');
+        const wishText = "May God bless you, take care of your health, stay happy always! ✨";
+        let j = 0;
+        function typeWish() {
+            if (j < wishText.length) {
+                document.getElementById("tw-wish").innerHTML += wishText.charAt(j);
+                j++;
+                setTimeout(typeWish, 40); // একটু দ্রুত টাইপ হবে
+            } else {
+                document.getElementById('wish-next').style.display = 'block';
+            }
+        }
+        typeWish();
+    }
+
+    function showQueenPage() {
+        nextPage('p7');
+        // ৫ সেকেন্ড পর অটোমেটিক লাস্ট পেজে যাবে
+        setTimeout(() => {
+            nextPage('p8');
+        }, 5000);
     }
 </script>
 
