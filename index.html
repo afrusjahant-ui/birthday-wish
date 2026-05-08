@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Birthday Surprise</title>
+    <title>Birthday Magic</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Pacifico&family=Fredoka+One&display=swap" rel="stylesheet">
     <style>
         body {
@@ -11,28 +11,44 @@
             display: flex; justify-content: center; align-items: center;
             height: 100vh; margin: 0; font-family: 'Dancing Script', cursive; overflow: hidden;
         }
-        .container { width: 90%; max-width: 400px; text-align: center; }
+        .container { width: 90%; max-width: 450px; text-align: center; }
         .paper {
             background: #fff9e6; background-image: url('https://www.transparenttextures.com/patterns/old-map.png');
-            padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            min-height: 480px; display: flex; flex-direction: column; justify-content: center; position: relative;
+            padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            min-height: 500px; display: flex; flex-direction: column; justify-content: center; position: relative;
         }
-        .page { display: none; animation: fadeIn 0.8s; }
-        .active { display: flex; flex-direction: column; align-items: center; }
+        .page { display: none; width: 100%; }
+        .active { display: flex; flex-direction: column; align-items: center; animation: fadeIn 1s; }
+
+        /* Cat with Cake Background */
+        .cat-cake-theme {
+            background: linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.6)), 
+                        url('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHYwdWp3eGZ3eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/4N1wOi78ZGzSB6H7vK/giphy.gif');
+            background-size: contain; background-repeat: no-repeat; background-position: center;
+        }
+
+        .accept-font { font-family: 'Fredoka One', cursive; color: #ff4d6d; font-size: 35px; }
+
+        .box-container { font-size: 100px; cursor: pointer; transition: 0.5s; }
+        .box-open { animation: boxJump 1s forwards; }
         
-        h1 { color: #ff4d6d; font-family: 'Pacifico', cursive; }
+        @keyframes boxJump { 0% { transform: scale(1); } 50% { transform: scale(1.2); } 100% { transform: scale(0); opacity: 0; } }
+
+        .letter-bg {
+            background: #fdfdfd; padding: 20px; border: 1px solid #ddd;
+            background-image: repeating-linear-gradient(#fdfdfd 0px, #fdfdfd 24px, #e1e1e1 25px);
+            text-align: left; line-height: 25px; color: #333; font-family: 'Arial', sans-serif;
+            width: 90%; margin-top: 10px; border-radius: 5px;
+        }
+
         .btn {
             background: #ff4d6d; color: white; border: none; padding: 12px 25px;
-            border-radius: 50px; cursor: pointer; font-size: 18px; margin: 10px;
+            border-radius: 50px; cursor: pointer; font-size: 18px; margin: 10px; font-family: 'Fredoka One';
         }
+
         .gf-img { width: 100%; border-radius: 10px; border: 5px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-top: 10px; }
-        
-        /* Specific Styles */
-        .how-dare { font-family: 'Fredoka One', cursive; color: red; font-size: 40px; }
-        .letter-text { text-align: left; font-size: 18px; color: #5d4037; line-height: 1.4; }
-        .cake-bg { background: url('https://img.freepik.com/free-vector/birthday-cake-with-candles_23-2147503113.jpg?size=338&ext=jpg') no-repeat center; background-size: contain; }
-        .typewriter { font-size: 20px; color: #c9184a; min-height: 60px; font-weight: bold; }
-        .final-text { font-family: 'Fredoka One', cursive; font-size: 35px; color: #ff4d6d; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
@@ -41,7 +57,7 @@
     <div class="paper" id="main-paper">
         
         <div id="p1" class="page active">
-            <h1>PLS ACCEPT THE GIFT ✨</h1>
+            <h1 class="accept-font">PLS ACCEPT THE GIFT ✨</h1>
             <div style="display:flex;">
                 <button class="btn" onclick="nextPage('p3')">YES</button>
                 <button class="btn" onclick="nextPage('p2')">NO</button>
@@ -49,43 +65,42 @@
         </div>
 
         <div id="p2" class="page">
-            <h1 class="how-dare">HOW DARE YOU? 😡</h1>
+            <h1 style="color:red; font-size: 40px; font-family: 'Fredoka One';">HOW DARE YOU? 😡</h1>
             <button class="btn" onclick="nextPage('p1')">Back ⬅️</button>
         </div>
 
         <div id="p3" class="page">
-            <h1>You have a package! 📦</h1>
-            <div style="font-size: 80px; cursor: pointer;" onclick="openBox()">🎁</div>
-            <p>Click the box to open</p>
+            <h1 class="accept-font">You have a package! 📦</h1>
+            <div class="box-container" id="gift-box" onclick="animateBox()">🎁</div>
+            <p>Click the box to open it!</p>
         </div>
 
         <div id="p4" class="page">
-            <h1>A Special Letter 📜</h1>
-            <div class="letter-text">
+            <h1 style="font-family: 'Pacifico';">A Special Letter 📜</h1>
+            <div class="letter-bg">
                 প্রিয় জান,<br>
-                আজ তোমার জন্মদিন, আর আমি খুব খুশি। তুমি আমার জীবনে আসার পর সবকিছু অনেক সুন্দর হয়ে গেছে। তোমার হাসিটা যেন সারাজীবন এমন মিষ্টি থাকে। সবসময় পাশে থেকো, অনেক অনেক ভালোবাসা নিও। (তোর বাকি ১০ লাইন এখানে লিখে দিস...)
+                আজ তোমার জন্মদিন। আমি ১০ লাইন লিখতে পারতাম কিন্তু তোমার জন্য আমার ভালোবাসা ১০ লাইনে শেষ হবে না। তুমি আমার জীবনের শ্রেষ্ঠ উপহার। সব সময় হাসিখুশি থেকো। শুভ জন্মদিন! ❤️
             </div>
             <button class="btn" id="letter-next" style="display:none;" onclick="showCakePage()">Next ➡️</button>
         </div>
 
         <div id="p5" class="page">
-            <h1 style="font-size: 40px; color: #ff4d6d;">Happy Birthday Jaan! ❤️</h1>
-            <p>Wait for it... ✨</p>
+            <h1 style="font-size: 35px; color: #ff4d6d; text-shadow: 2px 2px white; font-family: 'Pacifico';">Happy Birthday Jaan! ❤️</h1>
         </div>
 
         <div id="p6" class="page">
-            <h1>My Prayers 🤲</h1>
-            <div id="tw-wish" class="typewriter"></div>
+            <h1 style="font-family: 'Fredoka One';">My Prayers 🤲</h1>
+            <div id="tw-wish" style="font-size: 22px; color: #c9184a; font-weight: bold;"></div>
             <button class="btn" id="wish-next" style="display:none;" onclick="showQueenPage()">Next ➡️</button>
         </div>
 
         <div id="p7" class="page">
-            <h1>Birthday Queen 👸</h1>
-            <img src="gf_pic.jpg" class="gf-img" onerror="this.src='https://via.placeholder.com/300x250?text=Upload+Her+Photo'">
+            <h1 class="accept-font">Birthday Queen 👸</h1>
+            <img src="gf_pic.jpg" class="gf-img" onerror="this.src='https://via.placeholder.com/300x250?text=Upload+Her+Photo+Named+gf_pic.jpg'">
         </div>
 
         <div id="p8" class="page">
-            <h1 class="final-text">I WANT TO ANNOY YOU FOREVER! ❤️</h1>
+            <h1 style="font-family: 'Fredoka One'; font-size: 32px; color: #ff4d6d;">I WANT TO ANNOY YOU FOREVER! ❤️</h1>
             <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHYwdWp3eGZ3eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/KztT2c4u8mYYUiMKdJ/giphy.gif" style="width:200px;">
         </div>
 
@@ -98,46 +113,41 @@
         document.getElementById(id).classList.add('active');
     }
 
-    function openBox() {
-        nextPage('p4');
-        // লেটার পেজে ১০ সেকেন্ড পর নেক্সট বাটন আসবে
+    function animateBox() {
+        const box = document.getElementById('gift-box');
+        box.classList.add('box-open');
         setTimeout(() => {
-            document.getElementById('letter-next').style.display = 'block';
-        }, 10000);
+            nextPage('p4');
+            setTimeout(() => { document.getElementById('letter-next').style.display = 'block'; }, 10000);
+        }, 1000);
     }
 
     function showCakePage() {
         nextPage('p5');
-        document.getElementById('main-paper').classList.add('cake-bg');
-        // ৫ সেকেন্ড পর অটোমেটিক উইশ পেজে যাবে
+        document.getElementById('main-paper').classList.add('cat-cake-theme');
         setTimeout(() => {
-            document.getElementById('main-paper').classList.remove('cake-bg');
+            document.getElementById('main-paper').classList.remove('cat-cake-theme');
             showWishPage();
         }, 5000);
     }
 
     function showWishPage() {
         nextPage('p6');
-        const wishText = "May God bless you, take care of your health, stay happy always! ✨";
+        const wishText = "May God bless you, take care of your health, and stay happy always! ✨";
         let j = 0;
-        function typeWish() {
+        function type() {
             if (j < wishText.length) {
                 document.getElementById("tw-wish").innerHTML += wishText.charAt(j);
-                j++;
-                setTimeout(typeWish, 40); // একটু দ্রুত টাইপ হবে
-            } else {
-                document.getElementById('wish-next').style.display = 'block';
-            }
+                j++; 
+                setTimeout(type, 100); // ১০০ মিলিসেকেন্ড - এখন সুন্দর স্লো টাইপিং হবে
+            } else { document.getElementById('wish-next').style.display = 'block'; }
         }
-        typeWish();
+        type();
     }
 
     function showQueenPage() {
         nextPage('p7');
-        // ৫ সেকেন্ড পর অটোমেটিক লাস্ট পেজে যাবে
-        setTimeout(() => {
-            nextPage('p8');
-        }, 5000);
+        setTimeout(() => nextPage('p8'), 5000);
     }
 </script>
 
