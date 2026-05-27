@@ -37,11 +37,16 @@
 </head>
 <body>
 
+<audio id="bg-music" src="birthday_song.mp3" loop prefetch></audio>
+
 <div class="container">
     <div class="paper" id="main-paper">
         <div id="p1" class="page active">
             <h1 class="accept-font">PLS ACCEPT THE GIFT ✨</h1>
-            <div style="display:flex;"><button class="btn" onclick="nextPage('p3')">YES</button><button class="btn" onclick="nextPage('p2')">NO</button></div>
+            <div style="display:flex;">
+                <button class="btn" onclick="startEverything()">YES</button>
+                <button class="btn" onclick="nextPage('p2')">NO</button>
+            </div>
         </div>
 
         <div id="p2" class="page">
@@ -74,7 +79,6 @@
         </div>
 
         <div id="p7" class="page">
-            <audio id="bg-music" src="birthday_song.mp3" loop></audio>
             <div class="crown-container">
                 <div class="crown">👑</div>
                 <img src="gf_pic.jpg" class="gf-img" onerror="this.src='https://via.placeholder.com/300x250?text=Birthday+Queen'">
@@ -90,9 +94,17 @@
 </div>
 
 <script>
+    const music = document.getElementById('bg-music');
+
     function nextPage(id) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
         document.getElementById(id).classList.add('active');
+    }
+
+    // ইউজার "YES" চাপলেই গান ব্যাকগ্রাউন্ডে চালু হয়ে যাবে, ব্রাউজার আর আটকাবে না
+    function startEverything() {
+        music.play().catch(e => console.log("Audio play dynamic handle:", e));
+        nextPage('p3');
     }
 
     function animateBox() {
@@ -108,4 +120,33 @@
         nextPage('p5');
         document.getElementById('main-paper').classList.add('cat-cake-theme');
         setTimeout(() => {
-            document.getElementById('main-paper').classList.remove('cat-cake-
+            document.getElementById('main-paper').classList.remove('cat-cake-theme');
+            showWishPage();
+        }, 5000);
+    }
+
+    function showWishPage() {
+        nextPage('p6');
+        const wishText = "May God bless you, take care of your health, and stay happy always! ✨";
+        let j = 0;
+        function type() {
+            if (j < wishText.length) {
+                document.getElementById("tw-wish").innerHTML += wishText.charAt(j);
+                j++; 
+                setTimeout(type, 150); 
+            } else { document.getElementById('wish-next').style.display = 'block'; }
+        }
+        type();
+    }
+
+    function showQueenPage() {
+        nextPage('p7');
+        // Birthday Queen পেজে ৭ সেকেন্ড থাকার পর ফাইনাল পেজে যাবে
+        setTimeout(() => {
+            nextPage('p8');
+        }, 7000);
+    }
+</script>
+
+</body>
+</html>
