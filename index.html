@@ -551,6 +551,23 @@
             icon.className = "fas fa-play";
         }
     }
+    // পেজ লোড হওয়ামাত্রই পাসওয়ার্ড চাইবে
+window.onload = function() {
+    // বডি হাইড করে রাখা হলো যেন পাসওয়ার্ড দেওয়ার আগে কিছু দেখা না যায়
+    document.body.style.display = "none"; 
+    
+    // এখানে তোর পছন্দের পাসওয়ার্ড দে (যেমন আমি দিলাম saba15)
+    const secretPassword = "saba15"; 
+    
+    let userPass = prompt("Enter Password to Access the Website:");
+    
+    if (userPass === secretPassword) {
+        document.body.style.display = "flex"; // পাসওয়ার্ড মিললে পেজ শো করবে
+    } else {
+        alert("Wrong Password! Access Denied.");
+        window.location.reload(); // ভুল হলে পেজ আবার রিলোড হবে
+    }
+}
 </script>
 
 </body>
