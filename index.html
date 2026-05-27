@@ -8,54 +8,73 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* মেইন ব্যাকগ্রাউন্ড গ্রিড ও থিম */
+        /* মেইন গ্রিড ব্যাকগ্রাউন্ড থিম */
         body {
             margin: 0;
             padding: 0;
             background-color: #ffe5ec;
             background-image: linear-gradient(#ffccd5 1px, transparent 1px), linear-gradient(90deg, #ffccd5 1px, transparent 1px);
-            background-size: 20px 20px;
+            background-size: 24px 24px;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             font-family: 'Arial', sans-serif;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* ওপরের দুই কোণার ঝালর (Bunting Banner) */
+        .bunting-left, .bunting-right {
+            position: absolute;
+            top: 0;
+            width: 280px;
+            height: 90px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: 1;
+            pointer-events: none;
+        }
+        .bunting-left {
+            left: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 30"><path d="M0,0 Q25,20 50,0 Q75,20 100,0" fill="none" stroke="%23ff758f" stroke-width="1"/><polygon points="5,3 15,3 10,15" fill="%23ff4d6d"/><polygon points="25,5 35,5 30,18" fill="%23ff758f"/><polygon points="45,5 55,5 50,18" fill="%23ff4d6d"/><polygon points="65,5 75,5 70,18" fill="%23ff758f"/><polygon points="85,3 95,3 90,15" fill="%23ff4d6d"/></svg>');
+        }
+        .bunting-right {
+            right: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 30"><path d="M0,0 Q25,20 50,0 Q75,20 100,0" fill="none" stroke="%23ff758f" stroke-width="1"/><polygon points="5,3 15,3 10,15" fill="%23ff4d6d"/><polygon points="25,5 35,5 30,18" fill="%23ff758f"/><polygon points="45,5 55,5 50,18" fill="%23ff4d6d"/><polygon points="65,5 75,5 70,18" fill="%23ff758f"/><polygon points="85,3 95,3 90,15" fill="%23ff4d6d"/></svg>');
+            transform: scaleX(-1);
         }
 
         .container {
-            width: 95%;
-            max-width: 1000px;
+            width: 90%;
+            max-width: 950px;
+            z-index: 2;
             display: flex;
             justify-content: center;
             align-items: center;
-            position: relative;
-            z-index: 2;
         }
 
+        /* পেজ ট্রানজিশন */
         .page {
             display: none;
             width: 100%;
-            animation: fadeIn 0.8s ease-in-out forwards;
+            justify-content: center;
+            align-items: center;
         }
 
         .active {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            display: flex !important;
+            animation: fadeIn 0.6s ease-in-out forwards;
         }
 
-        /* --- PAGE 1: FRONT PAGE --- */
+        /* ================= PAGE 1: SULAIMAN CODES EXACT THEME ================= */
         .front-layout {
             display: flex;
-            flex-direction: row;
+            width: 100%;
             align-items: center;
             justify-content: space-between;
-            width: 100%;
-            gap: 50px;
+            gap: 40px;
             flex-wrap: wrap;
-            position: relative;
-            padding: 20px;
         }
 
         .front-left {
@@ -63,11 +82,105 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            text-align: left;
             min-width: 320px;
-            z-index: 10;
         }
 
+        /* অরিজিনাল থিমের ডাবল-বক্স নিওন টেক্সট স্টাইল */
+        .text-block-wrapper {
+            position: relative;
+            margin-bottom: 25px;
+            padding-top: 20px;
+        }
+
+        .happy-box {
+            background: #0056b3;
+            color: white;
+            font-family: 'Fredoka One', cursive;
+            font-size: 55px;
+            padding: 5px 25px;
+            border-radius: 8px;
+            border: 4px solid #000;
+            display: inline-block;
+            transform: rotate(-3deg);
+            margin-bottom: -10px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 4px 4px 0px #000;
+        }
+
+        .birthday-box {
+            background: #ff4d6d;
+            color: white;
+            font-family: 'Fredoka One', cursive;
+            font-size: 55px;
+            padding: 5px 25px;
+            border-radius: 8px;
+            border: 4px solid #000;
+            display: inline-block;
+            transform: rotate(2deg);
+            position: relative;
+            z-index: 3;
+            box-shadow: 4px 4px 0px #000;
+        }
+
+        /* অরিজিনাল পোলকা-ডট বার্থডে ক্যাপ */
+        .birthday-cap-exact {
+            position: absolute;
+            top: -30px;
+            right: -25px;
+            width: 65px;
+            height: 75px;
+            background: radial-gradient(#fff 20%, transparent 20%) #ff758f;
+            background-size: 10px 10px;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            transform: rotate(20deg);
+            z-index: 5;
+            border-bottom: 5px solid #000;
+        }
+        /* টুপির ওপরের পমপম বল */
+        .birthday-cap-exact::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 14px;
+            height: 14px;
+            background: #000;
+            border-radius: 50%;
+        }
+
+        .date-badge {
+            background: #ff758f;
+            color: white;
+            font-family: 'Fredoka One', cursive;
+            font-size: 18px;
+            padding: 6px 25px;
+            border-radius: 50px;
+            border: 3px solid #000;
+            box-shadow: 3px 3px 0px #000;
+            margin-bottom: 25px;
+        }
+
+        .action-btn {
+            background: #ff4d6d;
+            color: white;
+            font-family: 'Fredoka One', cursive;
+            font-size: 18px;
+            padding: 10px 30px;
+            border-radius: 50px;
+            border: 3px solid #000;
+            box-shadow: 4px 4px 0px #000;
+            cursor: pointer;
+            transition: 0.1s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .action-btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px #000; }
+        .action-btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0px #000; }
+
+        /* ডান সাইড: প্রোফাইল ও রিয়ালিস্টিক গ্লসি বেলুন */
         .front-right {
             flex: 1;
             display: flex;
@@ -75,94 +188,22 @@
             align-items: center;
             position: relative;
             min-width: 300px;
-            z-index: 5;
         }
 
-        /* হ্যাপি বার্থডে টেক্সট ও টুপির কন্টেইনার */
-        .hb-container {
-            position: relative;
-            display: inline-block;
-            margin-top: 30px; /* টুপির জায়গার জন্য একটু নিচে নামালাম */
-        }
-
-        /* স্ক্রিনশটের মতো বাঁকা বার্থডে ক্যাপ */
-        .birthday-cap {
-            position: absolute;
-            top: -42px;
-            left: 25px;
-            font-size: 55px;
-            transform: rotate(-25deg);
-            z-index: 15;
-            filter: drop-shadow(2px 4px 2px rgba(0,0,0,0.15));
-            pointer-events: none;
-        }
-
-        .giant-hb {
-            font-family: 'Fredoka One', cursive;
-            font-size: 75px;
-            color: #ff4d6d;
-            line-height: 80px;
-            margin: 0 0 20px 0;
-            text-shadow: 4px 4px 0px #fff;
-            -webkit-text-stroke: 2px #333;
-        }
-
-        .date-badge {
-            background: #ff758f;
-            color: white;
-            font-family: 'Fredoka One', cursive;
-            font-size: 22px;
-            padding: 8px 30px;
-            border-radius: 50px;
-            border: 3px solid #333;
-            box-shadow: 4px 4px 0px #333;
-            margin-bottom: 25px;
-        }
-
-        /* Click Here Saba Button */
-        .action-btn {
-            background: #ff4d6d;
-            color: white;
-            font-family: 'Fredoka One', cursive;
-            font-size: 20px;
-            padding: 12px 35px;
-            border-radius: 50px;
-            border: 3px solid #333;
-            box-shadow: 4px 4px 0px #333;
-            cursor: pointer;
-            transition: 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            position: relative;
-            z-index: 20;
-        }
-
-        .action-btn:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px #333;
-        }
-
-        .action-btn:active {
-            transform: translate(2px, 2px);
-            box-shadow: 2px 2px 0px #333;
-        }
-
-        /* প্রোফাইল ইমেজ */
-        .profile-wrapper {
+        .profile-card-wrapper {
             position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
+            z-index: 3;
         }
 
         .gf-circle-img {
-            width: 300px;
-            height: 300px;
+            width: 280px;
+            height: 280px;
             object-fit: cover;
             border-radius: 50%;
-            border: 6px solid #333;
-            box-shadow: 8px 8px 0px rgba(0,0,0,0.1);
+            border: 5px solid #000;
             background: white;
         }
 
@@ -170,94 +211,86 @@
             background: #fff;
             color: #ff4d6d;
             font-family: 'Pacifico', cursive;
-            font-size: 26px;
-            padding: 5px 40px;
+            font-size: 22px;
+            padding: 4px 35px;
             border-radius: 50px;
-            border: 3px solid #333;
-            box-shadow: 4px 4px 0px #333;
-            margin-top: -25px;
-            z-index: 5;
+            border: 3px solid #000;
+            box-shadow: 3px 3px 0px #000;
+            margin-top: -20px;
         }
 
-        /* --- স্ক্রিনশটের মতো রিয়ালিস্টিক থ্রিডি গ্লসি ব্যালুন --- */
-        .real-balloon {
+        /* --- এক্সাক্ট রিয়ালিস্টিক ৩ডি বেলুন ডিজাইন --- */
+        .realistic-balloon {
             position: absolute;
-            width: 75px;
-            height: 90px;
+            width: 65px;
+            height: 78px;
             border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
             z-index: 2;
-            animation: float 4s ease-in-out infinite;
+            animation: floatBalloon 4s ease-in-out infinite;
         }
-        /* ব্যালুনের গ্লসি রিফ্লেকশন স্পট */
-        .real-balloon::before {
+        /* বেলুনের ভেতরের চকচকে রিফ্লেকশন হাইলাইট */
+        .realistic-balloon::before {
             content: "";
             position: absolute;
             top: 10px;
-            left: 15px;
-            width: 15px;
-            height: 25px;
+            left: 12px;
+            width: 12px;
+            height: 20px;
             background: rgba(255, 255, 255, 0.6);
             border-radius: 50%;
-            transform: rotate(-15deg);
+            transform: rotate(-12deg);
         }
-        /* ব্যালুনের নিচের গিঁট/সুতা বাধার জায়গা */
-        .real-balloon::after {
+        /* বেলুনের নিচের রিয়েলিস্টিক বাঁকা কালো সুতা */
+        .realistic-balloon::after {
             content: "";
             position: absolute;
-            bottom: -6px;
-            left: 33px;
-            border-left: 5px solid transparent;
-            border-right: 5px solid transparent;
-            border-bottom: 8px solid currentColor;
-            transform: rotate(180deg);
+            bottom: -32px;
+            left: 31px;
+            width: 2px;
+            height: 35px;
+            background: transparent;
+            border-left: 2px solid #000;
+            border-radius: 50% 0 0 50%;
+            transform: rotate(5deg);
         }
 
-        /* ব্যালুন কালার ও লাইটিং ইফেক্ট */
-        .rb-pink {
-            background: radial-gradient(circle at 30% 30%, #ff758f, #ff4d6d, #c9184a);
-            color: #ff4d6d;
-            top: -40px;
-            left: -50px;
+        .bal-left {
+            background: radial-gradient(circle at 35% 35%, #ff9ebb, #ff4d6d, #a30026);
+            top: -20px;
+            left: -30px;
             animation-delay: 0s;
         }
-        .rb-purple {
-            background: radial-gradient(circle at 30% 30%, #e0aaff, #9d4edd, #5a189a);
-            color: #9d4edd;
-            top: 60px;
-            right: -60px;
-            animation-delay: 1.5s;
-        }
-        
-        .bunting-fallback {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 25px;
-            background-image: linear-gradient(45deg, #ff758f 25%, transparent 25%), linear-gradient(-45deg, #ff758f 25%, transparent 25%);
-            background-size: 30px 60px;
-            opacity: 0.7;
-            z-index: 1;
-            pointer-events: none;
+        .bal-right {
+            background: radial-gradient(circle at 35% 35%, #ff9ebb, #ff4d6d, #a30026);
+            bottom: 40px;
+            right: -30px;
+            animation-delay: 1.8s;
         }
 
-        /* --- PAGE 2: OPENING DIARY / CARD --- */
+        /* স্পার্কল ডেকোরেশন স্টার */
+        .deco-star {
+            position: absolute;
+            font-size: 18px;
+            color: #333;
+            animation: floatBalloon 3s ease-in-out infinite alternate;
+        }
+
+        /* ================= PAGE 2: DIARY / LETTER ================= */
         .diary-container {
             display: flex;
             width: 100%;
-            max-width: 800px;
+            max-width: 780px;
             background: #fff;
-            border: 4px solid #333;
-            border-radius: 15px;
-            box-shadow: 12px 12px 0px rgba(0,0,0,0.15);
+            border: 4px solid #000;
+            border-radius: 12px;
+            box-shadow: 10px 10px 0px rgba(0,0,0,0.1);
             overflow: hidden;
-            min-height: 480px;
+            min-height: 450px;
         }
-
         .diary-left {
             flex: 1;
             background: #ff758f;
-            border-right: 4px solid #333;
+            border-right: 4px solid #000;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -265,70 +298,260 @@
             color: white;
             padding: 20px;
         }
-
         .diary-right {
             flex: 1.4;
             background: #fff9e6;
             background-image: repeating-linear-gradient(#fff9e6 0px, #fff9e6 29px, #d1ccb9 30px);
-            padding: 35px;
-            text-align: left;
-            line-height: 30px;
-            color: #2b2b2b;
+            padding: 30px;
             font-family: 'Caveat', cursive;
-            font-size: 28px;
+            font-size: 26px;
+            line-height: 30px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
 
-        /* --- PAGE 3: TYPEWRITER PRAYERS --- */
+        /* ================= PAGE 3: PRAYERS ================= */
         .prayer-card {
             background: white;
-            border: 4px solid #333;
-            border-radius: 20px;
-            box-shadow: 8px 8px 0px #333;
-            padding: 40px;
+            border: 4px solid #000;
+            border-radius: 15px;
+            box-shadow: 8px 8px 0px #000;
+            padding: 35px;
             width: 100%;
-            max-width: 750px;
+            max-width: 650px;
+            text-align: center;
         }
 
-        /* --- PAGE 4: QUEEN & SPOTIFY PLAYER --- */
-        .queen-card {
-            background: white;
-            border: 4px solid #333;
-            border-radius: 25px;
-            box-shadow: 10px 10px 0px #333;
-            padding: 40px;
+        /* ================= PAGE 4: INSTA REAL VIBE CARD ================= */
+        .insta-vibe-card {
+            background: #fff;
+            border: 4px solid #000;
+            border-radius: 24px;
+            box-shadow: 10px 10px 0px rgba(0,0,0,0.08);
+            padding: 30px;
             width: 100%;
-            max-width: 850px;
+            max-width: 420px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background-image: radial-gradient(circle at 100% 0%, #fff0f3, transparent 60%);
         }
 
-        .crown-container {
+        .insta-photo-container {
             position: relative;
-            display: inline-block;
+            width: 290px;
+            height: 290px;
+            margin-bottom: 20px;
         }
-        .crown {
+
+        .insta-queen-crown {
             position: absolute;
-            top: -45px;
+            top: -22px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 55px;
+            font-size: 42px;
             z-index: 10;
-            animation: spinCrown 3s linear infinite;
+            filter: drop-shadow(0px 3px 2px rgba(0,0,0,0.15));
         }
 
         .gf-rect-img {
             width: 100%;
-            max-width: 320px;
-            height: 320px;
+            height: 100%;
             object-fit: cover;
-            border-radius: 20px;
-            border: 4px solid #333;
+            border-radius: 24px;
+            border: 4px solid #000;
         }
 
-        /* Spotify Player Style */
-        .spotify-card {
+        .vibe-text {
+            font-family: 'Fredoka One', cursive;
+            font-size: 26px;
+            color: #ff4d6d;
+            margin: 0 0 15px 0;
+        }
+
+        /* অরিজিনাল স্পোটিফাই প্লেয়ার স্টাইল */
+        .spotify-player {
             background: #282828;
             color: white;
             width: 100%;
-            max-width:
+            max-width: 290px;
+            padding: 10px 15px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 3px solid #000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            margin-bottom: 20px;
+        }
+        .spot-icon { color: #1DB954; font-size: 20px; margin-left: 5px; }
+        .spot-details { flex-grow: 1; text-align: left; margin-left: 12px; font-family: 'Arial', sans-serif; }
+        .spot-title { font-weight: bold; font-size: 13px; margin: 0; }
+        .spot-artist { font-size: 11px; color: #b3b3b3; margin: 2px 0 0 0; }
+        .spot-play-btn {
+            background: white;
+            color: black;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* ================= PAGE 5: FINAL ANNOY ================= */
+        .annoy-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Animations */
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
+        @keyframes floatBalloon { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-12px) rotate(3deg); } }
+    </style>
+</head>
+<body>
+
+<div class="bunting-left"></div>
+<div class="bunting-right"></div>
+
+<audio id="bg-music" src="birthday_song.mp3" loop></audio>
+
+<div class="container">
+    
+    <div id="p1" class="page active">
+        <div class="front-layout">
+            <div class="front-left">
+                <div class="text-block-wrapper">
+                    <div class="happy-box">Happy</div><br>
+                    <div class="birthday-box">Birthday</div>
+                    <div class="birthday-cap-exact"></div> </div>
+                
+                <div class="date-badge">📅 15 June</div>
+                <button class="action-btn" onclick="nextPage('p2')">
+                    Click Here Saba <i class="fas fa-envelope-open-text"></i>
+                </button>
+            </div>
+            
+            <div class="front-right">
+                <div class="realistic-balloon bal-left"></div> <div class="realistic-balloon bal-right"></div> <div class="deco-star" style="top:-10px; right:40px;">★</div>
+                <div class="deco-star" style="bottom:20px; left:-20px;">✦</div>
+
+                <div class="profile-card-wrapper">
+                    <img src="gf_pic.jpg" class="gf-circle-img" onerror="this.src='https://via.placeholder.com/280?text=Saba'">
+                    <div class="name-tag">Dear Saba</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="p2" class="page">
+        <div class="diary-container">
+            <div class="diary-left">
+                <div style="font-size: 60px;">📖</div>
+                <h2 style="font-family: 'Fredoka One'; margin: 10px 0 0 0;">To Saba</h2>
+                <p style="font-family: 'Pacifico'; margin: 5px 0 0 0;">Happy Birthday ✨</p>
+            </div>
+            <div class="diary-right">
+                <div>
+                    প্রিয় জান, আজ তোমার জন্মদিন। তোমার জন্য আমার ভালোবাসা এই কয়েক লাইনে বলে শেষ করা যাবে না। তুমি আমার জীবনের সেরা মানুষ। সব সময় এভাবেই হাসিখুশি থেকো। শুভ জন্মদিন! ❤️
+                </div>
+                <button class="action-btn" style="align-self: flex-end; padding: 6px 20px; font-size: 15px;" onclick="showPrayerPage()">
+                    Next ➡️
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="p3" class="page">
+        <div class="prayer-card">
+            <h1 style="font-family: 'Fredoka One'; color: #ff4d6d; font-size: 36px; margin-top: 0;">My Prayers 🤲</h1>
+            <div id="tw-wish" style="font-family: 'Pacifico'; font-size: 24px; color: #c9184a; min-height: 80px; margin: 20px 0;"></div>
+            <button class="action-btn" id="wish-next" style="display:none; margin: 0 auto;" onclick="nextPage('p4')">Next 👸</button>
+        </div>
+    </div>
+
+    <div id="p4" class="page">
+        <div class="insta-vibe-card">
+            <div class="insta-photo-container">
+                <div class="insta-queen-crown">👑</div>
+                <img src="gf_pic.jpg" class="gf-rect-img" onerror="this.src='https://via.placeholder.com/290x290?text=Birthday+Queen'">
+            </div>
+            
+            <h2 class="vibe-text">For you? 😉</h2>
+            
+            <div class="spotify-player">
+                <div class="spot-icon"><i class="fab fa-spotify"></i></div>
+                <div class="spot-details">
+                    <p class="spot-title">Good Looking</p>
+                    <p class="spot-artist">Suki Waterhouse</p>
+                </div>
+                <button class="spot-play-btn" onclick="toggleMusic(this)">
+                    <i class="fas fa-play" id="play-icon"></i>
+                </button>
+            </div>
+
+            <button class="action-btn" style="background:#b39ddb; color:#2a1b40; border-color:#000; box-shadow:3px 3px 0px #000;" onclick="nextPage('p5')">Continue</button>
+        </div>
+    </div>
+
+    <div id="p5" class="page">
+        <div class="annoy-card">
+            <h1 style="font-family: 'Fredoka One'; font-size: 36px; color: #ff4d6d; text-shadow: 2px 2px #fff; margin: 0 0 20px 0;">I WANT TO ANNOY YOU FOREVER! ❤️</h1>
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHYwdWp3eGZ3eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/KztT2c4u8mYYUiMKdJ/giphy.gif" style="width:260px; border: 4px solid #000; border-radius: 12px; box-shadow: 5px 5px 0px #000;">
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function nextPage(id) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        const targetPage = document.getElementById(id);
+        if(targetPage) {
+            targetPage.classList.add('active');
+        }
+        window.scrollTo(0, 0);
+    }
+
+    function showPrayerPage() {
+        nextPage('p3');
+        const wishText = "May God bless you, take care of your health, and stay happy always! ✨";
+        let j = 0;
+        const targetEl = document.getElementById("tw-wish");
+        targetEl.innerHTML = ""; 
+        
+        function type() {
+            if (j < wishText.length) {
+                targetEl.innerHTML += wishText.charAt(j);
+                j++; 
+                setTimeout(type, 80); 
+            } else { 
+                document.getElementById('wish-next').style.display = 'block'; 
+            }
+        }
+        setTimeout(type, 300);
+    }
+
+    function toggleMusic(btn) {
+        const music = document.getElementById('bg-music');
+        const icon = document.getElementById('play-icon');
+        
+        if (music.paused) {
+            music.play().catch(e => console.log("Audio play blocked/failed:", e));
+            icon.className = "fas fa-pause";
+        } else {
+            music.pause();
+            icon.className = "fas fa-play";
+        }
+    }
+</script>
+
+</body>
+</html>
