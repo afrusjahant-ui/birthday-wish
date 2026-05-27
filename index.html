@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Pacifico&family=Fredoka+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* পুরো স্ক্রিনকে ল্যান্ডস্কেপ বান্ধব করার জন্য ব্যাকগ্রাউন্ড ও প্যাডিং সেটআপ */
+        /* পুরো স্ক্রিনকে ল্যান্ডস্কেপ বান্ধব করার মূল সেটআপ */
         body { 
             background: #ffe5ec; 
             display: flex; 
@@ -20,7 +20,7 @@
         }
         .container { 
             width: 95%; 
-            max-width: 1000px; /* স্ক্রিন চওড়া করার জন্য ম্যাক্স উইডথ বাড়িয়ে দিলাম */
+            max-width: 950px; /* পুরো সাইটকে ল্যান্ডস্কেপ করতে উইডথ বাড়িয়ে দিলাম */
             text-align: center; 
         }
         .paper { 
@@ -35,22 +35,24 @@
             justify-content: center; 
             align-items: center;
             transition: 0.5s; 
+            width: 100%;
+            box-sizing: border-box;
         }
         .page { display: none; width: 100%; }
         .active { display: flex; flex-direction: column; align-items: center; animation: fadeIn 1s; }
         
-        /* ল্যান্ডস্কেপ বা দুই কলামের মেইন লেআউট */
-        .landscape-layout {
+        /* সব পেজের উপাদান ল্যান্ডস্কেপ করার জন্য ইউনিভার্সাল ফ্লেক্স লেআউট */
+        .landscape-wrapper {
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: space-around;
             width: 100%;
-            gap: 30px;
-            flex-wrap: wrap; /* ছোট স্ক্রিনে যাতে নিচে নেমে আসে */
+            gap: 40px;
+            flex-wrap: wrap; /* স্ক্রিন ছোট হলে যাতে ভেঙে নিচে নামে */
         }
 
-        .left-side, .right-side {
+        .section-left, .section-right {
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -67,8 +69,8 @@
             background-position: center !important;
         }
         
-        .accept-font { font-family: 'Fredoka One', cursive; color: #ff4d6d; font-size: 36px; margin-bottom: 20px; }
-        .btn { background: #ff4d6d; color: white; border: none; padding: 14px 35px; border-radius: 50px; cursor: pointer; font-size: 20px; margin: 15px; font-family: 'Fredoka One'; transition: 0.2s; }
+        .accept-font { font-family: 'Fredoka One', cursive; color: #ff4d6d; font-size: 38px; margin: 0 0 10px 0; }
+        .btn { background: #ff4d6d; color: white; border: none; padding: 14px 40px; border-radius: 50px; cursor: pointer; font-size: 20px; margin: 15px; font-family: 'Fredoka One'; transition: 0.2s; }
         .btn:hover { transform: scale(1.05); }
         
         /* Crown Spinning Animation */
@@ -76,7 +78,8 @@
         .crown { position: absolute; top: -45px; left: 50%; transform: translateX(-50%); font-size: 55px; z-index: 10; animation: spinCrown 3s linear infinite; }
         @keyframes spinCrown { 0% { transform: translateX(-50%) rotateY(0deg); } 100% { transform: translateX(-50%) rotateY(360deg); } }
 
-        .letter-bg { background: #fdfdfd; padding: 25px; border: 1px solid #ddd; background-image: repeating-linear-gradient(#fdfdfd 0px, #fdfdfd 24px, #e1e1e1 25px); text-align: left; line-height: 25px; color: #333; font-family: 'Arial', sans-serif; width: 85%; max-width: 500px; border-radius: 8px; font-size: 18px; }
+        /* চিঠির ব্যাকগ্রাউন্ড সাইজ ল্যান্ডস্কেপের জন্য বড় করলাম */
+        .letter-bg { background: #fdfdfd; padding: 30px; border: 1px solid #ddd; background-image: repeating-linear-gradient(#fdfdfd 0px, #fdfdfd 24px, #e1e1e1 25px); text-align: left; line-height: 25px; color: #333; font-family: 'Arial', sans-serif; width: 100%; max-width: 550px; border-radius: 8px; font-size: 18px; box-shadow: inset 0 0 10px rgba(0,0,0,0.05); }
         .gf-img { width: 100%; max-width: 320px; height: 320px; object-fit: cover; border-radius: 20px; border: 6px solid white; box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
         
         /* Spotify Music Player Style (Exact Insta Reel Vibe) */
@@ -88,7 +91,7 @@
         .play-btn { background: white; color: black; border: none; width: 38px; height: 38px; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 16px; transition: 0.2s; padding: 0; }
         
         /* Continue Button (Like Insta) */
-        .continue-btn { background: #caadd6; color: #33223a; padding: 12px 45px; border-radius: 15px; font-family: 'Arial', sans-serif; font-weight: bold; font-size: 18px; border: none; cursor: pointer; margin-top: 25px; transition: 0.2s; }
+        .continue-btn { background: #caadd6; color: #33223a; padding: 12px 50px; border-radius: 15px; font-family: 'Arial', sans-serif; font-weight: bold; font-size: 18px; border: none; cursor: pointer; margin-top: 25px; transition: 0.2s; }
         .continue-btn:hover { background: #bba2c7; transform: scale(1.05); }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -100,11 +103,20 @@
 
 <div class="container">
     <div class="paper" id="main-paper">
+        
         <div id="p1" class="page active">
-            <h1 class="accept-font">PLS ACCEPT THE GIFT ✨</h1>
-            <div style="display:flex;">
-                <button class="btn" onclick="nextPage('p3')">YES</button>
-                <button class="btn" onclick="nextPage('p2')">NO</button>
+            <div class="landscape-wrapper">
+                <div class="section-left">
+                    <h1 class="accept-font" style="font-size: 42px;">HELLO THERE! 👋</h1>
+                    <p style="font-size: 22px; color: #555; margin: 0;">I have a little surprise waiting for you...</p>
+                </div>
+                <div class="section-right">
+                    <h1 class="accept-font" style="font-size: 28px; color: #ff4d6d;">PLS ACCEPT THE GIFT ✨</h1>
+                    <div style="display:flex;">
+                        <button class="btn" onclick="nextPage('p3')">YES</button>
+                        <button class="btn" onclick="nextPage('p2')">NO</button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -114,41 +126,53 @@
         </div>
 
         <div id="p3" class="page">
-            <h1 class="accept-font">You have a package! 📦</h1>
-            <div style="font-size: 100px; cursor:pointer;" id="gift-box" onclick="animateBox()">🎁</div>
-            <p style="font-size: 20px;">Click the box to open!</p>
+            <div class="landscape-wrapper">
+                <div class="section-left">
+                    <h1 class="accept-font">You have a package! 📦</h1>
+                    <p style="font-size: 22px; color: #666; margin: 0;">A special delivery straight from my heart.</p>
+                </div>
+                <div class="section-right">
+                    <div style="font-size: 110px; cursor:pointer; transition: 0.3s;" id="gift-box" onclick="animateBox()">🎁</div>
+                    <p style="font-size: 18px; color: #ff4d6d; font-weight: bold;">Click the box to open!</p>
+                </div>
+            </div>
         </div>
 
         <div id="p4" class="page">
-            <h1 style="font-family: 'Pacifico'; font-size: 36px;">A Special Letter 📜</h1>
+            <h1 style="font-family: 'Pacifico'; font-size: 38px; margin-top: 0;">A Special Letter 📜</h1>
             <div class="letter-bg">
                 প্রিয় জান, আজ তোমার জন্মদিন। তোমার জন্য আমার ভালোবাসা এই কয়েক লাইনে বলে শেষ করা যাবে না। তুমি আমার জীবনের সেরা মানুষ। সব সময় এভাবেই হাসিখুশি থেকো। শুভ জন্মদিন! ❤️
             </div>
-            <button class="btn" id="letter-next" style="display:none;" onclick="showCakePage()">Next ➡️</button>
+            <button class="btn" id="letter-next" style="display:none; margin-top: 20px;" onclick="showCakePage()">Next ➡️</button>
         </div>
 
         <div id="p5" class="page">
-            <h1 style="font-size: 45px; color: #ff4d6d; text-shadow: 2px 2px white; font-family: 'Pacifico';">Happy Birthday Jaan! ❤️</h1>
+            <h1 style="font-size: 50px; color: #ff4d6d; text-shadow: 2px 2px white; font-family: 'Pacifico'; margin: 0;">Happy Birthday Jaan! ❤️</h1>
         </div>
 
         <div id="p6" class="page">
-            <h1 style="font-family: 'Fredoka One'; font-size: 36px;">My Prayers 🤲</h1>
-            <div id="tw-wish" style="font-size: 24px; color: #c9184a; font-weight: bold; min-height: 60px; max-width: 600px; margin-top: 20px;"></div>
-            <button class="btn" id="wish-next" style="display:none;" onclick="showQueenPage()">Next ➡️</button>
+            <div class="landscape-wrapper">
+                <div class="section-left">
+                    <h1 class="accept-font" style="font-size: 45px;">My Prayers 🤲</h1>
+                    <p style="font-size: 20px; color: #666; margin: 0;">Everything I wish for you...</p>
+                </div>
+                <div class="section-right">
+                    <div id="tw-wish" style="font-size: 24px; color: #c9184a; font-weight: bold; min-height: 80px; width: 100%; max-width: 400px; text-align: center;"></div>
+                    <button class="btn" id="wish-next" style="display:none;" onclick="showQueenPage()">Next ➡️</button>
+                </div>
+            </div>
         </div>
 
         <div id="p7" class="page">
-            <div class="landscape-layout">
-                
-                <div class="left-side">
+            <div class="landscape-wrapper">
+                <div class="section-left">
                     <div class="crown-container">
                         <div class="crown">👑</div>
                         <img src="gf_pic.jpg" class="gf-img" onerror="this.src='https://via.placeholder.com/320x320?text=Birthday+Queen'">
                     </div>
                 </div>
-                
-                <div class="right-side">
-                    <h2 class="accept-font" style="font-size: 40px; margin: 0;">Birthday Queen 👸</h2>
+                <div class="section-right">
+                    <h2 class="accept-font" style="font-size: 42px; margin: 0;">Birthday Queen 👸</h2>
                     <p style="font-size: 22px; color: #ff4d6d; margin: 10px 0 0 0; font-weight: bold;">For you? 😉</p>
                     
                     <div class="spotify-card">
@@ -166,14 +190,14 @@
 
                     <button class="continue-btn" onclick="nextPage('p8')">Continue</button>
                 </div>
-
             </div>
         </div>
 
         <div id="p8" class="page">
-            <h1 style="font-family: 'Fredoka One'; font-size: 38px; color: #ff4d6d;">I WANT TO ANNOY YOU FOREVER! ❤️</h1>
+            <h1 style="font-family: 'Fredoka One'; font-size: 40px; color: #ff4d6d; margin-top: 0;">I WANT TO ANNOY YOU FOREVER! ❤️</h1>
             <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHYwdWp3eGZ3eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/KztT2c4u8mYYUiMKdJ/giphy.gif" style="width:250px; margin-top: 20px;">
         </div>
+
     </div>
 </div>
 
