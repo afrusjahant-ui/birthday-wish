@@ -9,7 +9,7 @@
     <style>
         body { background: #ffe5ec; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; font-family: 'Dancing Script', cursive; overflow: hidden; }
         .container { width: 90%; max-width: 450px; text-align: center; }
-        .paper { background: #fff9e6; background-image: url('https://www.transparenttextures.com/patterns/old-map.png'); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); min-height: 520px; display: flex; flex-direction: column; justify-content: center; position: relative; transition: 0.5s; }
+        .paper { background: #fff9e6; background-image: url('https://www.transparenttextures.com/patterns/old-map.png'); padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); min-height: 530px; display: flex; flex-direction: column; justify-content: center; position: relative; transition: 0.5s; }
         .page { display: none; width: 100%; }
         .active { display: flex; flex-direction: column; align-items: center; animation: fadeIn 1s; }
         
@@ -23,24 +23,28 @@
         }
         
         .accept-font { font-family: 'Fredoka One', cursive; color: #ff4d6d; font-size: 32px; }
-        .btn { background: #ff4d6d; color: white; border: none; padding: 12px 25px; border-radius: 50px; cursor: pointer; font-size: 18px; margin: 10px; font-family: 'Fredoka One'; }
+        .btn { background: #ff4d6d; color: white; border: none; padding: 12px 25px; border-radius: 50px; cursor: pointer; font-size: 18px; margin: 10px; font-family: 'Fredoka One'; transition: 0.2s; }
+        .btn:hover { transform: scale(1.05); }
         
         /* Crown Spinning Animation */
-        .crown-container { position: relative; display: inline-block; margin-top: 20px; }
-        .crown { position: absolute; top: -45px; left: 50%; transform: translateX(-50%); font-size: 50px; z-index: 10; animation: spinCrown 3s linear infinite; }
+        .crown-container { position: relative; display: inline-block; margin-top: 15px; }
+        .crown { position: absolute; top: -38px; left: 50%; transform: translateX(-50%); font-size: 45px; z-index: 10; animation: spinCrown 3s linear infinite; }
         @keyframes spinCrown { 0% { transform: translateX(-50%) rotateY(0deg); } 100% { transform: translateX(-50%) rotateY(360deg); } }
 
         .letter-bg { background: #fdfdfd; padding: 20px; border: 1px solid #ddd; background-image: repeating-linear-gradient(#fdfdfd 0px, #fdfdfd 24px, #e1e1e1 25px); text-align: left; line-height: 25px; color: #333; font-family: 'Arial', sans-serif; width: 90%; margin-top: 10px; border-radius: 5px; font-size: 16px; }
-        .gf-img { width: 100%; max-width: 280px; border-radius: 10px; border: 5px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .gf-img { width: 100%; max-width: 250px; height: 250px; object-fit: cover; border-radius: 15px; border: 4px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         
-        /* Spotify Music Player Style (Insta Reel Vibe) */
-        .spotify-card { background: #221a24; color: white; width: 90%; max-width: 300px; padding: 12px 18px; border-radius: 20px; display: flex; align-items: center; justify-content: space-between; margin-top: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.3); font-family: 'Arial', sans-serif; }
-        .song-details { text-align: left; flex-grow: 1; margin-left: 10px; overflow: hidden; }
-        .song-title { font-weight: bold; font-size: 15px; margin: 0; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .song-artist { font-size: 12px; color: #b3b3b3; margin: 3px 0 0 0; }
-        .spotify-icon { color: #1DB954; font-size: 24px; }
-        .play-btn { background: white; color: black; border: none; width: 38px; height: 38px; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 16px; transition: 0.2s; }
-        .play-btn:hover { transform: scale(1.05); }
+        /* Spotify Music Player Style (Exact Insta Reel Vibe) */
+        .spotify-card { background: #473a4b; color: white; width: 85%; max-width: 270px; padding: 10px 14px; border-radius: 18px; display: flex; align-items: center; justify-content: space-between; margin-top: 15px; box-shadow: 0 6px 15px rgba(0,0,0,0.2); font-family: 'Arial', sans-serif; }
+        .song-thumb { width: 40px; height: 40px; border-radius: 6px; object-fit: cover; background: #221a24; display: flex; justify-content: center; align-items: center; font-size: 18px; color: #1DB954; }
+        .song-details { text-align: left; flex-grow: 1; margin-left: 12px; overflow: hidden; }
+        .song-title { font-weight: bold; font-size: 14px; margin: 0; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .song-artist { font-size: 11px; color: #b3b3b3; margin: 2px 0 0 0; }
+        .play-btn { background: white; color: black; border: none; width: 34px; height: 34px; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 14px; transition: 0.2s; padding: 0; margin-left: 5px; }
+        
+        /* Continue Button (Like Insta) */
+        .continue-btn { background: #caadd6; color: #33223a; padding: 10px 35px; border-radius: 12px; font-family: 'Arial', sans-serif; font-weight: bold; font-size: 16px; border: none; cursor: pointer; margin-top: 15px; transition: 0.2s; }
+        .continue-btn:hover { background: #bba2c7; }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
@@ -89,23 +93,26 @@
         </div>
 
         <div id="p7" class="page">
+            <h2 class="accept-font" style="margin: 0 0 10px 0; font-size: 26px;">For you? 😉</h2>
             <div class="crown-container">
                 <div class="crown">👑</div>
-                <img src="gf_pic.jpg" class="gf-img" onerror="this.src='https://via.placeholder.com/300x250?text=Birthday+Queen'">
+                <img src="gf_pic.jpg" class="gf-img" onerror="this.src='https://via.placeholder.com/250x250?text=Birthday+Queen'">
             </div>
             
             <div class="spotify-card">
-                <i class="fab fa-spotify spotify-icon"></i>
+                <div class="song-thumb">
+                    <i class="fab fa-spotify"></i>
+                </div>
                 <div class="song-details">
-                    <p class="song-title" id="player-title">Happy Birthday To You</p>
-                    <p class="song-artist" id="player-artist">Special Version</p>
+                    <p class="song-title">Good Looking</p>
+                    <p class="song-artist">Suki Waterhouse</p>
                 </div>
                 <button class="play-btn" onclick="toggleMusic(this)">
                     <i class="fas fa-play" id="play-icon"></i>
                 </button>
             </div>
 
-            <button class="btn" style="margin-top: 15px;" onclick="nextPage('p8')">Next ➡️</button>
+            <button class="continue-btn" onclick="nextPage('p8')">Continue</button>
         </div>
 
         <div id="p8" class="page">
@@ -154,16 +161,16 @@
     }
 
     function showQueenPage() {
-        nextPage('p7');
+        nextPage('p7'); // কোনো অটোমেটিক টাইমার নাই, তাই পেজ আটকে থাকবে না
     }
 
-    // Spotify Card Play/Pause Controller
+    // Spotify Controller (Play/Pause)
     function toggleMusic(btn) {
         const music = document.getElementById('bg-music');
         const icon = document.getElementById('play-icon');
         
         if (music.paused) {
-            music.play().catch(e => console.log("Playback error:", e));
+            music.play().catch(e => console.log("Audio file miss thakle eita dekhay:", e));
             icon.className = "fas fa-pause";
         } else {
             music.pause();
