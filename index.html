@@ -15,7 +15,7 @@
             background-color: #ffe5ec;
             background-image: linear-gradient(#ffccd5 1px, transparent 1px), linear-gradient(90deg, #ffccd5 1px, transparent 1px);
             background-size: 24px 24px;
-            display: flex;
+            display: none; /* পাসওয়ার্ড দেওয়ার আগে পুরো পেজ ১০০% হাইড থাকবে */
             justify-content: center;
             align-items: center;
             min-height: 100vh;
@@ -137,7 +137,6 @@
             z-index: 5;
             border-bottom: 5px solid #000;
         }
-        /* টুপির ওপরের পমপম বল */
         .birthday-cap-exact::before {
             content: '';
             position: absolute;
@@ -219,7 +218,7 @@
             margin-top: -20px;
         }
 
-        /* --- এক্সাক্ট রিয়ালিস্টিক ৩ডি বেলুন ডিজাইন --- */
+        /* রিয়ালিস্টিক ৩ডি বেলুন ডিজাইন */
         .realistic-balloon {
             position: absolute;
             width: 65px;
@@ -228,7 +227,6 @@
             z-index: 2;
             animation: floatBalloon 4s ease-in-out infinite;
         }
-        /* বেলুনের ভেতরের চকচকে রিফ্লেকশন হাইলাইট */
         .realistic-balloon::before {
             content: "";
             position: absolute;
@@ -240,7 +238,6 @@
             border-radius: 50%;
             transform: rotate(-12deg);
         }
-        /* বেলুনের নিচের রিয়েলিস্টিক বাঁকা কালো সুতা */
         .realistic-balloon::after {
             content: "";
             position: absolute;
@@ -267,7 +264,6 @@
             animation-delay: 1.8s;
         }
 
-        /* স্পার্কল ডেকোরেশন স্টার */
         .deco-star {
             position: absolute;
             font-size: 18px;
@@ -323,7 +319,7 @@
             text-align: center;
         }
 
-        /* ================= PAGE 4: INSTA REAL VIBE CARD ================= */
+        /* ================= PAGE 4: INSTA REEL VIBE CARD ================= */
         .insta-vibe-card {
             background: #fff;
             border: 4px solid #000;
@@ -371,7 +367,7 @@
             margin: 0 0 15px 0;
         }
 
-        /* অরিজিনাল স্পোটিফাই প্লেয়ার স্টাইল */
+        /* স্পোটিফাই প্লেয়ার স্টাইল */
         .spotify-player {
             background: #282828;
             color: white;
@@ -411,7 +407,6 @@
             text-align: center;
         }
 
-        /* Animations */
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
         @keyframes floatBalloon { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-12px) rotate(3deg); } }
     </style>
@@ -431,7 +426,8 @@
                 <div class="text-block-wrapper">
                     <div class="happy-box">Happy</div><br>
                     <div class="birthday-box">Birthday</div>
-                    <div class="birthday-cap-exact"></div> </div>
+                    <div class="birthday-cap-exact"></div>
+                </div>
                 
                 <div class="date-badge">📅 15 June</div>
                 <button class="action-btn" onclick="nextPage('p2')">
@@ -440,7 +436,10 @@
             </div>
             
             <div class="front-right">
-                <div class="realistic-balloon bal-left"></div> <div class="realistic-balloon bal-right"></div> <div class="deco-star" style="top:-10px; right:40px;">★</div>
+                <div class="realistic-balloon bal-left"></div>
+                <div class="realistic-balloon bal-right"></div>
+                
+                <div class="deco-star" style="top:-10px; right:40px;">★</div>
                 <div class="deco-star" style="bottom:20px; left:-20px;">✦</div>
 
                 <div class="profile-card-wrapper">
@@ -511,6 +510,22 @@
 </div>
 
 <script>
+    // পেজ লোড হওয়ামাত্রই সবার আগে পাসওয়ার্ড ভেরিফিকেশন হবে
+    window.onload = function() {
+        // এখানে তোর সিক্রেট পাসওয়ার্ডটা দেওয়া (Saba-র বার্থডে যেমন saba15)
+        const secretPassword = "saba15"; 
+        
+        let userPass = prompt("Enter Password to Access the Website:");
+        
+        if (userPass === secretPassword) {
+            // সঠিক পাসওয়ার্ড দিলে পেজ 'flex' মোডে দৃশ্যমান হবে
+            document.body.style.display = "flex"; 
+        } else {
+            alert("Wrong Password! Access Denied.");
+            window.location.reload(); // ভুল পাসওয়ার্ডে আবার রিফ্রেশ হবে
+        }
+    }
+
     function nextPage(id) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
         const targetPage = document.getElementById(id);
@@ -544,30 +559,13 @@
         const icon = document.getElementById('play-icon');
         
         if (music.paused) {
-            music.play().catch(e => console.log("Audio play blocked/failed:", e));
+            music.play().catch(e => console.log("Audio play blocked:", e));
             icon.className = "fas fa-pause";
         } else {
             music.pause();
             icon.className = "fas fa-play";
         }
     }
-    // পেজ লোড হওয়ামাত্রই পাসওয়ার্ড চাইবে
-window.onload = function() {
-    // বডি হাইড করে রাখা হলো যেন পাসওয়ার্ড দেওয়ার আগে কিছু দেখা না যায়
-    document.body.style.display = "none"; 
-    
-    // এখানে তোর পছন্দের পাসওয়ার্ড দে (যেমন আমি দিলাম saba15)
-    const secretPassword = "saba15"; 
-    
-    let userPass = prompt("Enter Password to Access the Website:");
-    
-    if (userPass === secretPassword) {
-        document.body.style.display = "flex"; // পাসওয়ার্ড মিললে পেজ শো করবে
-    } else {
-        alert("Wrong Password! Access Denied.");
-        window.location.reload(); // ভুল হলে পেজ আবার রিলোড হবে
-    }
-}
 </script>
 
 </body>
