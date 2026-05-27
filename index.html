@@ -37,7 +37,7 @@
 </head>
 <body>
 
-<audio id="bg-music" src="birthday_song.mp3" loop prefetch></audio>
+<audio id="bg-music" src="birthday_song.mp3" loop></audio>
 
 <div class="container">
     <div class="paper" id="main-paper">
@@ -94,16 +94,17 @@
 </div>
 
 <script>
-    const music = document.getElementById('bg-music');
-
     function nextPage(id) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
         document.getElementById(id).classList.add('active');
     }
 
-    // ইউজার "YES" চাপলেই গান ব্যাকগ্রাউন্ডে চালু হয়ে যাবে, ব্রাউজার আর আটকাবে না
+    // এবার ফাংশনের ভেতরে মিউজিক হ্যান্ডেল করায় কোনো ক্র্যাশ হবে না
     function startEverything() {
-        music.play().catch(e => console.log("Audio play dynamic handle:", e));
+        const music = document.getElementById('bg-music');
+        if (music) {
+            music.play().catch(e => console.log("Audio play allowed after click:", e));
+        }
         nextPage('p3');
     }
 
@@ -141,7 +142,6 @@
 
     function showQueenPage() {
         nextPage('p7');
-        // Birthday Queen পেজে ৭ সেকেন্ড থাকার পর ফাইনাল পেজে যাবে
         setTimeout(() => {
             nextPage('p8');
         }, 7000);
