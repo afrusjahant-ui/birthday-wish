@@ -7,12 +7,57 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Pacifico&family=Fredoka+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { background: #ffe5ec; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; font-family: 'Dancing Script', cursive; overflow: hidden; }
-        .container { width: 90%; max-width: 450px; text-align: center; }
-        .paper { background: #fff9e6; background-image: url('https://www.transparenttextures.com/patterns/old-map.png'); padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); min-height: 530px; display: flex; flex-direction: column; justify-content: center; position: relative; transition: 0.5s; }
+        /* পুরো স্ক্রিনকে ল্যান্ডস্কেপ বান্ধব করার জন্য ব্যাকগ্রাউন্ড ও প্যাডিং সেটআপ */
+        body { 
+            background: #ffe5ec; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            margin: 0; 
+            font-family: 'Dancing Script', cursive; 
+            overflow-x: hidden; 
+        }
+        .container { 
+            width: 95%; 
+            max-width: 1000px; /* স্ক্রিন চওড়া করার জন্য ম্যাক্স উইডথ বাড়িয়ে দিলাম */
+            text-align: center; 
+        }
+        .paper { 
+            background: #fff9e6; 
+            background-image: url('https://www.transparenttextures.com/patterns/old-map.png'); 
+            padding: 40px; 
+            border-radius: 25px; 
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15); 
+            min-height: 450px; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center;
+            transition: 0.5s; 
+        }
         .page { display: none; width: 100%; }
         .active { display: flex; flex-direction: column; align-items: center; animation: fadeIn 1s; }
         
+        /* ল্যান্ডস্কেপ বা দুই কলামের মেইন লেআউট */
+        .landscape-layout {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-around;
+            width: 100%;
+            gap: 30px;
+            flex-wrap: wrap; /* ছোট স্ক্রিনে যাতে নিচে নেমে আসে */
+        }
+
+        .left-side, .right-side {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 280px;
+        }
+
         /* Cat with Cake Background */
         .cat-cake-theme { 
             background-color: #ffe5ec !important;
@@ -22,29 +67,29 @@
             background-position: center !important;
         }
         
-        .accept-font { font-family: 'Fredoka One', cursive; color: #ff4d6d; font-size: 32px; }
-        .btn { background: #ff4d6d; color: white; border: none; padding: 12px 25px; border-radius: 50px; cursor: pointer; font-size: 18px; margin: 10px; font-family: 'Fredoka One'; transition: 0.2s; }
+        .accept-font { font-family: 'Fredoka One', cursive; color: #ff4d6d; font-size: 36px; margin-bottom: 20px; }
+        .btn { background: #ff4d6d; color: white; border: none; padding: 14px 35px; border-radius: 50px; cursor: pointer; font-size: 20px; margin: 15px; font-family: 'Fredoka One'; transition: 0.2s; }
         .btn:hover { transform: scale(1.05); }
         
         /* Crown Spinning Animation */
-        .crown-container { position: relative; display: inline-block; margin-top: 15px; }
-        .crown { position: absolute; top: -38px; left: 50%; transform: translateX(-50%); font-size: 45px; z-index: 10; animation: spinCrown 3s linear infinite; }
+        .crown-container { position: relative; display: inline-block; }
+        .crown { position: absolute; top: -45px; left: 50%; transform: translateX(-50%); font-size: 55px; z-index: 10; animation: spinCrown 3s linear infinite; }
         @keyframes spinCrown { 0% { transform: translateX(-50%) rotateY(0deg); } 100% { transform: translateX(-50%) rotateY(360deg); } }
 
-        .letter-bg { background: #fdfdfd; padding: 20px; border: 1px solid #ddd; background-image: repeating-linear-gradient(#fdfdfd 0px, #fdfdfd 24px, #e1e1e1 25px); text-align: left; line-height: 25px; color: #333; font-family: 'Arial', sans-serif; width: 90%; margin-top: 10px; border-radius: 5px; font-size: 16px; }
-        .gf-img { width: 100%; max-width: 250px; height: 250px; object-fit: cover; border-radius: 15px; border: 4px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .letter-bg { background: #fdfdfd; padding: 25px; border: 1px solid #ddd; background-image: repeating-linear-gradient(#fdfdfd 0px, #fdfdfd 24px, #e1e1e1 25px); text-align: left; line-height: 25px; color: #333; font-family: 'Arial', sans-serif; width: 85%; max-width: 500px; border-radius: 8px; font-size: 18px; }
+        .gf-img { width: 100%; max-width: 320px; height: 320px; object-fit: cover; border-radius: 20px; border: 6px solid white; box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
         
         /* Spotify Music Player Style (Exact Insta Reel Vibe) */
-        .spotify-card { background: #473a4b; color: white; width: 85%; max-width: 270px; padding: 10px 14px; border-radius: 18px; display: flex; align-items: center; justify-content: space-between; margin-top: 15px; box-shadow: 0 6px 15px rgba(0,0,0,0.2); font-family: 'Arial', sans-serif; }
-        .song-thumb { width: 40px; height: 40px; border-radius: 6px; object-fit: cover; background: #221a24; display: flex; justify-content: center; align-items: center; font-size: 18px; color: #1DB954; }
-        .song-details { text-align: left; flex-grow: 1; margin-left: 12px; overflow: hidden; }
-        .song-title { font-weight: bold; font-size: 14px; margin: 0; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .song-artist { font-size: 11px; color: #b3b3b3; margin: 2px 0 0 0; }
-        .play-btn { background: white; color: black; border: none; width: 34px; height: 34px; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 14px; transition: 0.2s; padding: 0; margin-left: 5px; }
+        .spotify-card { background: #473a4b; color: white; width: 100%; max-width: 300px; padding: 12px 16px; border-radius: 20px; display: flex; align-items: center; justify-content: space-between; margin-top: 20px; box-shadow: 0 6px 15px rgba(0,0,0,0.2); font-family: 'Arial', sans-serif; }
+        .song-thumb { width: 45px; height: 45px; border-radius: 8px; object-fit: cover; background: #221a24; display: flex; justify-content: center; align-items: center; font-size: 20px; color: #1DB954; }
+        .song-details { text-align: left; flex-grow: 1; margin-left: 15px; overflow: hidden; }
+        .song-title { font-weight: bold; font-size: 15px; margin: 0; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .song-artist { font-size: 12px; color: #b3b3b3; margin: 3px 0 0 0; }
+        .play-btn { background: white; color: black; border: none; width: 38px; height: 38px; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 16px; transition: 0.2s; padding: 0; }
         
         /* Continue Button (Like Insta) */
-        .continue-btn { background: #caadd6; color: #33223a; padding: 10px 35px; border-radius: 12px; font-family: 'Arial', sans-serif; font-weight: bold; font-size: 16px; border: none; cursor: pointer; margin-top: 15px; transition: 0.2s; }
-        .continue-btn:hover { background: #bba2c7; }
+        .continue-btn { background: #caadd6; color: #33223a; padding: 12px 45px; border-radius: 15px; font-family: 'Arial', sans-serif; font-weight: bold; font-size: 18px; border: none; cursor: pointer; margin-top: 25px; transition: 0.2s; }
+        .continue-btn:hover { background: #bba2c7; transform: scale(1.05); }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
@@ -64,18 +109,18 @@
         </div>
 
         <div id="p2" class="page">
-            <h1 style="color:red; font-size: 40px; font-family: 'Fredoka One';">HOW DARE YOU? 😡</h1>
+            <h1 style="color:red; font-size: 45px; font-family: 'Fredoka One';">HOW DARE YOU? 😡</h1>
             <button class="btn" onclick="nextPage('p1')">Back ⬅️</button>
         </div>
 
         <div id="p3" class="page">
             <h1 class="accept-font">You have a package! 📦</h1>
-            <div style="font-size: 80px; cursor:pointer;" id="gift-box" onclick="animateBox()">🎁</div>
-            <p>Click the box to open!</p>
+            <div style="font-size: 100px; cursor:pointer;" id="gift-box" onclick="animateBox()">🎁</div>
+            <p style="font-size: 20px;">Click the box to open!</p>
         </div>
 
         <div id="p4" class="page">
-            <h1 style="font-family: 'Pacifico';">A Special Letter 📜</h1>
+            <h1 style="font-family: 'Pacifico'; font-size: 36px;">A Special Letter 📜</h1>
             <div class="letter-bg">
                 প্রিয় জান, আজ তোমার জন্মদিন। তোমার জন্য আমার ভালোবাসা এই কয়েক লাইনে বলে শেষ করা যাবে না। তুমি আমার জীবনের সেরা মানুষ। সব সময় এভাবেই হাসিখুশি থেকো। শুভ জন্মদিন! ❤️
             </div>
@@ -83,41 +128,51 @@
         </div>
 
         <div id="p5" class="page">
-            <h1 style="font-size: 35px; color: #ff4d6d; text-shadow: 2px 2px white; font-family: 'Pacifico';">Happy Birthday Jaan! ❤️</h1>
+            <h1 style="font-size: 45px; color: #ff4d6d; text-shadow: 2px 2px white; font-family: 'Pacifico';">Happy Birthday Jaan! ❤️</h1>
         </div>
 
         <div id="p6" class="page">
-            <h1 style="font-family: 'Fredoka One';">My Prayers 🤲</h1>
-            <div id="tw-wish" style="font-size: 20px; color: #c9184a; font-weight: bold; min-height: 50px;"></div>
+            <h1 style="font-family: 'Fredoka One'; font-size: 36px;">My Prayers 🤲</h1>
+            <div id="tw-wish" style="font-size: 24px; color: #c9184a; font-weight: bold; min-height: 60px; max-width: 600px; margin-top: 20px;"></div>
             <button class="btn" id="wish-next" style="display:none;" onclick="showQueenPage()">Next ➡️</button>
         </div>
 
         <div id="p7" class="page">
-            <h2 class="accept-font" style="margin: 0 0 10px 0; font-size: 26px;">For you? 😉</h2>
-            <div class="crown-container">
-                <div class="crown">👑</div>
-                <img src="gf_pic.jpg" class="gf-img" onerror="this.src='https://via.placeholder.com/250x250?text=Birthday+Queen'">
-            </div>
-            
-            <div class="spotify-card">
-                <div class="song-thumb">
-                    <i class="fab fa-spotify"></i>
+            <div class="landscape-layout">
+                
+                <div class="left-side">
+                    <div class="crown-container">
+                        <div class="crown">👑</div>
+                        <img src="gf_pic.jpg" class="gf-img" onerror="this.src='https://via.placeholder.com/320x320?text=Birthday+Queen'">
+                    </div>
                 </div>
-                <div class="song-details">
-                    <p class="song-title">Haareya</p>
-                    <p class="song-artist">Arijit Singh</p>
-                </div>
-                <button class="play-btn" onclick="toggleMusic(this)">
-                    <i class="fas fa-play" id="play-icon"></i>
-                </button>
-            </div>
+                
+                <div class="right-side">
+                    <h2 class="accept-font" style="font-size: 40px; margin: 0;">Birthday Queen 👸</h2>
+                    <p style="font-size: 22px; color: #ff4d6d; margin: 10px 0 0 0; font-weight: bold;">For you? 😉</p>
+                    
+                    <div class="spotify-card">
+                        <div class="song-thumb">
+                            <i class="fab fa-spotify"></i>
+                        </div>
+                        <div class="song-details">
+                            <p class="song-title">Haareya</p>
+                            <p class="song-artist">Arijit Singh</p>
+                        </div>
+                        <button class="play-btn" onclick="toggleMusic(this)">
+                            <i class="fas fa-play" id="play-icon"></i>
+                        </button>
+                    </div>
 
-            <button class="continue-btn" onclick="nextPage('p8')">Continue</button>
+                    <button class="continue-btn" onclick="nextPage('p8')">Continue</button>
+                </div>
+
+            </div>
         </div>
 
         <div id="p8" class="page">
-            <h1 style="font-family: 'Fredoka One'; font-size: 30px; color: #ff4d6d;">I WANT TO ANNOY YOU FOREVER! ❤️</h1>
-            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHYwdWp3eGZ3eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/KztT2c4u8mYYUiMKdJ/giphy.gif" style="width:200px;">
+            <h1 style="font-family: 'Fredoka One'; font-size: 38px; color: #ff4d6d;">I WANT TO ANNOY YOU FOREVER! ❤️</h1>
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHYwdWp3eGZ3eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/KztT2c4u8mYYUiMKdJ/giphy.gif" style="width:250px; margin-top: 20px;">
         </div>
     </div>
 </div>
@@ -161,7 +216,7 @@
     }
 
     function showQueenPage() {
-        nextPage('p7'); // কোনো অটোমেটিক টাইমার নাই, তাই পেজ আটকে থাকবে না
+        nextPage('p7');
     }
 
     // Spotify Controller (Play/Pause)
@@ -170,7 +225,7 @@
         const icon = document.getElementById('play-icon');
         
         if (music.paused) {
-            music.play().catch(e => console.log("Audio file miss thakle eita dekhay:", e));
+            music.play().catch(e => console.log("Playback error:", e));
             icon.className = "fas fa-pause";
         } else {
             music.pause();
