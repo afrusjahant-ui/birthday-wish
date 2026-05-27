@@ -12,7 +12,7 @@
         .page { display: none; width: 100%; }
         .active { display: flex; flex-direction: column; align-items: center; animation: fadeIn 1s; }
         
-        /* Cat with Cake Background Logic */
+        /* Cat with Cake Background */
         .cat-cake-theme { 
             background-color: #ffe5ec !important;
             background-image: url('cake_bg.gif') !important; 
@@ -24,7 +24,7 @@
         .accept-font { font-family: 'Fredoka One', cursive; color: #ff4d6d; font-size: 32px; }
         .btn { background: #ff4d6d; color: white; border: none; padding: 12px 25px; border-radius: 50px; cursor: pointer; font-size: 18px; margin: 10px; font-family: 'Fredoka One'; }
         
-        /* Crown Animation */
+        /* Crown Spinning Animation */
         .crown-container { position: relative; display: inline-block; margin-top: 40px; }
         .crown { position: absolute; top: -45px; left: 50%; transform: translateX(-50%); font-size: 50px; z-index: 10; animation: spinCrown 3s linear infinite; }
         @keyframes spinCrown { 0% { transform: translateX(-50%) rotateY(0deg); } 100% { transform: translateX(-50%) rotateY(360deg); } }
@@ -39,26 +39,22 @@
 
 <div class="container">
     <div class="paper" id="main-paper">
-        <!-- P1: Accept -->
         <div id="p1" class="page active">
             <h1 class="accept-font">PLS ACCEPT THE GIFT ✨</h1>
             <div style="display:flex;"><button class="btn" onclick="nextPage('p3')">YES</button><button class="btn" onclick="nextPage('p2')">NO</button></div>
         </div>
 
-        <!-- P2: No Option -->
         <div id="p2" class="page">
             <h1 style="color:red; font-size: 40px; font-family: 'Fredoka One';">HOW DARE YOU? 😡</h1>
             <button class="btn" onclick="nextPage('p1')">Back ⬅️</button>
         </div>
 
-        <!-- P3: Box -->
         <div id="p3" class="page">
             <h1 class="accept-font">You have a package! 📦</h1>
             <div style="font-size: 80px; cursor:pointer;" id="gift-box" onclick="animateBox()">🎁</div>
             <p>Click the box to open!</p>
         </div>
 
-        <!-- P4: Letter -->
         <div id="p4" class="page">
             <h1 style="font-family: 'Pacifico';">A Special Letter 📜</h1>
             <div class="letter-bg">
@@ -67,26 +63,29 @@
             <button class="btn" id="letter-next" style="display:none;" onclick="showCakePage()">Next ➡️</button>
         </div>
 
-        <!-- P5: Cake Page with Cat GIF -->
         <div id="p5" class="page">
             <h1 style="font-size: 35px; color: #ff4d6d; text-shadow: 2px 2px white; font-family: 'Pacifico';">Happy Birthday Jaan! ❤️</h1>
         </div>
 
-        <!-- P6: Typewriter Wishes (Slow) -->
         <div id="p6" class="page">
             <h1 style="font-family: 'Fredoka One';">My Prayers 🤲</h1>
             <div id="tw-wish" style="font-size: 20px; color: #c9184a; font-weight: bold; min-height: 50px;"></div>
             <button class="btn" id="wish-next" style="display:none;" onclick="showQueenPage()">Next ➡️</button>
         </div>
 
-        <!-- P7: Birthday Queen with Spinning Crown -->
-        
+        <div id="p7" class="page">
+            <audio id="bg-music" src="birthday_song.mp3" loop></audio>
+            <div class="crown-container">
+                <div class="crown">👑</div>
+                <img src="gf_pic.jpg" class="gf-img" onerror="this.src='https://via.placeholder.com/300x250?text=Birthday+Queen'">
+            </div>
+            <h2 class="accept-font" style="margin-top: 15px;">Birthday Queen 👸</h2>
+        </div>
 
-<!-- P8: Final Page (I want to annoy you) -->
-<div id="p8" class="page">
-    <h1 style="font-family: 'Fredoka One'; font-size: 30px; color: #ff4d6d;">I WANT TO ANNOY YOU FOREVER! ❤️</h1>
-    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHYwdWp3eGZ3eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/KztT2c4u8mYYUiMKdJ/giphy.gif" style="width:200px;">
-</div>
+        <div id="p8" class="page">
+            <h1 style="font-family: 'Fredoka One'; font-size: 30px; color: #ff4d6d;">I WANT TO ANNOY YOU FOREVER! ❤️</h1>
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHYwdWp3eGZ3eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/KztT2c4u8mYYUiMKdJ/giphy.gif" style="width:200px;">
+        </div>
     </div>
 </div>
 
@@ -109,30 +108,4 @@
         nextPage('p5');
         document.getElementById('main-paper').classList.add('cat-cake-theme');
         setTimeout(() => {
-            document.getElementById('main-paper').classList.remove('cat-cake-theme');
-            showWishPage();
-        }, 5000);
-    }
-
-    function showWishPage() {
-        nextPage('p6');
-        const wishText = "May God bless you, take care of your health, and stay happy always! ✨";
-        let j = 0;
-        function type() {
-            if (j < wishText.length) {
-                document.getElementById("tw-wish").innerHTML += wishText.charAt(j);
-                j++; 
-                setTimeout(type, 150); // টাইপরাইটার এখন অনেক স্লো
-            } else { document.getElementById('wish-next').style.display = 'block'; }
-        }
-        type();
-    }
-
-    function showQueenPage() {
-        nextPage('p7');
-        setTimeout(() => nextPage('p8'), 6000);
-    }
-</script>
-
-</body>
-</html>
+            document.getElementById('main-paper').classList.remove('cat-cake-
