@@ -66,19 +66,14 @@
             align-items: center;
         }
 
-        /* ডায়েরি পেজ বাদে বাকি পেজগুলো ফুল ব্লকিং ওভারলে হিসেবে কাজ করবে */
-        .page:not(#p2).active {
+        /* সব পেজ ট্রানজিশন সমান স্মুথ করার জন্য */
+        .page.active {
             display: flex !important;
-            z-index: 10;
+            z-index: 15;
             background: #ffe5ec;
             background-image: linear-gradient(#ffccd5 1px, transparent 1px), linear-gradient(90deg, #ffccd5 1px, transparent 1px);
             background-size: 24px 24px;
-            animation: fadeIn 0.5s ease-in-out forwards;
-        }
-
-        #p2.active {
-            display: flex !important;
-            z-index: 15;
+            animation: fadeIn 0.4s ease-in-out forwards;
         }
 
         /* ================= PAGE 1: FRONT LAYOUT ================= */
@@ -89,13 +84,6 @@
             justify-content: space-between;
             gap: 40px;
             flex-wrap: wrap;
-            transition: transform 0.4s ease, opacity 0.4s ease;
-        }
-
-        body.diary-open .front-layout {
-            filter: blur(2px);
-            opacity: 0.5;
-            pointer-events: none;
         }
 
         .front-left {
@@ -198,7 +186,7 @@
         .action-btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px #000; }
         .action-btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0px #000; }
 
-        /* ================= প্রোফাইল কার্ড ================= */
+        /* প্রোফাইল কার্ড */
         .front-right {
             flex: 1;
             display: flex;
@@ -302,30 +290,35 @@
             100% { transform: translateY(-15px) rotate(4px); }
         }
 
-        /* ================= PAGE 2: ৩ডি ডায়েরি ইফেক্ট (FIXED & INSTANT) ================= */
-        .diary-wrapper {
-            perspective: 2000px; /* থ্রিডি ভিউ আরও ক্লিয়ার করার জন্য বাড়ানো হলো */
-            width: 760px;  
-            height: 500px; 
+        /* ================= PAGE 2: AUTOMATIC OPEN DIARY (NO FLIP FLOP) ================= */
+        .diary-open-view {
+            width: 780px;
+            height: 500px;
+            display: flex;
             position: relative;
-            z-index: 30;
-            transform: rotate(-2deg);
-            animation: cardScaleUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1) forwards;
+            transform: rotate(-1deg);
         }
 
-        .diary-book {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            transform-style: preserve-3d;
-        }
-
-        .diary-page-right {
-            position: absolute;
+        /* বাম পাতা */
+        .diary-left-page {
             width: 50%;
             height: 100%;
-            right: 0;
-            top: 0;
+            background: #ff85a1;
+            border: 4px solid #000;
+            border-radius: 16px 0 0 16px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-shadow: -4px 10px 0px rgba(0,0,0,0.1);
+        }
+
+        /* ডান পাতা */
+        .diary-right-page {
+            width: 50%;
+            height: 100%;
             background: #fff0f3;
             border: 4px solid #000;
             border-left: none;
@@ -336,12 +329,11 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            z-index: 1;
         }
 
         .diary-headline {
             font-family: 'Great Vibes', cursive;
-            font-size: 36px;
+            font-size: 38px;
             color: #c9184a;
             margin: 0 0 10px 0;
             text-align: center;
@@ -349,7 +341,7 @@
 
         .diary-body-text {
             font-family: 'Caveat', cursive;
-            font-size: 20px; 
+            font-size: 21px; 
             line-height: 26px;
             color: #4a4a4a;
             flex-grow: 1;
@@ -357,13 +349,50 @@
             overflow-y: auto; 
             padding-right: 5px;
         }
-
         .diary-body-text::-webkit-scrollbar { width: 4px; }
         .diary-body-text::-webkit-scrollbar-thumb { background: #ff758f; border-radius: 10px; }
 
+        /* ডায়েরির ভেতরের ইমেজ ও টেক্সট স্টাইল */
+        .diary-pic {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #000;
+            margin-bottom: 15px;
+            box-shadow: 3px 3px 0px #000;
+        }
+
+        .diary-left-title {
+            font-family: 'Fredoka One', cursive;
+            font-size: 32px;
+            color: white;
+            text-align: center;
+            text-shadow: 2px 2px 0px #000;
+            line-height: 38px;
+        }
+
+        /* অ্যান্ড্রয়েড নেভিগেশন এরিয়া ও ব্যাক বাটন */
+        .navigation-guide-area {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            margin-top: 10px;
+            gap: 4px;
+        }
+
+        .guide-text {
+            font-size: 11px;
+            color: #ff4d6d;
+            font-weight: bold;
+            font-family: 'Arial', sans-serif;
+            opacity: 0.8;
+            animation: pulseText 1.5s infinite alternate;
+        }
+
         .android-back-btn {
-            width: 38px;
-            height: 38px;
+            width: 44px;
+            height: 44px;
             background: #ff4d6d;
             border: 3px solid #000;
             border-radius: 50%;
@@ -372,89 +401,14 @@
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            box-shadow: 2px 2px 0px #000;
-            align-self: flex-end;
+            box-shadow: 3px 3px 0px #000;
             transition: 0.1s;
-            margin-top: 10px;
+            font-size: 18px;
         }
-        .android-back-btn:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0px #000; }
+        .android-back-btn:hover { transform: scale(1.05); }
+        .android-back-btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0px #000; }
 
-        .diary-cover-left {
-            position: absolute;
-            width: 50%;
-            height: 100%;
-            left: 0;
-            top: 0;
-            transform-origin: right center;
-            transform-style: preserve-3d;
-            transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); /* কাভারের স্পিড অপ্টিমাইজ করা হলো */
-            z-index: 10;
-        }
-
-        /* এক ক্লিকে ডায়েরি খোলার মেইন রুল */
-        .diary-wrapper.open .diary-cover-left {
-            transform: rotateY(-180deg);
-        }
-
-        .cover-front {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: #ff758f;
-            border: 4px solid #000;
-            border-radius: 16px 0 0 16px;
-            box-sizing: border-box;
-            backface-visibility: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            cursor: pointer;
-        }
-
-        .cover-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: #ff85a1;
-            border: 4px solid #000;
-            border-radius: 0 16px 16px 0;
-            box-sizing: border-box;
-            transform: rotateY(180deg);
-            backface-visibility: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .mirrored-title {
-            font-family: 'Fredoka One', cursive;
-            font-size: 32px;
-            color: white;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            line-height: 38px;
-            transform: scaleX(-1);
-            margin-top: 15px;
-        }
-
-        .mirrored-pic {
-            width: 85px;
-            height: 85px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 3px solid #000;
-            transform: scaleX(-1);
-        }
-
-        @keyframes cardScaleUp {
-            from { opacity: 0; transform: scale(0.9) rotate(2deg); }
-            to { opacity: 1; transform: scale(1) rotate(-2deg); }
-        }
+        @keyframes pulseText { from { opacity: 0.5; } to { opacity: 1; } }
 
         /* ================= PAGE 3: PRAYERS ================= */
         .prayer-card {
@@ -529,7 +483,7 @@
         /* ================= PAGE 5: FINAL PAGE ================= */
         .annoy-card { display: flex; flex-direction: column; align-items: center; text-align: center; }
 
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
     </style>
 </head>
 <body>
@@ -542,61 +496,58 @@
 
 <div class="container">
     
-    <div id="front-page-base" class="front-layout">
-        <div class="front-left">
-            <div class="text-block-wrapper">
-                <div class="happy-box">Happy</div><br>
-                <div class="birthday-box">Birthday</div>
-                <div class="birthday-cap-exact"></div>
+    <div id="p1" class="page active">
+        <div class="front-layout">
+            <div class="front-left">
+                <div class="text-block-wrapper">
+                    <div class="happy-box">Happy</div><br>
+                    <div class="birthday-box">Birthday</div>
+                    <div class="birthday-cap-exact"></div>
+                </div>
+                
+                <div class="date-badge">📅 15 June</div>
+                <button class="action-btn" onclick="nextPage('p2')">
+                    Click Here Saba <i class="fas fa-envelope-open-text"></i>
+                </button>
             </div>
             
-            <div class="date-badge">📅 15 June</div>
-            <button class="action-btn" onclick="openDiaryCard()">
-                Click Here Saba <i class="fas fa-envelope-open-text"></i>
-            </button>
-        </div>
-        
-        <div class="front-right">
-            <div class="profile-card-wrapper">
-                <div class="realistic-balloon bal-left"></div>
-                <div class="realistic-balloon bal-right"></div>
-                
-                <div class="deco-star" style="top:-30px; right:20px;">★</div>
-                <div class="deco-star" style="bottom:10px; left:-40px;">✦</div>
+            <div class="front-right">
+                <div class="profile-card-wrapper">
+                    <div class="realistic-balloon bal-left"></div>
+                    <div class="realistic-balloon bal-right"></div>
+                    
+                    <div class="deco-star" style="top:-30px; right:20px;">★</div>
+                    <div class="deco-star" style="bottom:10px; left:-40px;">✦</div>
 
-                <img src="gf_pic.jpg" class="gf-circle-img" onerror="this.src='https://via.placeholder.com/280?text=Saba'">
-                <div class="name-tag">Dear Saba</div>
+                    <img src="gf_pic.jpg" class="gf-circle-img" onerror="this.src='https://via.placeholder.com/280?text=Saba'">
+                    <div class="name-tag">Dear Saba</div>
+                </div>
             </div>
         </div>
     </div>
 
     <div id="p2" class="page">
-        <div class="diary-wrapper" id="diaryCard">
-            <div class="diary-book">
-                
-                <div class="diary-cover-left" onclick="triggerFlip()">
-                    <div class="cover-front">
-                        <div style="font-size: 55px;">📖</div>
-                        <h3 style="font-family: 'Fredoka One'; margin: 10px 0 0 0;">Open Me</h3>
-                    </div>
-                    <div class="cover-back">
-                        <img src="gf_pic.jpg" class="mirrored-pic" onerror="this.src='https://via.placeholder.com/85?text=Queen'">
-                        <div class="mirrored-title">HAPPY<br>BIRTHDAY</div>
-                    </div>
-                </div>
+        <div class="diary-open-view">
+            
+            <div class="diary-left-page">
+                <img src="gf_pic.jpg" class="diary-pic" onerror="this.src='https://via.placeholder.com/100?text=Queen'">
+                <div class="diary-left-title">HAPPY<br>BIRTHDAY<br>SABA! 🎂</div>
+            </div>
 
-                <div class="diary-page-right">
-                    <h2 class="diary-headline">To You!</h2>
-                    <div class="diary-body-text">
-                        Happy birthday chanda, the day you came into my life I was not really much attached to you but day by day you became close to my heart. And now you are truly my younger sister. I wish I could remove some of the pain from your life which you are bearing alone. But you're always welcome, you can talk anytime you want to talk specially those which you can't say to others. And this year your all dreams come true. I wish that your brother could wish you but if couldn't wish in him behalf I am wishing you happy birthday sana. Don't be Sad, ok be happy. 🥰
-                    </div>
-                    
-                    <div class="android-back-btn" onclick="closeDiaryAndNext()">
+            <div class="diary-right-page">
+                <h2 class="diary-headline">To You!</h2>
+                <div class="diary-body-text">
+                    Happy birthday chanda, the day you came into my life I was not really much attached to you but day by day you became close to my heart. And now you are truly my younger sister. I wish I could remove some of the pain from your life which you are bearing alone. But you're always welcome, you can talk anytime you want to talk specially those which you can't say to others. And this year your all dreams come true. I wish that your brother could wish you but if couldn't wish in him behalf I am wishing you happy birthday sana. Don't be Sad, ok be happy. 🥰
+                </div>
+                
+                <div class="navigation-guide-area">
+                    <span class="guide-text">Click back arrow to go to the next page</span>
+                    <div class="android-back-btn" onclick="triggerPrayerPage()">
                         <i class="fas fa-arrow-left"></i>
                     </div>
                 </div>
-
             </div>
+
         </div>
     </div>
 
@@ -615,12 +566,12 @@
                 <img src="gf_pic.jpg" class="gf-rect-img" onerror="this.src='https://via.placeholder.com/290x290?text=Birthday+Queen'">
             </div>
             
-            <h2 class="vibe-text">My Birthday Queen</h2>
+            <h2 class="vibe-text">For you? 😉</h2>
             
             <div class="spotify-player">
                 <div class="spot-icon"><i class="fab fa-spotify"></i></div>
                 <div class="spot-details">
-                    <p class="spot-title">Tujhme rab dikhta hain</p>
+                    <p class="spot-title">Hareya</p>
                     <p class="spot-artist">Arijit Singh</p>
                 </div>
                 <button class="spot-play-btn" onclick="toggleHareyaMusic(this)">
@@ -652,42 +603,14 @@
         
         if (userPass === secretPassword) {
             document.body.style.display = "flex"; 
-            melody.play().catch(e => console.log("Audio waiting for user interaction:", e));
+            melody.play().catch(e => console.log("Audio waiting for user click interaction:", e));
         } else {
             alert("Wrong Password! Access Denied.");
             window.location.reload();
         }
     }
 
-    // বাটনে চাপ দিলে ডায়েরি লেয়ার অন হবে এবং ইনস্ট্যান্ট খুলে যাবে
-    function openDiaryCard() {
-        document.body.classList.add('diary-open');
-        document.getElementById('p2').classList.add('active');
-        
-        // কোনো ডিলে ছাড়া সাথে সাথে ওপেন ক্লাস ট্রিগার
-        document.getElementById('diaryCard').classList.add('open');
-        melody.play().catch(e => {});
-    }
-
-    // ডায়েরির বডিতে বা কাভারে টাচ করলেও যেন সরাসরি ফ্লিপ হয় তার জন্য ব্যাকআপ ফাংশন
-    function triggerFlip() {
-        const card = document.getElementById('diaryCard');
-        if (!card.classList.contains('open')) {
-            card.classList.add('open');
-        }
-    }
-
-    // ব্যাক বাটন লজিক
-    function closeDiaryAndNext() {
-        document.getElementById('diaryCard').classList.remove('open');
-        setTimeout(() => {
-            document.body.classList.remove('diary-open');
-            document.getElementById('p2').classList.remove('active');
-            showPrayerPage();
-        }, 400); // ডিলে কমিয়ে আনা হলো স্মুথনেসের জন্য
-    }
-
-    // পেজ ম্যানেজার
+    // অল-ইন-ওয়ান পেজ নেভিগেশন রাউটার এবং সাউন্ড কন্ট্রোলার
     function nextPage(id) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
         const targetPage = document.getElementById(id);
@@ -695,13 +618,14 @@
             targetPage.classList.add('active');
         }
 
+        // স্মার্ট অডিও হ্যান্ডলার
         if (id === 'p4') {
-            melody.pause();
+            melody.pause(); // গান পেজে আসলে ব্যাকগ্রাউন্ড মেলোডি অফ
         } else if (id === 'p5') {
-            hareya.pause();
+            hareya.pause(); // শেষ পেজে আসলে Hareya অফ
             document.getElementById('play-icon').className = "fas fa-play"; 
             melody.currentTime = 0; 
-            melody.play().catch(e => {});
+            melody.play().catch(e => {}); // মেলোডি আবার রিস্টার্ট হবে
         } else {
             if (melody.paused) {
                 melody.play().catch(e => {});
@@ -710,7 +634,8 @@
         window.scrollTo(0, 0);
     }
 
-    function showPrayerPage() {
+    // ডায়েরির ব্যাক বাটন প্রেস করলে ৩ নম্বর পেজ চালু করার ট্রিগার
+    function triggerPrayerPage() {
         nextPage('p3');
         const wishText = "May God bless you, take care of your health, and stay happy always! ✨";
         let j = 0;
