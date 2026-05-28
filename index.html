@@ -67,7 +67,7 @@
             animation: fadeIn 0.6s ease-in-out forwards;
         }
 
-        /* ================= PAGE 1: SULAIMAN CODES EXACT THEME ================= */
+        /* ================= PAGE 1: FRONT LAYOUT ================= */
         .front-layout {
             display: flex;
             width: 100%;
@@ -85,7 +85,6 @@
             min-width: 320px;
         }
 
-        /* অরিজিনাল থিমের ডাবল-বক্স নিওন টেক্সট স্টাইল */
         .text-block-wrapper {
             position: relative;
             margin-bottom: 25px;
@@ -123,7 +122,7 @@
             box-shadow: 4px 4px 0px #000;
         }
 
-        /* অরিজিনাল পোলকা-ডট বার্থডে ক্যাপ */
+        /* বর্থডে ক্যাপ */
         .birthday-cap-exact {
             position: absolute;
             top: -30px;
@@ -179,7 +178,7 @@
         .action-btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px #000; }
         .action-btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0px #000; }
 
-        /* ডান সাইড: প্রোফাইল ও রিয়ালিস্টিক গ্লসি বেলুন */
+        /* ================= CRAZY ANIMATED RIGHT SIDE ================= */
         .front-right {
             flex: 1;
             display: flex;
@@ -187,14 +186,20 @@
             align-items: center;
             position: relative;
             min-width: 300px;
+            height: 380px; /* অ্যানিমেশনের জন্য ফিক্সড হাইট */
+            justify-content: flex-end;
         }
 
+        /* পুরো প্রোফাইল কার্ড সেটটা নিচ থেকে ওপরে আসবে দুলতে দুলতে */
         .profile-card-wrapper {
             position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
             z-index: 3;
+            opacity: 0;
+            animation: slideUpAndFloat 2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            animation-delay: 0.5s; /* পাসওয়ার্ড দেওয়ার পর একটু পজ নিয়ে আসবে */
         }
 
         .gf-circle-img {
@@ -204,6 +209,7 @@
             border-radius: 50%;
             border: 5px solid #000;
             background: white;
+            box-shadow: 0px 8px 24px rgba(0,0,0,0.15);
         }
 
         .name-tag {
@@ -216,16 +222,16 @@
             border: 3px solid #000;
             box-shadow: 3px 3px 0px #000;
             margin-top: -20px;
+            z-index: 4;
         }
 
-        /* রিয়ালিস্টিক ৩ডি বেলুন ডিজাইন */
+        /* রিয়ালিস্টিক ৩ডি বেলুন */
         .realistic-balloon {
             position: absolute;
             width: 65px;
             height: 78px;
             border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
             z-index: 2;
-            animation: floatBalloon 4s ease-in-out infinite;
         }
         .realistic-balloon::before {
             content: "";
@@ -251,24 +257,50 @@
             transform: rotate(5deg);
         }
 
+        /* কার্ডের ভেতরে থাকা বেলুনগুলোর পজিশন ও আলাদা টাইমিংয়ে দোলা */
         .bal-left {
             background: radial-gradient(circle at 35% 35%, #ff9ebb, #ff4d6d, #a30026);
             top: -20px;
-            left: -30px;
-            animation-delay: 0s;
+            left: -35px;
+            animation: individualFloat 3.5s ease-in-out infinite alternate;
         }
         .bal-right {
             background: radial-gradient(circle at 35% 35%, #ff9ebb, #ff4d6d, #a30026);
-            bottom: 40px;
-            right: -30px;
-            animation-delay: 1.8s;
+            bottom: 60px;
+            right: -35px;
+            animation: individualFloat 4s ease-in-out infinite alternate-reverse;
         }
 
         .deco-star {
             position: absolute;
             font-size: 18px;
             color: #333;
-            animation: floatBalloon 3s ease-in-out infinite alternate;
+        }
+
+        /* ================= ANIMATION KEYFRAMES ================= */
+        /* নিচ থেকে দুলতে দুলতে ওপরে ওঠা এবং সবশেষে কন্টিনিউয়াসলি ভাসমান থাকা */
+        @keyframes slideUpAndFloat {
+            0% {
+                opacity: 0;
+                transform: translateY(250px) rotate(-10deg);
+            }
+            60% {
+                opacity: 1;
+                transform: translateY(-10px) rotate(3deg);
+            }
+            80% {
+                transform: translateY(4px) rotate(-1deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0px) rotate(0deg);
+            }
+        }
+
+        /* সাইডের বেলুনগুলোর রিয়েলিস্টিক হালকা দোলা */
+        @keyframes individualFloat {
+            0% { transform: translateY(0) rotate(-3deg); }
+            100% { transform: translateY(-15px) rotate(4px); }
         }
 
         /* ================= PAGE 2: DIARY / LETTER ================= */
@@ -367,7 +399,6 @@
             margin: 0 0 15px 0;
         }
 
-        /* স্পোটিফাই প্লেয়ার স্টাইল */
         .spotify-player {
             background: #282828;
             color: white;
@@ -408,7 +439,6 @@
         }
 
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
-        @keyframes floatBalloon { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-12px) rotate(3deg); } }
     </style>
 </head>
 <body>
@@ -436,13 +466,10 @@
             </div>
             
             <div class="front-right">
-                <div class="realistic-balloon bal-left"></div>
-                <div class="realistic-balloon bal-right"></div>
-                
-                <div class="deco-star" style="top:-10px; right:40px;">★</div>
-                <div class="deco-star" style="bottom:20px; left:-20px;">✦</div>
-
                 <div class="profile-card-wrapper">
+                    <div class="realistic-balloon bal-left"></div>  <div class="realistic-balloon bal-right"></div> <div class="deco-star" style="top:-30px; right:20px;">★</div>
+                    <div class="deco-star" style="bottom:10px; left:-40px;">✦</div>
+
                     <img src="gf_pic.jpg" class="gf-circle-img" onerror="this.src='https://via.placeholder.com/280?text=Saba'">
                     <div class="name-tag">Dear Saba</div>
                 </div>
@@ -488,8 +515,8 @@
             <div class="spotify-player">
                 <div class="spot-icon"><i class="fab fa-spotify"></i></div>
                 <div class="spot-details">
-                    <p class="song-title">Haareya</p>
-                    <p class="song-artist">Arijit Singh</p>
+                    <p class="spot-title">Good Looking</p>
+                    <p class="spot-artist">Suki Waterhouse</p>
                 </div>
                 <button class="spot-play-btn" onclick="toggleMusic(this)">
                     <i class="fas fa-play" id="play-icon"></i>
@@ -510,19 +537,16 @@
 </div>
 
 <script>
-    // পেজ লোড হওয়ামাত্রই সবার আগে পাসওয়ার্ড ভেরিফিকেশন হবে
+    // সিকিউর পাসওয়ার্ড প্রোটেকশন লেয়ার
     window.onload = function() {
-        // এখানে তোর সিক্রেট পাসওয়ার্ডটা দেওয়া (Saba-র বার্থডে যেমন saba15)
         const secretPassword = "saba15"; 
-        
         let userPass = prompt("Enter Password to Access the Website:");
         
         if (userPass === secretPassword) {
-            // সঠিক পাসওয়ার্ড দিলে পেজ 'flex' মোডে দৃশ্যমান হবে
             document.body.style.display = "flex"; 
         } else {
             alert("Wrong Password! Access Denied.");
-            window.location.reload(); // ভুল পাসওয়ার্ডে আবার রিফ্রেশ হবে
+            window.location.reload();
         }
     }
 
