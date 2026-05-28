@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday Saba ❤️</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Pacifico&family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Pacifico&family=Caveat:wght@700&family=Great+Vibes&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -15,16 +15,16 @@
             background-color: #ffe5ec;
             background-image: linear-gradient(#ffccd5 1px, transparent 1px), linear-gradient(90deg, #ffccd5 1px, transparent 1px);
             background-size: 24px 24px;
-            display: none; /* পাসওয়ার্ড দেওয়ার আগে পুরো পেজ ১০০% হাইড থাকবে */
+            display: none; /* পাসওয়ার্ড দেওয়ার আগে পুরো পেজ হাইড থাকবে */
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             font-family: 'Arial', sans-serif;
-            overflow-x: hidden;
+            overflow: hidden;
             position: relative;
         }
 
-        /* ওপরের দুই কোণার ঝালর (Bunting Banner) */
+        /* ওপরের দুই কোণার ঝালর */
         .bunting-left, .bunting-right {
             position: absolute;
             top: 0;
@@ -49,22 +49,36 @@
             width: 90%;
             max-width: 950px;
             z-index: 2;
+            position: relative;
+            height: 550px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* পেজ ট্রানজিশন */
+        /* পেজ ট্রানজিশন লেয়ার */
         .page {
-            display: none;
+            position: absolute;
             width: 100%;
+            height: 100%;
+            display: none;
             justify-content: center;
             align-items: center;
         }
 
-        .active {
+        /* ডায়েরি পেজ বাদে বাকি পেজগুলো ফুল ব্লকিং ওভারলে হিসেবে কাজ করবে */
+        .page:not(#p2).active {
             display: flex !important;
-            animation: fadeIn 0.6s ease-in-out forwards;
+            z-index: 10;
+            background: #ffe5ec;
+            background-image: linear-gradient(#ffccd5 1px, transparent 1px), linear-gradient(90deg, #ffccd5 1px, transparent 1px);
+            background-size: 24px 24px;
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+
+        #p2.active {
+            display: flex !important;
+            z-index: 5;
         }
 
         /* ================= PAGE 1: FRONT LAYOUT ================= */
@@ -75,6 +89,12 @@
             justify-content: space-between;
             gap: 40px;
             flex-wrap: wrap;
+        }
+
+        body.diary-open .front-layout {
+            filter: blur(1px) cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0.85;
+            pointer-events: none;
         }
 
         .front-left {
@@ -122,7 +142,6 @@
             box-shadow: 4px 4px 0px #000;
         }
 
-        /* বর্থডে ক্যাপ */
         .birthday-cap-exact {
             position: absolute;
             top: -30px;
@@ -178,7 +197,7 @@
         .action-btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px #000; }
         .action-btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0px #000; }
 
-        /* ================= CRAZY ANIMATED RIGHT SIDE ================= */
+        /* ================= স্লো-মোশন প্রোফাইল কার্ড ================= */
         .front-right {
             flex: 1;
             display: flex;
@@ -186,11 +205,10 @@
             align-items: center;
             position: relative;
             min-width: 300px;
-            height: 380px; /* অ্যানিমেশনের জন্য ফিক্সড হাইট */
+            height: 380px;
             justify-content: flex-end;
         }
 
-        /* পুরো প্রোফাইল কার্ড সেটটা নিচ থেকে ওপরে আসবে দুলতে দুলতে */
         .profile-card-wrapper {
             position: relative;
             display: flex;
@@ -198,8 +216,8 @@
             align-items: center;
             z-index: 3;
             opacity: 0;
-            animation: slideUpAndFloat 2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-            animation-delay: 0.5s; /* পাসওয়ার্ড দেওয়ার পর একটু পজ নিয়ে আসবে */
+            animation: slideUpAndFloat 5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            animation-delay: 0.5s;
         }
 
         .gf-circle-img {
@@ -225,7 +243,6 @@
             z-index: 4;
         }
 
-        /* রিয়ালিস্টিক ৩ডি বেলুন */
         .realistic-balloon {
             position: absolute;
             width: 65px;
@@ -257,86 +274,179 @@
             transform: rotate(5deg);
         }
 
-        /* কার্ডের ভেতরে থাকা বেলুনগুলোর পজিশন ও আলাদা টাইমিংয়ে দোলা */
         .bal-left {
             background: radial-gradient(circle at 35% 35%, #ff9ebb, #ff4d6d, #a30026);
             top: -20px;
             left: -35px;
-            animation: individualFloat 3.5s ease-in-out infinite alternate;
+            animation: individualFloat 5.5s ease-in-out infinite alternate;
         }
         .bal-right {
             background: radial-gradient(circle at 35% 35%, #ff9ebb, #ff4d6d, #a30026);
             bottom: 60px;
             right: -35px;
-            animation: individualFloat 4s ease-in-out infinite alternate-reverse;
+            animation: individualFloat 6s ease-in-out infinite alternate-reverse;
         }
 
-        .deco-star {
-            position: absolute;
-            font-size: 18px;
-            color: #333;
-        }
+        .deco-star { position: absolute; font-size: 18px; color: #333; }
 
-        /* ================= ANIMATION KEYFRAMES ================= */
-        /* নিচ থেকে দুলতে দুলতে ওপরে ওঠা এবং সবশেষে কন্টিনিউয়াসলি ভাসমান থাকা */
         @keyframes slideUpAndFloat {
-            0% {
-                opacity: 0;
-                transform: translateY(250px) rotate(-10deg);
-            }
-            60% {
-                opacity: 1;
-                transform: translateY(-10px) rotate(3deg);
-            }
-            80% {
-                transform: translateY(4px) rotate(-1deg);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0px) rotate(0deg);
-            }
+            0% { opacity: 0; transform: translateY(250px) rotate(-10deg); }
+            60% { opacity: 1; transform: translateY(-10px) rotate(3deg); }
+            80% { transform: translateY(4px) rotate(-1deg); }
+            100% { opacity: 1; transform: translateY(0px) rotate(0deg); }
         }
 
-        /* সাইডের বেলুনগুলোর রিয়েলিস্টিক হালকা দোলা */
         @keyframes individualFloat {
             0% { transform: translateY(0) rotate(-3deg); }
             100% { transform: translateY(-15px) rotate(4px); }
         }
 
-        /* ================= PAGE 2: DIARY / LETTER ================= */
-        .diary-container {
-            display: flex;
-            width: 100%;
-            max-width: 780px;
-            background: #fff;
-            border: 4px solid #000;
-            border-radius: 12px;
-            box-shadow: 10px 10px 0px rgba(0,0,0,0.1);
-            overflow: hidden;
-            min-height: 450px;
+        /* ================= PAGE 2: ৩ডি ডায়েরি ইফেক্ট ================= */
+        .diary-wrapper {
+            perspective: 1500px;
+            width: 680px;
+            height: 440px;
+            position: absolute;
+            z-index: 20;
+            transform: rotate(-2deg);
+            animation: cardScaleUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
-        .diary-left {
-            flex: 1;
+
+        .diary-book {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .diary-page-right {
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            right: 0;
+            top: 0;
+            background: #fff0f3;
+            border: 4px solid #000;
+            border-left: none;
+            border-radius: 0 16px 16px 0;
+            box-shadow: 8px 10px 0px rgba(0,0,0,0.15);
+            padding: 25px 30px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .diary-headline {
+            font-family: 'Great Vibes', cursive;
+            font-size: 36px;
+            color: #c9184a;
+            margin: 0 0 10px 0;
+            text-align: center;
+        }
+
+        .diary-body-text {
+            font-family: 'Caveat', cursive;
+            font-size: 22px;
+            line-height: 28px;
+            color: #4a4a4a;
+            flex-grow: 1;
+            text-align: left;
+        }
+
+        .android-back-btn {
+            width: 38px;
+            height: 38px;
+            background: #ff4d6d;
+            border: 3px solid #000;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 2px 2px 0px #000;
+            align-self: flex-end;
+            transition: 0.1s;
+        }
+        .android-back-btn:active {
+            transform: translate(1px, 1px);
+            box-shadow: 1px 1px 0px #000;
+        }
+
+        .diary-cover-left {
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            transform-origin: right center;
+            transform-style: preserve-3d;
+            transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 5;
+        }
+
+        .diary-wrapper.open .diary-cover-left {
+            transform: rotateY(-180deg);
+        }
+
+        .cover-front {
+            position: absolute;
+            width: 100%;
+            height: 100%;
             background: #ff758f;
-            border-right: 4px solid #000;
+            border: 4px solid #000;
+            border-radius: 16px 0 0 16px;
+            box-sizing: border-box;
+            backface-visibility: hidden;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             color: white;
-            padding: 20px;
         }
-        .diary-right {
-            flex: 1.4;
-            background: #fff9e6;
-            background-image: repeating-linear-gradient(#fff9e6 0px, #fff9e6 29px, #d1ccb9 30px);
-            padding: 30px;
-            font-family: 'Caveat', cursive;
-            font-size: 26px;
-            line-height: 30px;
+
+        .cover-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #ff85a1;
+            border: 4px solid #000;
+            border-radius: 0 16px 16px 0;
+            box-sizing: border-box;
+            transform: rotateY(180deg);
+            backface-visibility: hidden;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .mirrored-title {
+            font-family: 'Fredoka One', cursive;
+            font-size: 32px;
+            color: white;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 38px;
+            transform: scaleX(-1);
+            margin-top: 15px;
+        }
+
+        .mirrored-pic {
+            width: 85px;
+            height: 85px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #000;
+            transform: scaleX(-1);
+        }
+
+        @keyframes cardScaleUp {
+            from { opacity: 0; transform: scale(0.8) rotate(5deg); }
+            to { opacity: 1; transform: scale(1) rotate(-2deg); }
         }
 
         /* ================= PAGE 3: PRAYERS ================= */
@@ -351,7 +461,7 @@
             text-align: center;
         }
 
-        /* ================= PAGE 4: INSTA REEL VIBE CARD ================= */
+        /* ================= PAGE 4: SPOTIFY/HAREYA CARD ================= */
         .insta-vibe-card {
             background: #fff;
             border: 4px solid #000;
@@ -381,7 +491,6 @@
             transform: translateX(-50%);
             font-size: 42px;
             z-index: 10;
-            filter: drop-shadow(0px 3px 2px rgba(0,0,0,0.15));
         }
 
         .gf-rect-img {
@@ -414,7 +523,7 @@
             margin-bottom: 20px;
         }
         .spot-icon { color: #1DB954; font-size: 20px; margin-left: 5px; }
-        .spot-details { flex-grow: 1; text-align: left; margin-left: 12px; font-family: 'Arial', sans-serif; }
+        .spot-details { flex-grow: 1; text-align: left; margin-left: 12px; }
         .spot-title { font-weight: bold; font-size: 13px; margin: 0; }
         .spot-artist { font-size: 11px; color: #b3b3b3; margin: 2px 0 0 0; }
         .spot-play-btn {
@@ -446,51 +555,65 @@
 <div class="bunting-left"></div>
 <div class="bunting-right"></div>
 
-<audio id="bg-music" src="birthday_song.mp3" loop></audio>
+<audio id="melody-music" src="melody.mp3" loop></audio>
+<audio id="hareya-music" src="hareya.mp3" loop></audio>
 
 <div class="container">
     
-    <div id="p1" class="page active">
-        <div class="front-layout">
-            <div class="front-left">
-                <div class="text-block-wrapper">
-                    <div class="happy-box">Happy</div><br>
-                    <div class="birthday-box">Birthday</div>
-                    <div class="birthday-cap-exact"></div>
-                </div>
-                
-                <div class="date-badge">📅 15 June</div>
-                <button class="action-btn" onclick="nextPage('p2')">
-                    Click Here Saba <i class="fas fa-envelope-open-text"></i>
-                </button>
+    <div id="front-page-base" class="front-layout">
+        <div class="front-left">
+            <div class="text-block-wrapper">
+                <div class="happy-box">Happy</div><br>
+                <div class="birthday-box">Birthday</div>
+                <div class="birthday-cap-exact"></div>
             </div>
             
-            <div class="front-right">
-                <div class="profile-card-wrapper">
-                    <div class="realistic-balloon bal-left"></div>  <div class="realistic-balloon bal-right"></div> <div class="deco-star" style="top:-30px; right:20px;">★</div>
-                    <div class="deco-star" style="bottom:10px; left:-40px;">✦</div>
+            <div class="date-badge">📅 15 June</div>
+            <button class="action-btn" onclick="openDiaryCard()">
+                Click Here Saba <i class="fas fa-envelope-open-text"></i>
+            </button>
+        </div>
+        
+        <div class="front-right">
+            <div class="profile-card-wrapper">
+                <div class="realistic-balloon bal-left"></div>
+                <div class="realistic-balloon bal-right"></div>
+                
+                <div class="deco-star" style="top:-30px; right:20px;">★</div>
+                <div class="deco-star" style="bottom:10px; left:-40px;">✦</div>
 
-                    <img src="gf_pic.jpg" class="gf-circle-img" onerror="this.src='https://via.placeholder.com/280?text=Saba'">
-                    <div class="name-tag">Dear Saba</div>
-                </div>
+                <img src="gf_pic.jpg" class="gf-circle-img" onerror="this.src='https://via.placeholder.com/280?text=Saba'">
+                <div class="name-tag">Dear Saba</div>
             </div>
         </div>
     </div>
 
     <div id="p2" class="page">
-        <div class="diary-container">
-            <div class="diary-left">
-                <div style="font-size: 60px;">📖</div>
-                <h2 style="font-family: 'Fredoka One'; margin: 10px 0 0 0;">To Saba</h2>
-                <p style="font-family: 'Pacifico'; margin: 5px 0 0 0;">Happy Birthday ✨</p>
-            </div>
-            <div class="diary-right">
-                <div>
-                    প্রিয় জান, আজ তোমার জন্মদিন। তোমার জন্য আমার ভালোবাসা এই কয়েক লাইনে বলে শেষ করা যাবে না। তুমি আমার জীবনের সেরা মানুষ। সব সময় এভাবেই হাসিখুশি থেকো। শুভ জন্মদিন! ❤️
+        <div class="diary-wrapper" id="diaryCard">
+            <div class="diary-book">
+                
+                <div class="diary-cover-left">
+                    <div class="cover-front">
+                        <div style="font-size: 55px;">📖</div>
+                        <h3 style="font-family: 'Fredoka One'; margin: 10px 0 0 0;">Open Me</h3>
+                    </div>
+                    <div class="cover-back">
+                        <img src="gf_pic.jpg" class="mirrored-pic" onerror="this.src='https://via.placeholder.com/85?text=Queen'">
+                        <div class="mirrored-title">HAPPY<br>BIRTHDAY</div>
+                    </div>
                 </div>
-                <button class="action-btn" style="align-self: flex-end; padding: 6px 20px; font-size: 15px;" onclick="showPrayerPage()">
-                    Next ➡️
-                </button>
+
+                <div class="diary-page-right">
+                    <h2 class="diary-headline">To You!</h2>
+                    <div class="diary-body-text">
+                        Happy birthday chanda, the day you came into my life I was not really much attached to you but day by day you became close to my heart. And now you are truly my younger sister. I wish I could remove some of the pain from your life which you are bearing alone. But you're always welcome, you can talk anytime you want to talk specially those which you can't say to others. And this year your all dreams come true. I wish that your brother could wish you but if couldn't wish in him behalf I am wishing you happy birthday sana. Don't be Sad, ok be happy. 🥰
+                    </div>
+                    
+                    <div class="android-back-btn" onclick="closeDiaryAndNext()">
+                        <i class="fas fa-arrow-left"></i>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -515,10 +638,10 @@
             <div class="spotify-player">
                 <div class="spot-icon"><i class="fab fa-spotify"></i></div>
                 <div class="spot-details">
-                    <p class="spot-title">Good Looking</p>
-                    <p class="spot-artist">Suki Waterhouse</p>
+                    <p class="spot-title">Hareya</p>
+                    <p class="spot-artist">Arijit Singh</p>
                 </div>
-                <button class="spot-play-btn" onclick="toggleMusic(this)">
+                <button class="spot-play-btn" onclick="toggleHareyaMusic(this)">
                     <i class="fas fa-play" id="play-icon"></i>
                 </button>
             </div>
@@ -537,24 +660,72 @@
 </div>
 
 <script>
-    // সিকিউর পাসওয়ার্ড প্রোটেকশন লেয়ার
+    const melody = document.getElementById('melody-music');
+    const hareya = document.getElementById('hareya-music');
+
+    // পাসওয়ার্ড প্রোটেকশন + অটো-মেলোডি প্লে ব্যাকগ্রাউন্ড লজিক
     window.onload = function() {
         const secretPassword = "saba15"; 
         let userPass = prompt("Enter Password to Access the Website:");
         
         if (userPass === secretPassword) {
             document.body.style.display = "flex"; 
+            // পাসওয়ার্ড কনফার্ম হলেই ব্যাকগ্রাউন্ড মেলোডি লোড ও স্টার্ট হবে
+            melody.play().catch(e => console.log("Audio waiting for user click interaction:", e));
         } else {
             alert("Wrong Password! Access Denied.");
             window.location.reload();
         }
     }
 
+    // ডায়েরি কার্ড ওপেন করার ফাংশন
+    function openDiaryCard() {
+        document.body.classList.add('diary-open');
+        const p2 = document.getElementById('p2');
+        p2.classList.add('active');
+        
+        // মেলোডি প্লে নিশ্চিত করা
+        melody.play().catch(e => {});
+
+        setTimeout(() => {
+            document.getElementById('diaryCard').classList.add('open');
+        }, 150);
+    }
+
+    // অ্যান্ড্রয়েড ব্যাক বাটন প্রেস করে ডায়েরি ক্লোজ করা ও পেজ ৩ এ যাওয়া
+    function closeDiaryAndNext() {
+        document.getElementById('diaryCard').classList.remove('open');
+        setTimeout(() => {
+            document.body.classList.remove('diary-open');
+            document.getElementById('p2').classList.remove('active');
+            showPrayerPage();
+        }, 600);
+    }
+
+    // অল ইন ওয়ান পেজ সাউন্ড ম্যানেজার
     function nextPage(id) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
         const targetPage = document.getElementById(id);
         if(targetPage) {
             targetPage.classList.add('active');
+        }
+
+        // --- স্মার্ট অডিও ট্র্যাকিং রাউটার ---
+        if (id === 'p4') {
+            // ৪ নম্বর পেজে আসার সাথে সাথে মেলোডি চিরতরে পজ হবে
+            melody.pause();
+        } else if (id === 'p5') {
+            // ৫ নম্বর পেজে পা দেওয়া মাত্রই Hareya বন্ধ হবে এবং প্রথম থেকে মেলোডি ব্যাকগ্রাউন্ডে ফিরবে
+            hareya.pause();
+            document.getElementById('play-icon').className = "fas fa-play"; // প্লে বাটন রিসেট
+            
+            melody.currentTime = 0; // রিস্টার্ট মেলোডি
+            melody.play().catch(e => {});
+        } else {
+            // ১, ২ বা ৩ নম্বর পেজে ফিরে আসলে যেন মেলোডি রানিং থাকে
+            if (melody.paused) {
+                melody.play().catch(e => {});
+            }
         }
         window.scrollTo(0, 0);
     }
@@ -578,15 +749,15 @@
         setTimeout(type, 300);
     }
 
-    function toggleMusic(btn) {
-        const music = document.getElementById('bg-music');
+    // পেজ ৪ এর স্পটিফাই প্লেয়ারের জন্য Hareya গান কন্ট্রোল
+    function toggleHareyaMusic(btn) {
         const icon = document.getElementById('play-icon');
         
-        if (music.paused) {
-            music.play().catch(e => console.log("Audio play blocked:", e));
+        if (hareya.paused) {
+            hareya.play().catch(e => console.log("Audio play blocked:", e));
             icon.className = "fas fa-pause";
         } else {
-            music.pause();
+            hareya.pause();
             icon.className = "fas fa-play";
         }
     }
