@@ -20,7 +20,7 @@
             align-items: center;
             min-height: 100vh;
             font-family: 'Arial', sans-serif;
-            overflow: hidden;
+            overflow-x: hidden;
             position: relative;
         }
 
@@ -46,11 +46,11 @@
         }
 
         .container {
-            width: 90%;
-            max-width: 950px;
+            width: 95%;
+            max-width: 1000px;
             z-index: 2;
             position: relative;
-            height: 550px;
+            height: 620px; /* ডায়েরিটা নিচে নেমে যাওয়ার প্রবলেম সলভ করার জন্য হাইট বাড়ানো হলো */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -301,11 +301,11 @@
             100% { transform: translateY(-15px) rotate(4px); }
         }
 
-        /* ================= PAGE 2: ৩ডি ডায়েরি ইফেক্ট ================= */
+        /* ================= PAGE 2: ৩ডি ডায়েরি ইফেক্ট (FIXED SIZE) ================= */
         .diary-wrapper {
             perspective: 1500px;
-            width: 680px;
-            height: 440px;
+            width: 760px;  /* লেখার জায়গা বাড়াতে উইডথ বাড়ানো হলো */
+            height: 500px; /* ডায়েরি বড় করতে এবং লেখা ফিট করতে হাইট বাড়ানো হলো */
             position: absolute;
             z-index: 20;
             transform: rotate(-2deg);
@@ -347,11 +347,22 @@
 
         .diary-body-text {
             font-family: 'Caveat', cursive;
-            font-size: 22px;
-            line-height: 28px;
+            font-size: 20px; /* লেখা সুন্দরভাবে আটকাতে ফন্ট সাইজ সামান্য অ্যাডজাস্ট করা হলো */
+            line-height: 26px;
             color: #4a4a4a;
             flex-grow: 1;
             text-align: left;
+            overflow-y: auto; /* লেখা আরও বেশি হলে যেন ডায়েরির ভেতরেই স্ক্রোল করা যায় */
+            padding-right: 5px;
+        }
+
+        /* স্ক্রোলবারটা দেখতে সুন্দর করার জন্য স্টাইলিং */
+        .diary-body-text::-webkit-scrollbar {
+            width: 4px;
+        }
+        .diary-body-text::-webkit-scrollbar-thumb {
+            background: #ff758f;
+            border-radius: 10px;
         }
 
         .android-back-btn {
@@ -368,6 +379,7 @@
             box-shadow: 2px 2px 0px #000;
             align-self: flex-end;
             transition: 0.1s;
+            margin-top: 10px;
         }
         .android-back-btn:active {
             transform: translate(1px, 1px);
@@ -678,7 +690,7 @@
         }
     }
 
-    // ডায়েরি কার্ড ওপেন করার ফাংশন
+    // ডায়েরিカード ওপেন করার ফাংশন
     function openDiaryCard() {
         document.body.classList.add('diary-open');
         const p2 = document.getElementById('p2');
