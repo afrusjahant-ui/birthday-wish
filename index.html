@@ -50,7 +50,7 @@
             max-width: 1000px;
             z-index: 2;
             position: relative;
-            height: 620px; /* ডায়েরিটা নিচে নেমে যাওয়ার প্রবলেম সলভ করার জন্য হাইট বাড়ানো হলো */
+            height: 620px; 
             display: flex;
             justify-content: center;
             align-items: center;
@@ -78,7 +78,7 @@
 
         #p2.active {
             display: flex !important;
-            z-index: 5;
+            z-index: 15;
         }
 
         /* ================= PAGE 1: FRONT LAYOUT ================= */
@@ -89,11 +89,12 @@
             justify-content: space-between;
             gap: 40px;
             flex-wrap: wrap;
+            transition: transform 0.4s ease, opacity 0.4s ease;
         }
 
         body.diary-open .front-layout {
-            filter: blur(1px) cubic-bezier(0.4, 0, 0.2, 1);
-            opacity: 0.85;
+            filter: blur(2px);
+            opacity: 0.5;
             pointer-events: none;
         }
 
@@ -197,7 +198,7 @@
         .action-btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px #000; }
         .action-btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0px #000; }
 
-        /* ================= স্লো-মোশন প্রোফাইল কার্ড ================= */
+        /* ================= প্রোফাইল কার্ড ================= */
         .front-right {
             flex: 1;
             display: flex;
@@ -301,15 +302,15 @@
             100% { transform: translateY(-15px) rotate(4px); }
         }
 
-        /* ================= PAGE 2: ৩ডি ডায়েরি ইফেক্ট (FIXED SIZE) ================= */
+        /* ================= PAGE 2: ৩ডি ডায়েরি ইফেক্ট (FIXED & INSTANT) ================= */
         .diary-wrapper {
-            perspective: 1500px;
-            width: 760px;  /* লেখার জায়গা বাড়াতে উইডথ বাড়ানো হলো */
-            height: 500px; /* ডায়েরি বড় করতে এবং লেখা ফিট করতে হাইট বাড়ানো হলো */
-            position: absolute;
-            z-index: 20;
+            perspective: 2000px; /* থ্রিডি ভিউ আরও ক্লিয়ার করার জন্য বাড়ানো হলো */
+            width: 760px;  
+            height: 500px; 
+            position: relative;
+            z-index: 30;
             transform: rotate(-2deg);
-            animation: cardScaleUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            animation: cardScaleUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1) forwards;
         }
 
         .diary-book {
@@ -335,6 +336,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            z-index: 1;
         }
 
         .diary-headline {
@@ -347,23 +349,17 @@
 
         .diary-body-text {
             font-family: 'Caveat', cursive;
-            font-size: 20px; /* লেখা সুন্দরভাবে আটকাতে ফন্ট সাইজ সামান্য অ্যাডজাস্ট করা হলো */
+            font-size: 20px; 
             line-height: 26px;
             color: #4a4a4a;
             flex-grow: 1;
             text-align: left;
-            overflow-y: auto; /* লেখা আরও বেশি হলে যেন ডায়েরির ভেতরেই স্ক্রোল করা যায় */
+            overflow-y: auto; 
             padding-right: 5px;
         }
 
-        /* স্ক্রোলবারটা দেখতে সুন্দর করার জন্য স্টাইলিং */
-        .diary-body-text::-webkit-scrollbar {
-            width: 4px;
-        }
-        .diary-body-text::-webkit-scrollbar-thumb {
-            background: #ff758f;
-            border-radius: 10px;
-        }
+        .diary-body-text::-webkit-scrollbar { width: 4px; }
+        .diary-body-text::-webkit-scrollbar-thumb { background: #ff758f; border-radius: 10px; }
 
         .android-back-btn {
             width: 38px;
@@ -381,10 +377,7 @@
             transition: 0.1s;
             margin-top: 10px;
         }
-        .android-back-btn:active {
-            transform: translate(1px, 1px);
-            box-shadow: 1px 1px 0px #000;
-        }
+        .android-back-btn:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0px #000; }
 
         .diary-cover-left {
             position: absolute;
@@ -394,10 +387,11 @@
             top: 0;
             transform-origin: right center;
             transform-style: preserve-3d;
-            transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 5;
+            transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); /* কাভারের স্পিড অপ্টিমাইজ করা হলো */
+            z-index: 10;
         }
 
+        /* এক ক্লিকে ডায়েরি খোলার মেইন রুল */
         .diary-wrapper.open .diary-cover-left {
             transform: rotateY(-180deg);
         }
@@ -416,6 +410,7 @@
             justify-content: center;
             align-items: center;
             color: white;
+            cursor: pointer;
         }
 
         .cover-back {
@@ -457,7 +452,7 @@
         }
 
         @keyframes cardScaleUp {
-            from { opacity: 0; transform: scale(0.8) rotate(5deg); }
+            from { opacity: 0; transform: scale(0.9) rotate(2deg); }
             to { opacity: 1; transform: scale(1) rotate(-2deg); }
         }
 
@@ -473,7 +468,7 @@
             text-align: center;
         }
 
-        /* ================= PAGE 4: SPOTIFY/HAREYA CARD ================= */
+        /* ================= PAGE 4: SPOTIFY CARD ================= */
         .insta-vibe-card {
             background: #fff;
             border: 4px solid #000;
@@ -496,29 +491,9 @@
             margin-bottom: 20px;
         }
 
-        .insta-queen-crown {
-            position: absolute;
-            top: -22px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 42px;
-            z-index: 10;
-        }
-
-        .gf-rect-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 24px;
-            border: 4px solid #000;
-        }
-
-        .vibe-text {
-            font-family: 'Fredoka One', cursive;
-            font-size: 26px;
-            color: #ff4d6d;
-            margin: 0 0 15px 0;
-        }
+        .insta-queen-crown { position: absolute; top: -22px; left: 50%; transform: translateX(-50%); font-size: 42px; z-index: 10; }
+        .gf-rect-img { width: 100%; height: 100%; object-fit: cover; border-radius: 24px; border: 4px solid #000; }
+        .vibe-text { font-family: 'Fredoka One', cursive; font-size: 26px; color: #ff4d6d; margin: 0 0 15px 0; }
 
         .spotify-player {
             background: #282828;
@@ -551,13 +526,8 @@
             align-items: center;
         }
 
-        /* ================= PAGE 5: FINAL ANNOY ================= */
-        .annoy-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
+        /* ================= PAGE 5: FINAL PAGE ================= */
+        .annoy-card { display: flex; flex-direction: column; align-items: center; text-align: center; }
 
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
     </style>
@@ -604,7 +574,7 @@
         <div class="diary-wrapper" id="diaryCard">
             <div class="diary-book">
                 
-                <div class="diary-cover-left">
+                <div class="diary-cover-left" onclick="triggerFlip()">
                     <div class="cover-front">
                         <div style="font-size: 55px;">📖</div>
                         <h3 style="font-family: 'Fredoka One'; margin: 10px 0 0 0;">Open Me</h3>
@@ -645,12 +615,12 @@
                 <img src="gf_pic.jpg" class="gf-rect-img" onerror="this.src='https://via.placeholder.com/290x290?text=Birthday+Queen'">
             </div>
             
-            <h2 class="vibe-text">For you? 😉</h2>
+            <h2 class="vibe-text">My Birthday Queen</h2>
             
             <div class="spotify-player">
                 <div class="spot-icon"><i class="fab fa-spotify"></i></div>
                 <div class="spot-details">
-                    <p class="spot-title">Hareya</p>
+                    <p class="spot-title">Tujhme rab dikhta hain</p>
                     <p class="spot-artist">Arijit Singh</p>
                 </div>
                 <button class="spot-play-btn" onclick="toggleHareyaMusic(this)">
@@ -675,46 +645,49 @@
     const melody = document.getElementById('melody-music');
     const hareya = document.getElementById('hareya-music');
 
-    // পাসওয়ার্ড প্রোটেকশন + অটো-মেলোডি প্লে ব্যাকগ্রাউন্ড লজিক
+    // পাসওয়ার্ড প্রোটেকশন লজিক
     window.onload = function() {
         const secretPassword = "saba15"; 
         let userPass = prompt("Enter Password to Access the Website:");
         
         if (userPass === secretPassword) {
             document.body.style.display = "flex"; 
-            // পাসওয়ার্ড কনফার্ম হলেই ব্যাকগ্রাউন্ড মেলোডি লোড ও স্টার্ট হবে
-            melody.play().catch(e => console.log("Audio waiting for user click interaction:", e));
+            melody.play().catch(e => console.log("Audio waiting for user interaction:", e));
         } else {
             alert("Wrong Password! Access Denied.");
             window.location.reload();
         }
     }
 
-    // ডায়েরিカード ওপেন করার ফাংশন
+    // বাটনে চাপ দিলে ডায়েরি লেয়ার অন হবে এবং ইনস্ট্যান্ট খুলে যাবে
     function openDiaryCard() {
         document.body.classList.add('diary-open');
-        const p2 = document.getElementById('p2');
-        p2.classList.add('active');
+        document.getElementById('p2').classList.add('active');
         
-        // মেলোডি প্লে নিশ্চিত করা
+        // কোনো ডিলে ছাড়া সাথে সাথে ওপেন ক্লাস ট্রিগার
+        document.getElementById('diaryCard').classList.add('open');
         melody.play().catch(e => {});
-
-        setTimeout(() => {
-            document.getElementById('diaryCard').classList.add('open');
-        }, 150);
     }
 
-    // অ্যান্ড্রয়েড ব্যাক বাটন প্রেস করে ডায়েরি ক্লোজ করা ও পেজ ৩ এ যাওয়া
+    // ডায়েরির বডিতে বা কাভারে টাচ করলেও যেন সরাসরি ফ্লিপ হয় তার জন্য ব্যাকআপ ফাংশন
+    function triggerFlip() {
+        const card = document.getElementById('diaryCard');
+        if (!card.classList.contains('open')) {
+            card.classList.add('open');
+        }
+    }
+
+    // ব্যাক বাটন লজিক
     function closeDiaryAndNext() {
         document.getElementById('diaryCard').classList.remove('open');
         setTimeout(() => {
             document.body.classList.remove('diary-open');
             document.getElementById('p2').classList.remove('active');
             showPrayerPage();
-        }, 600);
+        }, 400); // ডিলে কমিয়ে আনা হলো স্মুথনেসের জন্য
     }
 
-    // অল ইন ওয়ান পেজ সাউন্ড ম্যানেজার
+    // পেজ ম্যানেজার
     function nextPage(id) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
         const targetPage = document.getElementById(id);
@@ -722,19 +695,14 @@
             targetPage.classList.add('active');
         }
 
-        // --- স্মার্ট অডিও ট্র্যাকিং রাউটার ---
         if (id === 'p4') {
-            // ৪ নম্বর পেজে আসার সাথে সাথে মেলোডি চিরতরে পজ হবে
             melody.pause();
         } else if (id === 'p5') {
-            // ৫ নম্বর পেজে পা দেওয়া মাত্রই Hareya বন্ধ হবে এবং প্রথম থেকে মেলোডি ব্যাকগ্রাউন্ডে ফিরবে
             hareya.pause();
-            document.getElementById('play-icon').className = "fas fa-play"; // প্লে বাটন রিসেট
-            
-            melody.currentTime = 0; // রিস্টার্ট মেলোডি
+            document.getElementById('play-icon').className = "fas fa-play"; 
+            melody.currentTime = 0; 
             melody.play().catch(e => {});
         } else {
-            // ১, ২ বা ৩ নম্বর পেজে ফিরে আসলে যেন মেলোডি রানিং থাকে
             if (melody.paused) {
                 melody.play().catch(e => {});
             }
@@ -753,20 +721,19 @@
             if (j < wishText.length) {
                 targetEl.innerHTML += wishText.charAt(j);
                 j++; 
-                setTimeout(type, 80); 
+                setTimeout(type, 60); 
             } else { 
                 document.getElementById('wish-next').style.display = 'block'; 
             }
         }
-        setTimeout(type, 300);
+        setTimeout(type, 200);
     }
 
-    // পেজ ৪ এর স্পটিফাই প্লেয়ারের জন্য Hareya গান কন্ট্রোল
+    // স্পটিফাই প্লেয়ার মিউজিক টগল
     function toggleHareyaMusic(btn) {
         const icon = document.getElementById('play-icon');
-        
         if (hareya.paused) {
-            hareya.play().catch(e => console.log("Audio play blocked:", e));
+            hareya.play().catch(e => {});
             icon.className = "fas fa-pause";
         } else {
             hareya.pause();
