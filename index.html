@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday Saba ❤️</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Pacifico&family=Caveat:wght@700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Pacifico&family=Caveat:wght=700&family=Great+Vibes&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -22,6 +22,7 @@
             font-family: 'Arial', sans-serif;
             overflow-x: hidden;
             position: relative;
+            transition: background 0.5s ease;
         }
 
         /* লক স্ক্রিন ওভারলে ডিজাইন */
@@ -142,7 +143,6 @@
             transition: filter 0.4s ease, opacity 0.4s ease;
         }
 
-        /* ডায়েরি বা অন্য পেজ ওপেন হলে ব্যাকগ্রাউন্ড আবছা ও ব্লার হবে */
         body.overlay-active .front-layout {
             filter: blur(4px);
             opacity: 0.35;
@@ -159,7 +159,6 @@
             align-items: center;
         }
 
-        /* ডায়েরি পেজ বাদে বাকি পেজগুলো ফুল ব্যাকগ্রাউন্ড ওভারলে */
         .page:not(#p2).active {
             display: flex !important;
             z-index: 15;
@@ -169,7 +168,6 @@
             animation: fadeIn 0.4s ease-in-out forwards;
         }
 
-        /* ডায়েরি পেজটি ফ্রন্ট পেজের ওপরে ভেসে থাকবে */
         #p2.active {
             display: flex !important;
             z-index: 20;
@@ -380,7 +378,7 @@
             100% { transform: translateY(-15px) rotate(4px); }
         }
 
-        /* ================= PAGE 2: TILTED AUTOMATIC OPEN DIARY ================= */
+        /* ================= DIARY OPEN VIEW ================= */
         .diary-open-view {
             width: 820px;
             height: 520px;
@@ -390,7 +388,6 @@
             filter: drop-shadow(5px 15px 25px rgba(0,0,0,0.25));
         }
 
-        /* বাম পাতা (কাভার ব্যাকসাইড - নো মিরর, একদম নরমাল ক্লিয়ার সোজা টেক্সট) */
         .diary-left-page {
             width: 50%;
             height: 100%;
@@ -407,7 +404,6 @@
             position: relative;
         }
 
-        /* কন্টেন্ট সোজা রাখার নরমাল লেআউট */
         .normal-content {
             display: flex;
             flex-direction: column;
@@ -434,15 +430,14 @@
             line-height: 38px;
         }
 
-        /* 📌 রিয়্যালিস্টিক পিন-আপ বিগ রোস (Big Rose for Pinned Effect) */
         .pin-up-rose {
             position: absolute;
             top: 50px;
-            right: -30px; /* ডায়েরির বাম পাতা ও ডান পাতা বা চিঠির মাঝখানে ফাঁকা জায়গায় থাকবে */
-            width: 140px; /* বড় সাইজ */
-            height: 350px; /* লম্বা ডাঁটা */
+            right: -30px; 
+            width: 140px; 
+            height: 350px; 
             pointer-events: none;
-            z-index: 10; /* চিঠির ওপর দিয়ে ডাঁটাটা যাবে */
+            z-index: 10; 
         }
 
         .big-rose-stem {
@@ -460,26 +455,24 @@
             position: absolute;
             top: 0;
             left: 0;
-            font-size: 110px; /* বড় ফুল */
+            font-size: 110px; 
             color: red;
             filter: drop-shadow(4px 6px 4px rgba(0,0,0,0.2));
         }
 
-        /* কালো রঙের পিন ইফেক্ট */
         .pin-head {
             position: absolute;
-            top: 140px; /* পিনের পজিশন ডাঁটার ওপরে */
+            top: 140px; 
             left: 45px;
             width: 14px;
             height: 14px;
-            background-color: #333; /* কালো পিন */
+            background-color: #333; 
             border-radius: 50%;
             border: 3px solid #fff;
             box-shadow: 3px 3px 0px rgba(0,0,0,0.15);
-            z-index: 11; /* ফুল ও ডাঁটার ওপরে থাকবে পিন */
+            z-index: 11; 
         }
 
-        /* ডান পাতা (চিঠির পাতা) */
         .diary-right-page {
             width: 50%;
             height: 100%;
@@ -516,7 +509,6 @@
         .diary-body-text::-webkit-scrollbar { width: 4px; }
         .diary-body-text::-webkit-scrollbar-thumb { background: #ff758f; border-radius: 10px; }
 
-        /* অ্যান্ড্রয়েড নেভিগেশন এরিয়া ও রাইট সাইড ফরোয়ার্ড বাটন */
         .navigation-guide-area {
             display: flex;
             flex-direction: column;
@@ -566,7 +558,7 @@
             text-align: center;
         }
 
-        /* ================= PAGE 4: SPOTIFY CARD (gf_song.jpg) ================= */
+        /* ================= PAGE 4: SPOTIFY CARD ================= */
         .insta-vibe-card {
             background: #fff;
             border: 4px solid #000;
@@ -624,7 +616,7 @@
             align-items: center;
         }
 
-        /* ================= PAGE 5: FINAL PAGE ================= */
+        /* ================= PAGE 5: ANNOY CARD ================= */
         .annoy-card { 
             display: flex; 
             flex-direction: column; 
@@ -632,10 +624,227 @@
             text-align: center; 
         }
 
+        /* ================= 🎂 NEW PAGE 6: THE ULTRA CAKE STORY ANIMATION 🎂 ================= */
+        /* পুরো স্টেজ কন্টেইনার */
+        .cake-stage {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        /* থ্রিডি কেক বেস ড্রয়িং */
+        .cartoon-cake {
+            position: relative;
+            width: 250px;
+            height: 140px;
+            background: #ff758f; /* স্ট্রবেরি পিঙ্ক ক্রাস্ট */
+            border: 5px solid #000;
+            border-radius: 120px / 40px; /* কার্টুন ওভাল ও থ্রিডি কার্ভ ইফেক্ট */
+            box-shadow: 0 12px 0 #ff4d6d, 0 20px 0px rgba(0,0,0,0.15);
+            margin-top: 100px;
+            opacity: 0;
+            transform: translateY(200px);
+            animation: cakeSlideUp 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            animation-delay: 0.5s;
+        }
+
+        /* কেকের উপরের ফ্ল্যাট অংশ */
+        .cartoon-cake::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            width: 244px;
+            height: 40px;
+            background: #fff0f3; /* ভ্যানিলা হোয়াইট টপিং */
+            border: 5px solid #000;
+            border-radius: 120px / 40px;
+            z-index: 1;
+        }
+
+        /* কেকের ক্রিমের ড্রিপিং/লেয়ার ইফেক্ট */
+        .cake-cream-drips {
+            position: absolute;
+            top: 25px;
+            left: 10px;
+            width: 230px;
+            height: 25px;
+            background-image: radial-gradient(circle at 15px 0, #fff0f3 18px, transparent 20px);
+            background-size: 30px 40px;
+            z-index: 2;
+        }
+
+        /* 👀 কিউট চোখ-মুখ অ্যানিমেশন */
+        .cake-face {
+            position: absolute;
+            top: 55px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            opacity: 0;
+            z-index: 3;
+            animation: faceFadeIn 0.8s ease forwards;
+            animation-delay: 1.8s;
+        }
+
+        .cake-eye {
+            width: 16px;
+            height: 16px;
+            background: #000;
+            border-radius: 50%;
+            position: relative;
+        }
+        /* চোখের ভেতরের কিউট গ্ল্যামার ডট */
+        .cake-eye::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 3px;
+            width: 5px;
+            height: 5px;
+            background: #fff;
+            border-radius: 50%;
+        }
+
+        .cake-smile {
+            width: 24px;
+            height: 14px;
+            border: 4px solid #000;
+            border-top: none;
+            border-radius: 0 0 20px 20px;
+            margin-top: 10px;
+        }
+
+        /* 🕯️ মোমবাতি অ্যানিমেশন */
+        .cake-candle {
+            position: absolute;
+            top: -45px;
+            left: 50%;
+            transform: translateX(-50%) scaleY(0);
+            width: 14px;
+            height: 55px;
+            background: linear-gradient(90deg, #3399ff 50%, #66b2ff 50%);
+            background-size: 10px 10px;
+            border: 4px solid #000;
+            border-radius: 4px;
+            transform-origin: bottom center;
+            z-index: 4;
+            animation: candlePopUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            animation-delay: 2.8s;
+        }
+
+        /* 🔥 মোমবাতির আগুন */
+        .candle-flame {
+            position: absolute;
+            top: -24px;
+            left: 50%;
+            transform: translateX(-50%) scale(0);
+            width: 14px;
+            height: 24px;
+            background: #ffcc00;
+            border-radius: 50% 50% 20% 20% / 60% 60% 40% 40%;
+            border: 2px solid #000;
+            box-shadow: 0 0 20px #ffcc00, 0 0 40px #ff9900;
+            transform-origin: bottom center;
+            z-index: 5;
+            animation: flameIgnite 0.5s ease forwards, flameFlicker 0.15s ease-in-out infinite alternate;
+            animation-delay: 3.8s, 4.3s;
+        }
+
+        /* 🖤 স্ক্রিন ডার্কেনিং ওভারলে ইফেক্ট (স্ক্রিনশটের মতো মোমবাতির আলো বাদে সব অন্ধকার হবে) */
+        .dark-room-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(13, 11, 26, 0.95); /* কুচকুচে অন্ধকার নাইট মোড */
+            z-index: 8;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        /* লাইট অন হবার সাথে সাথে অন্ধকার হবে */
+        body.dark-active .dark-room-overlay {
+            opacity: 1;
+        }
+
+        /* অন্ধকার মোডে কেকের গ্লোয়িং ইফেক্ট */
+        body.dark-active .cartoon-cake {
+            box-shadow: 0 0 50px rgba(255, 204, 0, 0.4), 0 12px 0 #ff4d6d;
+            border-color: #ff9900;
+            transition: all 1.2s ease;
+        }
+
+        /* 🎏 হ্যাপি বার্থডে সাবা ডুলন্ত ব্যানার */
+        .hanging-banner {
+            position: absolute;
+            top: -120px; /* শুরু হবে স্ক্রিনের বাইরে থেকে */
+            display: flex;
+            gap: 10px;
+            z-index: 12;
+            transform-origin: top center;
+            opacity: 0;
+            animation: bannerDropIn 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.1) forwards, bannerSwing 2.5s ease-in-out infinite alternate;
+            animation-delay: 4.8s;
+        }
+
+        .banner-flag {
+            background: #ff4d6d;
+            color: white;
+            font-family: 'Fredoka One', cursive;
+            font-size: 24px;
+            padding: 15px 20px;
+            border: 4px solid #000;
+            border-radius: 0 0 12px 12px;
+            box-shadow: 4px 4px 0px #000;
+            text-shadow: 2px 2px #000;
+            white-space: nowrap;
+        }
+        .banner-flag.blue { background: #3399ff; }
+        .banner-flag.purple { background: #b39ddb; color: #2a1b40; }
+
+        /* ================= 🎥 KEYFRAMES DEFINITIONS ================= */
+        @keyframes cakeSlideUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes faceFadeIn {
+            to { opacity: 1; }
+        }
+        @keyframes candlePopUp {
+            to { transform: translateX(-50%) scaleY(1); }
+        }
+        @keyframes flameIgnite {
+            to { transform: translateX(-50%) scale(1); }
+        }
+        @keyframes flameFlicker {
+            from { transform: translateX(-50%) scale(1) rotate(-2deg); }
+            to { transform: translateX(-50%) scale(1.05) rotate(2deg); }
+        }
+        @keyframes bannerDropIn {
+            to { opacity: 1; top: -10px; }
+        }
+        @keyframes bannerSwing {
+            0% { transform: rotate(-3deg); }
+            100% { transform: rotate(3deg); }
+        }
+
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
     </style>
 </head>
 <body>
+
+<div class="dark-room-overlay" id="roomOverlay"></div>
 
 <div id="lock-screen">
     <div class="lock-card">
@@ -752,7 +961,35 @@
         <div id="p5" class="page">
             <div class="annoy-card">
                 <h1 style="font-family: 'Fredoka One'; font-size: 36px; color: #ff4d6d; text-shadow: 2px 2px #fff; margin: 0 0 20px 0;">I WANT TO ANNOY YOU FOREVER! ❤️</h1>
-                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHYwdWp3eGZ3eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/KztT2c4u8mYYUiMKdJ/giphy.gif" style="width:260px; border: 4px solid #000; border-radius: 12px; box-shadow: 4px 4px 0px #000;">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHYwdWp3eGZ3eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/KztT2c4u8mYYUiMKdJ/giphy.gif" style="width:260px; border: 4px solid #000; border-radius: 12px; box-shadow: 4px 4px 0px #000; margin-bottom: 25px;">
+                
+                <button class="action-btn" onclick="triggerCakeAnimationPage()">See Surprise Menu 🎂</button>
+            </div>
+        </div>
+
+        <div id="p6" class="page">
+            <div class="cake-stage">
+                
+                <div class="hanging-banner">
+                    <div class="banner-flag">Happy</div>
+                    <div class="banner-flag blue">Birthday</div>
+                    <div class="banner-flag purple">Saba ✨</div>
+                </div>
+
+                <div class="cartoon-cake">
+                    <div class="cake-cream-drips"></div>
+                    
+                    <div class="cake-face">
+                        <div class="cake-eye"></div>
+                        <div class="cake-smile"></div>
+                        <div class="cake-eye"></div>
+                    </div>
+
+                    <div class="cake-candle">
+                        <div class="candle-flame"></div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -771,7 +1008,7 @@
         if (userPass === secretPassword) {
             document.getElementById('lock-screen').style.display = "none";
             document.getElementById('main-content').style.display = "flex";
-            createConfettiEffect(); // বার্থডে জরি বা ঝালর ইফেক্ট স্টার্ট হবে
+            createConfettiEffect(); 
             melody.play().catch(e => console.log("Audio waiting for interaction:", e));
         } else if (userPass !== null) {
             alert("Wrong Password! Try Again.");
@@ -782,6 +1019,7 @@
     function createConfettiEffect() {
         const box = document.getElementById('confettiBox');
         const colors = ['#ff4d6d', '#ff758f', '#ffb3c1', '#3399ff', '#ffcc00', '#b39ddb'];
+        box.innerHTML = ""; // রিসেট
         for (let i = 0; i < 40; i++) {
             const confetti = document.createElement('div');
             confetti.className = 'confetti';
@@ -798,7 +1036,7 @@
 
     // ডায়েরি পেজ লোড ও ওভারলে ব্লার হ্যান্ডলার
     function openDiaryView() {
-        document.body.classList.add('overlay-active'); // ফ্রন্ট পেজ হালকা আবছা ও ব্লার করবে
+        document.body.classList.add('overlay-active'); 
         document.getElementById('p2').classList.add('active');
         melody.play().catch(e => {});
     }
@@ -807,9 +1045,10 @@
     function nextPage(id) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
         
-        // ডায়েরি ছাড়া অন্য পেজে গেলে ওভারলে বডি ব্লার বন্ধ হবে
-        if (id !== 'p2') {
+        // ডায়েরি এবং ম্যাজিক কেক পেজ ছাড়া অন্য পেজে বডি ব্লার বা ডার্কনেস রিমুভ হবে
+        if (id !== 'p2' && id !== 'p6') {
             document.body.classList.remove('overlay-active');
+            document.body.classList.remove('dark-active');
         }
 
         const targetPage = document.getElementById(id);
@@ -819,17 +1058,14 @@
 
         // --- স্মার্ট অডিও ট্র্যাকিং রাউটার ---
         if (id === 'p4') {
-            // পেজ ৪ এ আসলে ব্যাকগ্রাউন্ড মেলোডি একদম অফ হয়ে যাবে
             melody.pause();
-        } else if (id === 'p5') {
-            // পেজ ৫ এ গেলে Hareya গান বন্ধ হবে এবং পুরোনো মেলোডি আবার প্রথম থেকে শুরু হবে
+        } else if (id === 'p5' || id === 'p6') {
             hareya.pause();
             document.getElementById('play-icon').className = "fas fa-play"; 
-            
-            melody.currentTime = 0; 
-            melody.play().catch(e => {});
+            if (melody.paused) {
+                melody.play().catch(e => {});
+            }
         } else {
-            // অন্য কোনো পেজে ফেরত আসলে মেলোডি ট্র্যাকিং সচল রাখা
             if (melody.paused) {
                 melody.play().catch(e => {});
             }
@@ -855,6 +1091,16 @@
             }
         }
         setTimeout(type, 200);
+    }
+
+    // 🎂 পেজ ৬ এর আল্ট্রা কেক স্টোরি এবং নাইট মোড ট্রিগার ফাংশন
+    function triggerCakeAnimationPage() {
+        nextPage('p6');
+        
+        // মোমবাতি জ্বলার টাইমিং (৩.৮ সেকেন্ড) ম্যাচ করে ব্যাকগ্রাউন্ড অন্ধকার করার কমান্ড
+        setTimeout(() => {
+            document.body.classList.add('dark-active');
+        }, 3800);
     }
 
     // স্পটিফাই প্লেয়ার মিউজিক টগল
