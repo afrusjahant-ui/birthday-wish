@@ -9,7 +9,7 @@
     
     <style>
         /* ==========================================================================
-           🎨 ১. গ্লোবাল রিসেট, বেস লেআউট এবং নিওব্রুটালিজম রুলস
+           🎨 ১. গ্লোবাল রিসেট, বেস লেআউট এবং নিওব্রুটালিズム রুলস
            ========================================================================== */
         * {
             margin: 0;
@@ -31,7 +31,7 @@
         }
 
         /* ==========================================================================
-           🌌 ২. ব্যাকগ্রাউন্ড থিম লেয়ার (৬ নম্বর পেজের ডাইনামিক ট্রানজিশনের জন্য)
+           🌌 ২. ব্যাকগ্রাউন্ড থিম লেয়ার
            ========================================================================== */
         .pink-grid-bg {
             position: absolute;
@@ -63,16 +63,9 @@
             pointer-events: none;
         }
 
-        /* বডি যখন ড্রিমি অ্যাক্টিভ মোডে যাবে */
-        body.dreamy-active .pink-grid-bg { 
-            opacity: 0; 
-        }
-        body.dreamy-active .dreamy-dark-bg { 
-            opacity: 1; 
-            pointer-events: auto; 
-        }
+        body.dreamy-active .pink-grid-bg { opacity: 0; }
+        body.dreamy-active .dreamy-dark-bg { opacity: 1; pointer-events: auto; }
 
-        /* রাতের তারা জেনারেটর কন্টেইনার */
         .star-sky {
             position: absolute;
             width: 100%;
@@ -84,9 +77,7 @@
             transition: opacity 2s ease;
             pointer-events: none;
         }
-        body.dreamy-active .star-sky { 
-            opacity: 1; 
-        }
+        body.dreamy-active .star-sky { opacity: 1; }
 
         .star {
             position: absolute;
@@ -102,20 +93,12 @@
         /* ফুল স্ক্রিন বার্থডে কনফেটি */
         .confetti-container {
             position: absolute;
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%;
-            overflow: hidden; 
-            pointer-events: none; 
-            z-index: 5;
+            top: 0; left: 0; width: 100%; height: 100%;
+            overflow: hidden; pointer-events: none; z-index: 5;
         }
         .confetti {
-            position: absolute; 
-            width: 12px; 
-            height: 12px;
-            background-color: #ff4d6d; 
-            border-radius: 3px;
+            position: absolute; width: 12px; height: 12px;
+            background-color: #ff4d6d; border-radius: 3px;
             animation: fall linear infinite;
         }
         @keyframes fall {
@@ -123,49 +106,69 @@
             100% { transform: translateY(100vh) rotate(720deg); opacity: 0.4; }
         }
 
+        /* 🎈 রিয়েলিস্টিক ফ্লোটিং বেলুন স্টাইল (Page 1 এর জন্য) */
+        .balloon-wrapper {
+            position: absolute;
+            bottom: -150px;
+            z-index: 4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: floatUp 8s linear infinite;
+            pointer-events: none;
+        }
+        .realistic-balloon {
+            width: 75px;
+            height: 90px;
+            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+            position: relative;
+            box-shadow: inset -8px -12px 15px rgba(0,0,0,0.15), 0 8px 15px rgba(0,0,0,0.1);
+        }
+        .realistic-balloon::before {
+            content: "";
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+        }
+        .balloon-string {
+            width: 2px;
+            height: 100px;
+            background: rgba(0,0,0,0.15);
+            margin-top: 5px;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-110vh) rotate(15deg); opacity: 0; }
+        }
+
         /* ==========================================================================
            🔒 ৩. অরিজিনাল লক স্ক্রিন ওভারলে
            ========================================================================== */
         #lock-screen {
             position: fixed;
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background: #ffe5ec;
             background-image: linear-gradient(#ffccd5 1px, transparent 1px), linear-gradient(90deg, #ffccd5 1px, transparent 1px);
             background-size: 24px 24px;
             z-index: 9999;
-            display: flex; 
-            justify-content: center; 
-            align-items: center;
+            display: flex; justify-content: center; align-items: center;
         }
         .lock-card {
-            background: #ffffff; 
-            border: 4px solid #000000; 
-            padding: 35px;
-            border-radius: 24px; 
-            box-shadow: 6px 6px 0px #000000; 
-            text-align: center; 
-            max-width: 340px;
+            background: #ffffff; border: 4px solid #000000; padding: 35px;
+            border-radius: 24px; box-shadow: 6px 6px 0px #000000; text-align: center; max-width: 340px;
         }
         .lock-btn {
-            background: #ff4d6d; 
-            color: #ffffff; 
-            font-family: 'Fredoka One', cursive;
-            border: 3px solid #000000; 
-            padding: 12px 30px; 
-            font-size: 18px;
-            border-radius: 50px; 
-            cursor: pointer; 
-            box-shadow: 3px 3px 0px #000000;
-            margin-top: 20px; 
-            transition: 0.1s;
+            background: #ff4d6d; color: #ffffff; font-family: 'Fredoka One', cursive;
+            border: 3px solid #000000; padding: 12px 30px; font-size: 18px;
+            border-radius: 50px; cursor: pointer; box-shadow: 3px 3px 0px #000000;
+            margin-top: 20px; transition: 0.1s;
         }
-        .lock-btn:active { 
-            transform: translate(2px, 2px); 
-            box-shadow: 1px 1px 0px #000000; 
-        }
+        .lock-btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0px #000000; }
 
         /* ==========================================================================
            📦 ৪. মেইন অ্যাপ কন্টেইনার এবং রাউটিং রুলস
@@ -199,489 +202,170 @@
            🏠 ৫. PAGE 1: অরিজিনাল ফ্রন্ট পেজ লেআউট
            ========================================================================== */
         .front-layout {
-            display: flex; 
-            width: 100%; 
-            align-items: center; 
-            justify-content: space-between; 
-            gap: 40px; 
-            flex-wrap: wrap;
+            display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap;
         }
-        .front-left { 
-            flex: 1.2; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: flex-start; 
-            min-width: 320px; 
-        }
-        .text-block-wrapper { 
-            position: relative; 
-            margin-bottom: 25px; 
-            padding-top: 20px; 
-        }
+        .front-left { flex: 1.2; display: flex; flex-direction: column; align-items: flex-start; min-width: 320px; }
+        .text-block-wrapper { position: relative; margin-bottom: 25px; padding-top: 20px; }
         
         .happy-box {
-            background: #0056b3; 
-            color: #ffffff; 
-            font-family: 'Fredoka One', cursive; 
-            font-size: 55px;
-            padding: 5px 25px; 
-            border-radius: 8px; 
-            border: 4px solid #000000; 
-            display: inline-block;
-            transform: rotate(-3deg); 
-            margin-bottom: -10px; 
-            position: relative; 
-            z-index: 2; 
-            box-shadow: 4px 4px 0px #000000;
+            background: #0056b3; color: #ffffff; font-family: 'Fredoka One', cursive; font-size: 55px;
+            padding: 5px 25px; border-radius: 8px; border: 4px solid #000000; display: inline-block;
+            transform: rotate(-3deg); margin-bottom: -10px; position: relative; z-index: 2; box-shadow: 4px 4px 0px #000000;
         }
         .birthday-box {
-            background: #ff4d6d; 
-            color: #ffffff; 
-            font-family: 'Fredoka One', cursive; 
-            font-size: 55px;
-            padding: 5px 25px; 
-            border-radius: 8px; 
-            border: 4px solid #000000; 
-            display: inline-block;
-            transform: rotate(2deg); 
-            position: relative; 
-            z-index: 3; 
-            box-shadow: 4px 4px 0px #000000;
+            background: #ff4d6d; color: #ffffff; font-family: 'Fredoka One', cursive; font-size: 55px;
+            padding: 5px 25px; border-radius: 8px; border: 4px solid #000000; display: inline-block;
+            transform: rotate(2deg); position: relative; z-index: 3; box-shadow: 4px 4px 0px #000000;
         }
         .birthday-cap-exact {
-            position: absolute; 
-            top: -30px; 
-            right: -25px; 
-            width: 65px; 
-            height: 75px;
-            background: radial-gradient(#ffffff 20%, transparent 20%) #ff758f; 
-            background-size: 10px 10px;
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%); 
-            transform: rotate(20deg); 
-            z-index: 5; 
-            border-bottom: 5px solid #000000;
+            position: absolute; top: -30px; right: -25px; width: 65px; height: 75px;
+            background: radial-gradient(#ffffff 20%, transparent 20%) #ff758f; background-size: 10px 10px;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%); transform: rotate(20deg); z-index: 5; border-bottom: 5px solid #000000;
         }
-        .birthday-cap-exact::before { 
-            content: ''; 
-            position: absolute; 
-            top: -6px; 
-            left: 50%; 
-            transform: translateX(-50%); 
-            width: 14px; 
-            height: 14px; 
-            background: #000000; 
-            border-radius: 50%; 
-        }
+        .birthday-cap-exact::before { content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%); width: 14px; height: 14px; background: #000000; border-radius: 50%; }
         
-        .date-badge { 
-            background: #ff758f; 
-            color: #ffffff; 
-            font-family: 'Fredoka One', cursive; 
-            font-size: 18px; 
-            padding: 6px 25px; 
-            border-radius: 50px; 
-            border: 3px solid #000000; 
-            box-shadow: 3px 3px 0px #000000; 
-            margin-bottom: 25px; 
-        }
+        .date-badge { background: #ff758f; color: #ffffff; font-family: 'Fredoka One', cursive; font-size: 18px; padding: 6px 25px; border-radius: 50px; border: 3px solid #000000; box-shadow: 3px 3px 0px #000000; margin-bottom: 25px; }
         
         .action-btn {
-            background: #ff4d6d; 
-            color: #ffffff; 
-            font-family: 'Fredoka One', cursive; 
-            font-size: 18px;
-            padding: 10px 30px; 
-            border-radius: 50px; 
-            border: 3px solid #000000; 
-            box-shadow: 4px 4px 0px #000000;
-            cursor: pointer; 
-            transition: 0.1s; 
-            display: flex; 
-            align-items: center; 
-            gap: 10px;
+            background: #ff4d6d; color: #ffffff; font-family: 'Fredoka One', cursive; font-size: 18px;
+            padding: 10px 30px; border-radius: 50px; border: 3px solid #000000; box-shadow: 4px 4px 0px #000000;
+            cursor: pointer; transition: 0.1s; display: flex; align-items: center; gap: 10px;
         }
-        .action-btn:hover { 
-            transform: translate(-2px, -2px); 
-            box-shadow: 6px 6px 0px #000000; 
-        }
-        .action-btn:active { 
-            transform: translate(2px, 2px); 
-            box-shadow: 2px 2px 0px #000000; 
-        }
+        .action-btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px #000000; }
+        .action-btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0px #000000; }
 
-        .front-right { 
-            flex: 1; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            position: relative; 
-            min-width: 300px; 
-            height: 380px; 
-            justify-content: flex-end; 
-        }
-        .profile-card-wrapper { 
-            position: relative; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            z-index: 3; 
-            animation: FloatOnly 4s ease-in-out infinite alternate; 
-        }
-        .gf-circle-img { 
-            width: 280px; 
-            height: 280px; 
-            object-fit: cover; 
-            border-radius: 50%; 
-            border: 5px solid #000000; 
-            background: #ffffff; 
-            box-shadow: 0px 8px 24px rgba(0,0,0,0.15); 
-        }
-        .name-tag { 
-            background: #ffffff; 
-            color: #ff4d6d; 
-            font-family: 'Pacifico', cursive; 
-            font-size: 22px; 
-            padding: 4px 35px; 
-            border-radius: 50px; 
-            border: 3px solid #000000; 
-            box-shadow: 3px 3px 0px #000000; 
-            margin-top: -20px; 
-            z-index: 4; 
-        }
+        .front-right { flex: 1; display: flex; flex-direction: column; align-items: center; position: relative; min-width: 300px; height: 380px; justify-content: flex-end; }
+        .profile-card-wrapper { position: relative; display: flex; flex-direction: column; align-items: center; z-index: 3; animation: FloatOnly 4s ease-in-out infinite alternate; }
+        .gf-circle-img { width: 280px; height: 280px; object-fit: cover; border-radius: 50%; border: 5px solid #000000; background: #ffffff; box-shadow: 0px 8px 24px rgba(0,0,0,0.15); }
+        .name-tag { background: #ffffff; color: #ff4d6d; font-family: 'Pacifico', cursive; font-size: 22px; padding: 4px 35px; border-radius: 50px; border: 3px solid #000000; box-shadow: 3px 3px 0px #000000; margin-top: -20px; z-index: 4; }
         
-        @keyframes FloatOnly { 
-            from { transform: translateY(0px); } 
-            to { transform: translateY(-12px); } 
-        }
+        @keyframes FloatOnly { from { transform: translateY(0px); } to { transform: translateY(-12px); } }
 
         /* ==========================================================================
            📖 ৬. PAGE 2: অরিজিনাল ওপেন ডায়েরি ভিউ
            ========================================================================== */
-        .diary-open-view { 
-            width: 820px; 
-            height: 520px; 
-            display: flex; 
-            transform: rotate(-1deg); 
-            filter: drop-shadow(5px 15px 25px rgba(0,0,0,0.15)); 
-        }
-        .diary-left-page { 
-            width: 50%; 
-            height: 100%; 
-            background: #ff85a1; 
-            border: 4px solid #000000; 
-            border-radius: 16px 0 0 16px; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center; 
-            padding: 20px; 
-            position: relative; 
-        }
-        .diary-pic { 
-            width: 110px; 
-            height: 110px; 
-            object-fit: cover; 
-            border-radius: 50%; 
-            border: 4px solid #000000; 
-            margin-bottom: 15px; 
-            box-shadow: 3px 3px 0px #000000; 
-        }
-        .diary-left-title { 
-            font-family: 'Fredoka One', cursive; 
-            font-size: 30px; 
-            color: #ffffff; 
-            text-align: center; 
-            text-shadow: 2px 2px 0px #000000; 
-        }
+        .diary-open-view { width: 820px; height: 520px; display: flex; transform: rotate(-1deg); filter: drop-shadow(5px 15px 25px rgba(0,0,0,0.15)); }
+        .diary-left-page { width: 50%; height: 100%; background: #ff85a1; border: 4px solid #000000; border-radius: 16px 0 0 16px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; position: relative; }
+        .diary-pic { width: 110px; height: 110px; object-fit: cover; border-radius: 50%; border: 4px solid #000000; margin-bottom: 15px; box-shadow: 3px 3px 0px #000000; }
+        .diary-left-title { font-family: 'Fredoka One', cursive; font-size: 30px; color: #ffffff; text-align: center; text-shadow: 2px 2px 0px #000000; }
         
-        /* গোলাপ ফুল ও পিন ডিজাইন */
-        .pin-up-rose { 
-            position: absolute; 
-            top: 40px; 
-            right: -25px; 
-            width: 120px; 
-            height: 300px; 
-            pointer-events: none; 
-            z-index: 10; 
-        }
-        .big-rose-stem { 
-            position: absolute; 
-            top: 60px; 
-            left: 50px; 
-            width: 4px; 
-            height: 220px; 
-            background: linear-gradient(to top, #1a4d00, #2d8a00); 
-            transform: rotate(-12deg); 
-            border-radius: 5px; 
-        }
-        .big-rose-head { 
-            position: absolute; 
-            top: 0; 
-            left: 0; 
-            font-size: 90px; 
-            filter: drop-shadow(3px 5px 3px rgba(0,0,0,0.15)); 
-        }
-        .pin-head { 
-            position: absolute; 
-            top: 120px; 
-            left: 40px; 
-            width: 12px; 
-            height: 12px; 
-            background: #333333; 
-            border-radius: 50%; 
-            border: 2px solid #ffffff; 
-            z-index: 11; 
-        }
+        .pin-up-rose { position: absolute; top: 40px; right: -25px; width: 120px; height: 300px; pointer-events: none; z-index: 10; }
+        .big-rose-stem { position: absolute; top: 60px; left: 50px; width: 4px; height: 220px; background: linear-gradient(to top, #1a4d00, #2d8a00); transform: rotate(-12deg); border-radius: 5px; }
+        .big-rose-head { position: absolute; top: 0; left: 0; font-size: 90px; filter: drop-shadow(3px 5px 3px rgba(0,0,0,0.15)); }
+        .pin-head { position: absolute; top: 120px; left: 40px; width: 12px; height: 12px; background: #333333; border-radius: 50%; border: 2px solid #ffffff; z-index: 11; }
 
-        .diary-right-page { 
-            width: 50%; 
-            height: 100%; 
-            background: #fff0f3; 
-            border: 4px solid #000000; 
-            border-left: none; 
-            border-radius: 0 16px 16px 0; 
-            padding: 25px 30px; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: space-between; 
-        }
-        .diary-headline { 
-            font-family: 'Great Vibes', cursive; 
-            font-size: 38px; 
-            color: #c9184a; 
-            text-align: center; 
-            margin-bottom: 5px; 
-        }
-        .diary-body-text { 
-            font-family: 'Caveat', cursive; 
-            font-size: 21px; 
-            line-height: 25px; 
-            color: #4a4a4a; 
-            overflow-y: auto; 
-            padding-right: 5px; 
-            flex-grow: 1; 
-            text-align: left; 
-        }
+        .diary-right-page { width: 50%; height: 100%; background: #fff0f3; border: 4px solid #000000; border-left: none; border-radius: 0 16px 16px 0; padding: 25px 30px; display: flex; flex-direction: column; justify-content: space-between; }
+        .diary-headline { font-family: 'Great Vibes', cursive; font-size: 38px; color: #c9184a; text-align: center; margin-bottom: 5px; }
+        .diary-body-text { font-family: 'Caveat', cursive; font-size: 21px; line-height: 25px; color: #4a4a4a; overflow-y: auto; padding-right: 5px; flex-grow: 1; text-align: left; }
         .diary-body-text::-webkit-scrollbar { width: 4px; }
         .diary-body-text::-webkit-scrollbar-thumb { background: #ff758f; border-radius: 10px; }
         
-        .navigation-guide-area { 
-            display: flex; 
-            flex-direction: column; 
-            align-items: flex-end; 
-            gap: 4px; 
-        }
-        .guide-text { 
-            font-size: 11px; 
-            color: #ff4d6d; 
-            font-weight: bold; 
-        }
-        .android-forward-btn { 
-            width: 44px; 
-            height: 44px; 
-            background: #ff4d6d; 
-            border: 3px solid #000000; 
-            border-radius: 50%; 
-            color: #ffffff; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            cursor: pointer; 
-            box-shadow: 3px 3px 0px #000000; 
-            font-size: 18px; 
-        }
-        .android-forward-btn:active { 
-            transform: translate(2px, 2px); 
-            box-shadow: 1px 1px 0px #000000; 
-        }
+        .navigation-guide-area { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+        .guide-text { font-size: 11px; color: #ff4d6d; font-weight: bold; }
+        .android-forward-btn { width: 44px; height: 44px; background: #ff4d6d; border: 3px solid #000000; border-radius: 50%; color: #ffffff; display: flex; justify-content: center; align-items: center; cursor: pointer; box-shadow: 3px 3px 0px #000000; font-size: 18px; }
+        .android-forward-btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0px #000000; }
 
         /* ==========================================================================
-           🤲 ৭. PAGE 3: অরিজিনাল মাই প্রেয়ার্স কার্ড
+           🤲 7. PAGE 3: My Prayers Card
            ========================================================================== */
-        .prayer-card { 
-            background: #ffffff; 
-            border: 4px solid #000000; 
-            border-radius: 20px; 
-            box-shadow: 8px 8px 0px #000000; 
-            padding: 35px; 
-            width: 100%; 
-            max-width: 650px; 
-            text-align: center; 
-        }
+        .prayer-card { background: #ffffff; border: 4px solid #000000; border-radius: 20px; box-shadow: 8px 8px 0px #000000; padding: 35px; width: 100%; max-width: 650px; text-align: center; }
 
         /* ==========================================================================
-           🎵 ৮. PAGE 4: অরিজিনাল স্পটিফাই ভাইব কার্ড
+           🎵 ৮. PAGE 4: স্পটিফাই ভাইব কার্ড (ফিক্সড লেআউট)
            ========================================================================== */
         .insta-vibe-card { 
-            background: #ffffff; 
-            border: 4px solid #000000; 
-            border-radius: 24px; 
-            box-shadow: 8px 8px 0px #000000; 
-            padding: 30px; 
-            width: 100%; 
-            max-width: 400px; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-        }
-        .insta-photo-container { 
-            position: relative; 
-            width: 270px; 
-            height: 270px; 
-            margin-bottom: 20px; 
-        }
-        .insta-queen-crown { 
-            position: absolute; 
-            top: -22px; 
-            left: 50%; 
-            transform: translateX(-50%); 
-            font-size: 42px; 
-            z-index: 10; 
-        }
-        .gf-rect-img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-            border-radius: 24px; 
-            border: 4px solid #000000; 
-        }
-        .vibe-text { 
-            font-family: 'Fredoka One', cursive; 
-            font-size: 26px; 
-            color: #ff4d6d; 
-            margin-bottom: 15px; 
+            background: #ffffff; border: 4px solid #000000; border-radius: 24px; box-shadow: 8px 8px 0px #000000; 
+            padding: 30px; width: 100%; max-width: 400px; display: flex; flex-direction: column; align-items: center; 
         }
         
+        /* ফিক্সড: "For you?" লেখা এখন অরিজিনাল ডিজাইনের মতো ঠিক ছবির ওপরে থাকবে */
+        .vibe-text { 
+            font-family: 'Fredoka One', cursive; font-size: 26px; color: #ff4d6d; margin-bottom: 12px; text-align: center;
+        }
+        
+        .insta-photo-container { position: relative; width: 270px; height: 270px; margin-bottom: 20px; }
+        .insta-queen-crown { position: absolute; top: -22px; left: 50%; transform: translateX(-50%); font-size: 42px; z-index: 10; }
+        .gf-rect-img { width: 100%; height: 100%; object-fit: cover; border-radius: 24px; border: 4px solid #000000; }
+        
         .spotify-player { 
-            background: #282828; 
-            color: #ffffff; 
-            width: 100%; 
-            max-width: 270px; 
-            padding: 10px 15px; 
-            border-radius: 50px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: space-between; 
-            border: 3px solid #000000; 
-            margin-bottom: 20px; 
+            background: #282828; color: #ffffff; width: 100%; max-width: 270px; padding: 10px 15px; 
+            border-radius: 50px; display: flex; align-items: center; justify-content: space-between; border: 3px solid #000000; margin-bottom: 20px; 
         }
-        .spot-icon { 
-            color: #1DB954; 
-            font-size: 20px; 
-        }
-        .spot-details { 
-            flex-grow: 1; 
-            text-align: left; 
-            margin-left: 12px; 
-        }
-        .spot-title { 
-            font-weight: bold; 
-            font-size: 13px; 
-            margin: 0; 
-        }
-        .spot-artist { 
-            font-size: 11px; 
-            color: #b3b3b3; 
-            margin-top: 2px; 
-        }
-        .spot-play-btn { 
-            background: #ffffff; 
-            color: #000000; 
-            border: none; 
-            width: 32px; 
-            height: 32px; 
-            border-radius: 50%; 
-            cursor: pointer; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-        }
+        .spot-icon { color: #1DB954; font-size: 20px; }
+        .spot-details { flex-grow: 1; text-align: left; margin-left: 12px; }
+        .spot-title { font-weight: bold; font-size: 13px; margin: 0; }
+        .spot-artist { font-size: 11px; color: #b3b3b3; margin-top: 2px; }
+        .spot-play-btn { background: #ffffff; color: #000000; border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; }
 
         /* ==========================================================================
            🤪 ৯. PAGE 5: অরিজিনাল অ্যানয় কার্ড
            ========================================================================== */
-        .annoy-card { 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            text-align: center; 
-        }
+        .annoy-card { display: flex; flex-direction: column; align-items: center; text-align: center; }
 
         /* ==========================================================================
-           🎂 ১০. PAGE 6: নতুন সিনেমাটিক ড্রিমি কেক পেজ (তোর রিকোয়েস্ট অনুযায়ী ফিক্সড)
+           🎂 ১০. PAGE 6: সিনেমাটিক ড্রিমি কেক পেজ (৩ মোমবাতি + আই ব্লিংক অ্যানিমেশন)
            ========================================================================== */
         .cake-stage {
-            position: relative;
-            width: 100%;
-            max-width: 500px;
-            height: 500px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 20; 
+            position: relative; width: 100%; max-width: 500px; height: 500px;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 20; 
         }
 
-        /* কার্টুন থ্রিডি কেক বডি */
+        /* কার্টুন কেক বডি */
         .cartoon-cake {
-            position: relative;
-            width: 250px;
-            height: 140px;
-            background: #ff758f;
-            border: 5px solid #000000;
-            border-radius: 120px / 40px;
-            box-shadow: 0 12px 0 #ff4d6d, 0 20px 0px rgba(0,0,0,0.15);
-            margin-top: 100px;
-            
-            /* শুরুতে হাইড থাকবে, স্লাইড করে ওপরে উঠবে */
-            opacity: 0;
-            transform: translateY(250px);
+            position: relative; width: 250px; height: 140px; background: #ff758f;
+            border: 5px solid #000000; border-radius: 120px / 40px;
+            box-shadow: 0 12px 0 #ff4d6d, 0 20px 0px rgba(0,0,0,0.15); margin-top: 100px;
+            opacity: 0; transform: translateY(250px);
             transition: transform 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 1.2s ease, box-shadow 1.5s ease;
         }
+        .cake-stage.cake-entered .cartoon-cake { opacity: 1; transform: translateY(0); }
 
-        /* কেক যখন পেজে এন্ট্রি নিবে */
-        .cake-stage.cake-entered .cartoon-cake {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* কেকের ক্রিমের টপিং */
+        /* কেকের ক্রিম */
         .cartoon-cake::before {
-            content: ''; position: absolute; top: -2px; left: -2px;
-            width: 244px; height: 40px; background: #fff0f3;
-            border: 5px solid #000000; border-radius: 120px / 40px; z-index: 1;
+            content: ''; position: absolute; top: -2px; left: -2px; width: 244px; height: 40px;
+            background: #fff0f3; border: 5px solid #000000; border-radius: 120px / 40px; z-index: 1;
         }
         .cake-cream-drips {
             position: absolute; top: 25px; left: 10px; width: 230px; height: 25px;
-            background-image: radial-gradient(circle at 15px 0, #fff0f3 18px, transparent 20px);
-            background-size: 30px 40px; z-index: 2;
+            background-image: radial-gradient(circle at 15px 0, #fff0f3 18px, transparent 20px); background-size: 30px 40px; z-index: 2;
         }
 
-        /* কিউট ফেস স্টাইল */
+        /* 👁️ ফেস এবং আই ব্লিংক (Blink) অ্যানিমেশন */
         .cake-face {
             position: absolute; top: 55px; left: 50%; transform: translateX(-50%);
             width: 100px; height: 40px; display: flex; justify-content: space-between; align-items: center; z-index: 3;
         }
-        .cake-eye { width: 16px; height: 16px; background: #000000; border-radius: 50%; position: relative; }
+        .cake-eye { 
+            width: 16px; height: 16px; background: #000000; border-radius: 50%; position: relative; 
+            animation: blinkEye 4s infinite; /* ৪ সেকেন্ড পর পর ব্লিংক করবে */
+        }
         .cake-eye::after { content: ''; position: absolute; top: 2px; left: 3px; width: 5px; height: 5px; background: #ffffff; border-radius: 50%; }
         .cake-smile { width: 24px; height: 14px; border: 4px solid #000000; border-top: none; border-radius: 0 0 20px 20px; margin-top: 10px; }
 
-        /* মোমবাতি স্ট্যান্ড */
-        .cake-candle {
-            position: absolute; top: -45px; left: 50%; transform: translateX(-50%);
-            width: 14px; height: 55px; background: linear-gradient(90deg, #3399ff 50%, #66b2ff 50%);
-            background-size: 10px 10px; border: 4px solid #000000; border-radius: 4px; z-index: 4;
+        @keyframes blinkEye {
+            0%, 90%, 100% { transform: scaleY(1); }
+            93%, 96% { transform: scaleY(0.1); } /* চোখ বন্ধ হবে */
         }
 
-        /* মোমবাতির আগুন/শিখা */
+        /* 🕯️ ৩টি মোমবাতির কন্টেইনার এবং পজিশন */
+        .candles-row {
+            position: absolute; top: -45px; left: 50%; transform: translateX(-50%);
+            width: 90px; display: flex; justify-content: space-between; z-index: 4;
+        }
+        .single-candle {
+            width: 12px; height: 55px; background: linear-gradient(90deg, #3399ff 50%, #66b2ff 50%);
+            background-size: 10px 10px; border: 3px solid #000000; border-radius: 4px; position: relative;
+        }
+        /* মাঝখানের মোমবাতিটা একটু ওপরে থাকবে সৌন্দর্যের জন্য */
+        .single-candle.middle { transform: translateY(-5px); }
+
+        /* মোমবাতির শিখা */
         .candle-flame {
             position: absolute; top: -24px; left: 50%; transform: translateX(-50%) scale(0);
-            width: 14px; height: 24px; background: #ffcc00; border-radius: 50% 50% 20% 20% / 60% 60% 40% 40%;
-            border: 2px solid #000000; transform-origin: bottom center; z-index: 5;
+            width: 12px; height: 22px; background: #ffcc00; border-radius: 50% 50% 20% 20% / 60% 60% 40% 40%;
+            border: 2px solid #000000; transform-origin: bottom center;
             transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.5);
         }
-
-        /* মোমবাতি যখন লাইট-আপ হবে */
         .candle-flame.ignited {
             transform: translateX(-50%) scale(1);
             animation: flameFlicker 0.15s ease-in-out infinite alternate;
@@ -691,31 +375,19 @@
             to { transform: translateX(-50%) scale(1.05) rotate(2deg); }
         }
 
-        /* ড্রিমি একটিভ হলে গ্লো ইফেক্ট অন হবে */
         body.dreamy-active .candle-flame.ignited {
-            box-shadow: 0 0 25px #ffcc00, 0 0 50px #ff9900, 0 0 100px rgba(255, 204, 0, 0.6);
+            box-shadow: 0 0 20px #ffcc00, 0 0 40px #ff9900;
         }
-        body.dreamy-active .cartoon-cake {
-            box-shadow: 0 0 45px rgba(255, 204, 0, 0.35), 0 12px 0 #ff4d6d;
-        }
+        body.dreamy-active .cartoon-cake { box-shadow: 0 0 45px rgba(255, 204, 0, 0.35), 0 12px 0 #ff4d6d; }
 
-        /* 🎏 দুলন্ত ব্যানার (শুরুতে স্ক্রিনের বাইরে হাইড করা) */
+        /* 🎏 দুলন্ত ব্যানার */
         .hanging-banner {
-            position: absolute;
-            top: -180px; 
-            display: flex;
-            gap: 12px;
-            z-index: 25;
-            transform-origin: top center;
-            transition: top 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.15);
+            position: absolute; top: -180px; display: flex; gap: 12px; z-index: 25;
+            transform-origin: top center; transition: top 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.15);
         }
-
-        /* ড্রিমি মোডে ব্যানার নিচে নেমে দুলবে */
         .cake-stage.banner-dropped .hanging-banner {
-            top: -15px;
-            animation: bannerSwing 3s ease-in-out infinite alternate;
+            top: -15px; animation: bannerSwing 3s ease-in-out infinite alternate;
         }
-
         .banner-flag {
             background: #ff4d6d; color: #ffffff; font-family: 'Fredoka One', cursive; font-size: 24px;
             padding: 14px 22px; border: 4px solid #000000; border-radius: 0 0 14px 14px;
@@ -724,12 +396,9 @@
         .banner-flag.blue { background: #3399ff; }
         .banner-flag.purple { background: #b39ddb; color: #2a1b40; }
 
-        @keyframes bannerSwing {
-            0% { transform: rotate(-4deg); }
-            100% { transform: rotate(4deg); }
-        }
+        @keyframes bannerSwing { 0% { transform: rotate(-4deg); } 100% { transform: rotate(4deg); } }
 
-        /* রেসপন্সিভ মিডিয়া কুয়েরি (অক্ষত রাখা হয়েছে) */
+        /* রেসপন্সিভ মিডিয়া কুয়েরি */
         @media (max-width: 768px) {
             .container { height: auto; min-height: 550px; }
             .front-layout { flex-direction: column; justify-content: center; gap: 20px; }
@@ -744,6 +413,8 @@
 <div class="pink-grid-bg"></div>
 <div class="dreamy-dark-bg"></div>
 <div class="star-sky" id="starSky"></div>
+
+<div id="balloonLayer" style="position: absolute; width:100%; height:100%; top:0; left:0; pointer-events:none; z-index:4;"></div>
 
 <div id="lock-screen">
     <div class="lock-card">
@@ -777,7 +448,7 @@
                 </div>
                 <div class="front-right">
                     <div class="profile-card-wrapper">
-                        <img src="gf_front.jpg" class="gf-circle-img" onerror="this.src='https://via.placeholder.com/280?text=Saba+Front'">
+                        <img src="gf_front.jpg" class="gf-circle-img" onerror="this.src='gf_pic.jpg'">
                         <div class="name-tag">Dear Saba</div>
                     </div>
                 </div>
@@ -787,7 +458,7 @@
         <div id="p2" class="page">
             <div class="diary-open-view">
                 <div class="diary-left-page">
-                    <img src="gf_front.jpg" class="diary-pic" onerror="this.src='https://via.placeholder.com/105?text=Saba+Front'">
+                    <img src="gf_front.jpg" class="diary-pic" onerror="this.src='gf_pic.jpg'">
                     <div class="diary-left-title">HAPPY<br>BIRTHDAY<br>SABA! 🎂</div>
                     
                     <div class="pin-up-rose">
@@ -822,11 +493,12 @@
 
         <div id="p4" class="page">
             <div class="insta-vibe-card">
+                <h2 class="vibe-text">For you? 😉</h2>
+                
                 <div class="insta-photo-container">
                     <div class="insta-queen-crown">👑</div>
-                    <img src="gf_song.jpg" class="gf-rect-img" onerror="this.src='https://via.placeholder.com/270?text=Saba+Song'">
+                    <img src="gf_song.jpg" class="gf-rect-img" onerror="this.src='gf_pic.jpg'">
                 </div>
-                <h2 class="vibe-text">For you? 😉</h2>
                 
                 <div class="spotify-player">
                     <div class="spot-icon"><i class="fab fa-spotify"></i></div>
@@ -866,8 +538,11 @@
                         <div class="cake-smile"></div>
                         <div class="cake-eye"></div>
                     </div>
-                    <div class="cake-candle">
-                        <div class="candle-flame" id="candleFlame"></div>
+                    
+                    <div class="candles-row">
+                        <div class="single-candle"><div class="candle-flame"></div></div>
+                        <div class="single-candle middle"><div class="candle-flame"></div></div>
+                        <div class="single-candle"><div class="candle-flame"></div></div>
                     </div>
                 </div>
 
@@ -881,7 +556,7 @@
     const melody = document.getElementById('melody-music');
     const hareya = document.getElementById('hareya-music');
 
-    // 🔒 পাসওয়ার্ড ভেরিফিকেশন লজিক
+    // 🔒 পাসওয়ার্ড ভেরিফিকেশন
     function checkPassword() {
         const secret = "saba15";
         let userPass = prompt("Enter Password to Access the Website:");
@@ -889,13 +564,14 @@
             document.getElementById('lock-screen').style.display = "none";
             createConfetti();
             generateStars();
+            spawnBalloons(); // ফ্রন্ট পেজের বেলুন জেনারেট হবে
             melody.play().catch(e => console.log("Audio play deferred:", e));
         } else if (userPass !== null) {
             alert("Wrong Password! Try Again.");
         }
     }
 
-    // 🎉 ব্যাকগ্রাউন্ড কনফেটি জেনারেটর
+    // 🎉 কনফেটি জেনারেটর
     function createConfetti() {
         const box = document.getElementById('confettiBox');
         const colors = ['#ff4d6d', '#ff758f', '#ffb3c1', '#3399ff', '#ffcc00', '#b39ddb'];
@@ -913,7 +589,7 @@
         }
     }
 
-    // 🌌 ডাইনামিক তারা মেকার (রাতের ড্রিমি ব্যাকগ্রাউন্ডের জন্য)
+    // 🌌 তারা জেনারেটর
     function generateStars() {
         const sky = document.getElementById('starSky');
         for (let i = 0; i < 60; i++) {
@@ -930,20 +606,57 @@
         }
     }
 
-    // 🔄 অরিজিনাল রাউটার / পেজ সুইচিং ফাংশন
+    // 🎈 রিয়েলিস্টিক বেলুন স্পনার ফাংশন (Page 1 এর জন্য)
+    function spawnBalloons() {
+        const container = document.getElementById('balloonLayer');
+        const colors = ['#ff4d6d', '#ff758f', '#3399ff', '#ffcc00', '#b39ddb'];
+        for (let i = 0; i < 12; i++) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'balloon-wrapper';
+            wrapper.style.left = Math.random() * 85 + 5 + '%';
+            wrapper.style.animationDelay = Math.random() * 6 + 's';
+            wrapper.style.animationDuration = Math.random() * 4 + 7 + 's';
+
+            const balloon = document.createElement('div');
+            balloon.className = 'realistic-balloon';
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            balloon.style.backgroundColor = randomColor;
+            balloon.style.setProperty('--balloon-base-color', randomColor);
+
+            // বেলুনের নিচের গিঁট দেওয়ার জন্য স্টাইল ডায়নামিকালি ইনজেক্ট
+            const style = document.createElement('style');
+            style.innerHTML = `.realistic-balloon::before { border-bottom: 7px solid ${randomColor}; }`;
+            document.head.appendChild(style);
+
+            const string = document.createElement('div');
+            string.className = 'balloon-string';
+
+            wrapper.appendChild(balloon);
+            wrapper.appendChild(string);
+            container.appendChild(wrapper);
+        }
+    }
+
+    // 🔄 পেজ রাউটার
     function nextPage(id) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
         
-        // ৬ নম্বর পেজে না থাকলে ড্রিমি স্টেট সবসময় রিসেট থাকবে
         if (id !== 'p6') {
             document.body.classList.remove('dreamy-active');
             document.getElementById('cakeStage').classList.remove('cake-entered', 'banner-dropped');
-            document.getElementById('candleFlame').classList.remove('ignited');
+            document.querySelectorAll('.candle-flame').forEach(f => f.classList.remove('ignited'));
+        }
+
+        // বেলুন শুধুমাত্র প্রথম পেজেই দেখা যাবে
+        if (id === 'p1') {
+            document.getElementById('balloonLayer').style.display = 'block';
+        } else {
+            document.getElementById('balloonLayer').style.display = 'none';
         }
 
         document.getElementById(id).classList.add('active');
 
-        // 🎵 স্মার্ট মিউজিক কন্ট্রোল লজিক
+        // মিউজিক কন্ট্রোল
         if (id === 'p4') {
             melody.pause();
         } else if (id === 'p5' || id === 'p6') {
@@ -956,7 +669,7 @@
         }
     }
 
-    // 🤲 ৩ নম্বর পেজের উইশ টাইপিং ইফেক্ট
+    // 🤲 উইশ টাইপিং ইফেক্ট
     function triggerPrayerPage() {
         nextPage('p3');
         const text = "May God bless you, take care of your health, and stay happy always! ✨";
@@ -976,7 +689,7 @@
         setTimeout(type, 300);
     }
 
-    // 🎵 স্পটিফাই প্লে বাটন লজিক
+    // 🎵 স্পটিফাই প্লে/পজ
     function toggleSong(btn) {
         const icon = document.getElementById('play-icon');
         if (hareya.paused) {
@@ -989,28 +702,28 @@
     }
 
     // ==========================================================================
-    // 🎬 PAGE 6 TIMELINE CONTROLLER: তোর রিকোয়েস্টের সিকোয়েন্স
+    // 🎬 PAGE 6 TIMELINE CONTROLLER: ৩ মোমবাতির পারফেক্ট সিন
     // ==========================================================================
     function triggerCinematicCakePage() {
         nextPage('p6');
         
         const stage = document.getElementById('cakeStage');
-        const flame = document.getElementById('candleFlame');
+        const flames = document.querySelectorAll('.candle-flame');
 
-        // স্টেপ ১: পেজে ঢোকার সাথে সাথে নরমাল পিঙ্ক গ্রিড ব্যাকগ্রাউন্ডে কেকটা ওপরে উঠবে
+        // স্টেপ ১: পিঙ্ক গ্রিড ব্যাকগ্রাউন্ডে কার্টুন কেক স্লাইড করে ওপরে উঠবে
         setTimeout(() => {
             stage.classList.add('cake-entered');
         }, 300);
 
-        // স্টেপ ২: কেক আসার পর (১.৫ সেকেন্ড পর) মোমবাতিটা দপ করে জ্বলে উঠবে (Light Up)
+        // স্টেপ ২: কেক আসার পর ৩টি মোমবাতি একসাথে জ্বলে উঠবে
         setTimeout(() => {
-            flame.classList.add('ignited');
+            flames.forEach(flame => flame.classList.add('ignited'));
             
-            // স্টেপ ৩: ঠিক মোমবাতি জ্বলার মূহূর্তে পিঙ্ক ব্যাকগ্রাউন্ড স্মুথলি ফেইড আউট হয়ে ড্রিমি ডার্ক হবে
+            // স্টেপ ৩: মোমবাতি জ্বলার ঠিক সাথে সাথে ব্যাকগ্রাউন্ড স্মুথলি ড্রিমি ডার্ক হবে
             document.body.classList.add('dreamy-active');
         }, 1800);
 
-        // স্টেপ ৪: ড্রিমি ডার্ক ব্যাকগ্রাউন্ড আসার ঠিক ১ সেকেন্ড পর ব্যানারটা দুলতে দুলতে নিচে নামবে
+        // স্টেপ ৪: রাতের ড্রিমি ব্যাকগ্রাউন্ড অন হওয়ার পর ব্যানারটি দুলতে দুলতে নামবে
         setTimeout(() => {
             stage.classList.add('banner-dropped');
         }, 2800);
