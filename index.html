@@ -159,7 +159,7 @@
             align-items: center;
         }
 
-        /* ডায়েরি পেজ বাদে বাকি পেজগুলোতে ফুল ব্যাকগ্রাউন্ড ওভারলে */
+        /* ডায়েরি পেজ বাদে বাকি পেজগুলো ফুল ব্যাকগ্রাউন্ড ওভারলে */
         .page:not(#p2).active {
             display: flex !important;
             z-index: 15;
@@ -434,18 +434,6 @@
             line-height: 38px;
         }
 
-        /* 🌹 অ্যানিমেটেড থ্রিডি গোলাপ ফুল */
-        .diary-rose {
-            position: absolute;
-            bottom: 25px;
-            right: 25px;
-            font-size: 50px;
-            z-index: 10;
-            filter: drop-shadow(3px 5px 4px rgba(0,0,0,0.2));
-            animation: roseFloat 3s ease-in-out infinite alternate;
-            transform-origin: bottom center;
-        }
-
         /* 📌 রিয়্যালিস্টিক পিন-আপ বিগ রোস (Big Rose for Pinned Effect) */
         .pin-up-rose {
             position: absolute;
@@ -489,11 +477,6 @@
             border: 3px solid #fff;
             box-shadow: 3px 3px 0px rgba(0,0,0,0.15);
             z-index: 11; /* ফুল ও ডাঁটার ওপরে থাকবে পিন */
-        }
-
-        @keyframes roseFloat {
-            0% { transform: translateY(0) rotate(-5deg); }
-            100% { transform: translateY(-8px) rotate(5deg); }
         }
 
         /* ডান পাতা (চিঠির পাতা) */
@@ -710,8 +693,6 @@
                         <div class="diary-left-title">HAPPY<br>BIRTHDAY<br>SABA! 🎂</div>
                     </div>
                     
-                    <div class="diary-rose">🌹</div>
-                    
                     <div class="pin-up-rose">
                         <div class="big-rose-stem"></div>
                         <div class="big-rose-head">🌹</div>
@@ -771,7 +752,7 @@
         <div id="p5" class="page">
             <div class="annoy-card">
                 <h1 style="font-family: 'Fredoka One'; font-size: 36px; color: #ff4d6d; text-shadow: 2px 2px #fff; margin: 0 0 20px 0;">I WANT TO ANNOY YOU FOREVER! ❤️</h1>
-                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHYwdWp3eGZ3eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/KztT2c4u8mYYUiMKdJ/giphy.gif" style="width:260px; border: 4px solid #000; border-radius: 12px; box-shadow: 5px 5px 0px #000;">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHYwdWp3eGZ3eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/KztT2c4u8mYYUiMKdJ/giphy.gif" style="width:260px; border: 4px solid #000; border-radius: 12px; box-shadow: 4px 4px 0px #000;">
             </div>
         </div>
 
@@ -782,7 +763,7 @@
     const melody = document.getElementById('melody-music');
     const hareya = document.getElementById('hareya-music');
 
-    // পাসওয়ার্ড প্রোটেকশন লজিক (রিলোড লুপ বাগ-ফিক্সড)
+    // পাসওয়ার্ড প্রোটেকশন লজিক
     function checkPassword() {
         const secretPassword = "saba15"; 
         let userPass = prompt("Enter Password to Access the Website:");
