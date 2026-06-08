@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* মেইন গ্রিড ব্যাকগ্রাউন্ড থিম */
+        /* মেইন গ্রিড ব্যাকগ্রাউন্ড থিম (লাইট মোড) */
         body {
             margin: 0;
             padding: 0;
@@ -22,7 +22,15 @@
             font-family: 'Arial', sans-serif;
             overflow-x: hidden;
             position: relative;
-            transition: background 0.5s ease;
+            transition: background 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* 🌌 ম্যাজিকাল ড্রিমী নাইট স্কাই থিম (মোমবাতি জ্বলার পর একটিভেট হবে) */
+        body.dark-active {
+            background-color: #1a162b;
+            /* রাতের আকাশের নেভি ব্লু ও পার্পল গ্রেডিয়েন্ট */
+            background-image: radial-gradient(circle at 50% 50%, #2c254a, #131021);
+            background-size: cover;
         }
 
         /* লক স্ক্রিন ওভারলে ডিজাইন */
@@ -84,6 +92,7 @@
             background-repeat: no-repeat;
             z-index: 5;
             pointer-events: none;
+            transition: opacity 1s ease;
         }
         .bunting-left {
             left: 0;
@@ -93,6 +102,9 @@
             right: 0;
             background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 30"><path d="M0,0 Q25,20 50,0 Q75,20 100,0" fill="none" stroke="%23ff758f" stroke-width="1"/><polygon points="5,3 15,3 10,15" fill="%23ff4d6d"/><polygon points="25,5 35,5 30,18" fill="%23ff758f"/><polygon points="45,5 55,5 50,18" fill="%23ff4d6d"/></svg>');
             transform: scaleX(-1);
+        }
+        body.dark-active .bunting-left, body.dark-active .bunting-right {
+            opacity: 0.15; /* নাইট মোডে ঝালর হালকা আবছা হয়ে যাবে */
         }
 
         /* জরি/কনফেটি ড্রপ কন্টেইনার */
@@ -119,6 +131,34 @@
         @keyframes fall {
             0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
             100% { transform: translateY(100vh) rotate(720deg); opacity: 0.4; }
+        }
+
+        /* ✨ ড্রিমী নাইট মোডের টুইঙ্কলিং স্টারস */
+        .star-sky {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 2s ease;
+        }
+        body.dark-active .star-sky {
+            opacity: 1;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 8px #fff; }
         }
 
         .container {
@@ -165,6 +205,14 @@
             background: #ffe5ec;
             background-image: linear-gradient(#ffccd5 1px, transparent 1px), linear-gradient(90deg, #ffccd5 1px, transparent 1px);
             background-size: 24px 24px;
+            animation: fadeIn 0.4s ease-in-out forwards;
+        }
+
+        /* পেজ ৬ এর ব্যাকগ্রাউন্ড ট্রান্সপারেন্ট থাকবে যেন বডির ড্রিমী স্কাই দেখা যায় */
+        #p6.active {
+            display: flex !important;
+            z-index: 15;
+            background: transparent !important;
             animation: fadeIn 0.4s ease-in-out forwards;
         }
 
@@ -274,7 +322,7 @@
         .action-btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px #000; }
         .action-btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0px #000; }
 
-        /* প্রোফাইল কার্ড */
+        /* প্রোফাইলカード */
         .front-right {
             flex: 1;
             display: flex;
@@ -624,8 +672,8 @@
             text-align: center; 
         }
 
-        /* ================= 🎂 NEW PAGE 6: THE ULTRA CAKE STORY ANIMATION 🎂 ================= */
-        /* পুরো স্টেজ কন্টেইনার */
+
+        /* ================= 🎂 PAGE 6: THE CINEMATIC MIDSUMMER CAKE ANIMATION 🎂 ================= */
         .cake-stage {
             position: relative;
             width: 100%;
@@ -638,23 +686,24 @@
             z-index: 10;
         }
 
-        /* থ্রিডি কেক বেস ড্রয়িং */
+        /* থ্রিডি কার্টুন কেক বেস */
         .cartoon-cake {
             position: relative;
             width: 250px;
             height: 140px;
-            background: #ff758f; /* স্ট্রবেরি পিঙ্ক ক্রাস্ট */
+            background: #ff758f;
             border: 5px solid #000;
-            border-radius: 120px / 40px; /* কার্টুন ওভাল ও থ্রিডি কার্ভ ইফেক্ট */
+            border-radius: 120px / 40px;
             box-shadow: 0 12px 0 #ff4d6d, 0 20px 0px rgba(0,0,0,0.15);
             margin-top: 100px;
             opacity: 0;
             transform: translateY(200px);
             animation: cakeSlideUp 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
             animation-delay: 0.5s;
+            transition: all 1.5s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* কেকের উপরের ফ্ল্যাট অংশ */
+        /* কেকের উপরের অংশ */
         .cartoon-cake::before {
             content: '';
             position: absolute;
@@ -662,13 +711,13 @@
             left: -2px;
             width: 244px;
             height: 40px;
-            background: #fff0f3; /* ভ্যানিলা হোয়াইট টপিং */
+            background: #fff0f3;
             border: 5px solid #000;
             border-radius: 120px / 40px;
             z-index: 1;
         }
 
-        /* কেকের ক্রিমের ড্রিপিং/লেয়ার ইফেক্ট */
+        /* ক্রিম ড্রিপস */
         .cake-cream-drips {
             position: absolute;
             top: 25px;
@@ -680,7 +729,7 @@
             z-index: 2;
         }
 
-        /* 👀 কিউট চোখ-মুখ অ্যানিমেশন */
+        /* 👀 চোখ-মুখ অ্যানিমেশন */
         .cake-face {
             position: absolute;
             top: 55px;
@@ -704,7 +753,6 @@
             border-radius: 50%;
             position: relative;
         }
-        /* চোখের ভেতরের কিউট গ্ল্যামার ডট */
         .cake-eye::after {
             content: '';
             position: absolute;
@@ -725,7 +773,7 @@
             margin-top: 10px;
         }
 
-        /* 🕯️ মোমবাতি অ্যানিমেশন */
+        /* 🕯️ মোমবাতি */
         .cake-candle {
             position: absolute;
             top: -45px;
@@ -743,7 +791,7 @@
             animation-delay: 2.8s;
         }
 
-        /* 🔥 মোমবাতির আগুন */
+        /* 🔥 মোমবাতির ড্রিমী লাইট/আগুন */
         .candle-flame {
             position: absolute;
             top: -24px;
@@ -754,48 +802,35 @@
             background: #ffcc00;
             border-radius: 50% 50% 20% 20% / 60% 60% 40% 40%;
             border: 2px solid #000;
-            box-shadow: 0 0 20px #ffcc00, 0 0 40px #ff9900;
             transform-origin: bottom center;
             z-index: 5;
             animation: flameIgnite 0.5s ease forwards, flameFlicker 0.15s ease-in-out infinite alternate;
             animation-delay: 3.8s, 4.3s;
+            transition: box-shadow 1s ease;
         }
 
-        /* 🖤 স্ক্রিন ডার্কেনিং ওভারলে ইফেক্ট (স্ক্রিনশটের মতো মোমবাতির আলো বাদে সব অন্ধকার হবে) */
-        .dark-room-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(13, 11, 26, 0.95); /* কুচকুচে অন্ধকার নাইট মোড */
-            z-index: 8;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 1.5s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-        /* লাইট অন হবার সাথে সাথে অন্ধকার হবে */
-        body.dark-active .dark-room-overlay {
-            opacity: 1;
+        /* 💡 মোমবাতি জ্বলার পর কেক ও ফ্লেমের ড্রিমী গ্লো ইফেক্ট */
+        body.dark-active .candle-flame {
+            box-shadow: 0 0 25px #ffcc00, 0 0 50px #ff9900, 0 0 100px rgba(255, 204, 0, 0.6);
         }
 
-        /* অন্ধকার মোডে কেকের গ্লোয়িং ইফেক্ট */
         body.dark-active .cartoon-cake {
-            box-shadow: 0 0 50px rgba(255, 204, 0, 0.4), 0 12px 0 #ff4d6d;
-            border-color: #ff9900;
-            transition: all 1.2s ease;
+            /* মোমবাতির আলো কেকের ওপর এসে পড়ছে এমন মায়াবী ইয়েলো গ্লো */
+            box-shadow: 0 0 45px rgba(255, 204, 0, 0.35), 0 12px 0 #ff4d6d;
         }
 
-        /* 🎏 হ্যাপি বার্থডে সাবা ডুলন্ত ব্যানার */
+
+        /* 🎏 হ্যাপি বার্থডে সাবা ডুলন্ত ব্যানার (ড্রিমী মোডে আসবে) */
         .hanging-banner {
             position: absolute;
-            top: -120px; /* শুরু হবে স্ক্রিনের বাইরে থেকে */
+            top: -160px; /* স্ক্রিনের বাইরে থাকবে প্রথমে */
             display: flex;
-            gap: 10px;
+            gap: 12px;
             z-index: 12;
             transform-origin: top center;
             opacity: 0;
-            animation: bannerDropIn 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.1) forwards, bannerSwing 2.5s ease-in-out infinite alternate;
+            animation: bannerDropIn 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.1) forwards, bannerSwing 3s ease-in-out infinite alternate;
+            /* মোমবাতি জ্বলে চারপাশ ড্রিমী আকাশ হবার ঠিক পর ব্যানার নামবে */
             animation-delay: 4.8s;
         }
 
@@ -804,15 +839,16 @@
             color: white;
             font-family: 'Fredoka One', cursive;
             font-size: 24px;
-            padding: 15px 20px;
+            padding: 14px 22px;
             border: 4px solid #000;
-            border-radius: 0 0 12px 12px;
+            border-radius: 0 0 14px 14px;
             box-shadow: 4px 4px 0px #000;
             text-shadow: 2px 2px #000;
             white-space: nowrap;
         }
         .banner-flag.blue { background: #3399ff; }
         .banner-flag.purple { background: #b39ddb; color: #2a1b40; }
+
 
         /* ================= 🎥 KEYFRAMES DEFINITIONS ================= */
         @keyframes cakeSlideUp {
@@ -832,19 +868,18 @@
             to { transform: translateX(-50%) scale(1.05) rotate(2deg); }
         }
         @keyframes bannerDropIn {
-            to { opacity: 1; top: -10px; }
+            to { opacity: 1; top: -15px; }
         }
         @keyframes bannerSwing {
-            0% { transform: rotate(-3deg); }
-            100% { transform: rotate(3deg); }
+            0% { transform: rotate(-4deg); }
+            100% { transform: rotate(4deg); }
         }
-
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
     </style>
 </head>
 <body>
 
-<div class="dark-room-overlay" id="roomOverlay"></div>
+<div class="star-sky" id="starSky"></div>
 
 <div id="lock-screen">
     <div class="lock-card">
@@ -1009,17 +1044,18 @@
             document.getElementById('lock-screen').style.display = "none";
             document.getElementById('main-content').style.display = "flex";
             createConfettiEffect(); 
+            generateStars(); // রাতের আকাশের জন্য ব্যাকগ্রাউন্ডে তারা তৈরি করে রাখা
             melody.play().catch(e => console.log("Audio waiting for interaction:", e));
         } else if (userPass !== null) {
             alert("Wrong Password! Try Again.");
         }
     }
 
-    // ব্যাকগ্রাউন্ডের ওপর থেকে রঙিন জরি/কনফেটি পড়ার ইফেক্ট
+    // ব্যাকগ্রাউন্ডের জরি/কনফেটি ইফেক্ট
     function createConfettiEffect() {
         const box = document.getElementById('confettiBox');
         const colors = ['#ff4d6d', '#ff758f', '#ffb3c1', '#3399ff', '#ffcc00', '#b39ddb'];
-        box.innerHTML = ""; // রিসেট
+        box.innerHTML = ""; 
         for (let i = 0; i < 40; i++) {
             const confetti = document.createElement('div');
             confetti.className = 'confetti';
@@ -1034,18 +1070,35 @@
         }
     }
 
-    // ডায়েরি পেজ লোড ও ওভারলে ব্লার হ্যান্ডলার
+    // 🌌 ড্রিমী আকাশের জন্য ডায়নামিক তারা জেনারেটর
+    function generateStars() {
+        const starSky = document.getElementById('starSky');
+        starSky.innerHTML = "";
+        for (let i = 0; i < 50; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            const size = Math.random() * 3 + 1 + 'px';
+            star.style.width = size;
+            star.style.height = size;
+            star.style.animationDelay = Math.random() * 2 + 's';
+            star.style.animationDuration = Math.random() * 1.5 + 1.5 + 's';
+            starSky.appendChild(star);
+        }
+    }
+
+    // ডায়েরি ভিউ হ্যান্ডলার
     function openDiaryView() {
         document.body.classList.add('overlay-active'); 
         document.getElementById('p2').classList.add('active');
         melody.play().catch(e => {});
     }
 
-    // অল-ইন-ওয়ান পেজ নেভিগেশন রাউটার এবং সাউন্ড ট্র্যাক কন্ট্রোলার
+    // পেজ চেঞ্জার রাউটার
     function nextPage(id) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
         
-        // ডায়েরি এবং ম্যাজিক কেক পেজ ছাড়া অন্য পেজে বডি ব্লার বা ডার্কনেস রিমুভ হবে
         if (id !== 'p2' && id !== 'p6') {
             document.body.classList.remove('overlay-active');
             document.body.classList.remove('dark-active');
@@ -1056,7 +1109,7 @@
             targetPage.classList.add('active');
         }
 
-        // --- স্মার্ট অডিও ট্র্যাকিং রাউটার ---
+        // --- স্মার্ট অডিও ট্র্যাকিং ---
         if (id === 'p4') {
             melody.pause();
         } else if (id === 'p5' || id === 'p6') {
@@ -1073,7 +1126,6 @@
         window.scrollTo(0, 0);
     }
 
-    // ডায়েরির ফরোয়ার্ড অ্যারো ক্লিক করলে ৩ নম্বর পেজ (My Prayers) চালু করার ট্রিগার
     function triggerPrayerPage() {
         nextPage('p3');
         const wishText = "May God bless you, take care of your health, and stay happy always! ✨";
@@ -1093,22 +1145,21 @@
         setTimeout(type, 200);
     }
 
-    // 🎂 পেজ ৬ এর আল্ট্রা কেক স্টোরি এবং নাইট মোড ট্রিগার ফাংশন
+    // 🎂 ড্রিমী নাইট মোড এবং কেক অ্যানিমেশন ট্রিগার
     function triggerCakeAnimationPage() {
         nextPage('p6');
         
-        // মোমবাতি জ্বলার টাইমিং (৩.৮ সেকেন্ড) ম্যাচ করে ব্যাকগ্রাউন্ড অন্ধকার করার কমান্ড
+        // মোমবাতি জ্বলার টাইমিং (৩.৮ সেকেন্ড) ম্যাচ করে ব্যাকগ্রাউন্ডকে ড্রিমী আকাশ করা হবে
         setTimeout(() => {
             document.body.classList.add('dark-active');
         }, 3800);
     }
 
-    // স্পটিফাই প্লেয়ার মিউজিক টগল
+    // স্পটিফাই প্লেয়ার মিউজিক
     function toggleHareyaMusic(btn) {
         const icon = document.getElementById('play-icon');
-        
         if (hareya.paused) {
-            hareya.play().catch(e => console.log("Audio play blocked:", e));
+            hareya.play().catch(e => console.log(e));
             icon.className = "fas fa-pause";
         } else {
             hareya.pause();
