@@ -24,7 +24,7 @@
             position: relative;
         }
 
-        /* লক স্ক্রিন ওভারলে ডিজাইন (রিলোড লুপ ও ক্র্যাশ আটকানোর জন্য) */
+        /* লক স্ক্রিন ওভারলে ডিজাইন */
         #lock-screen {
             position: fixed;
             top: 0;
@@ -73,7 +73,7 @@
             align-items: center;
         }
 
-        /* ওপরের দুই কোণার ঝালর বা রঙিন ফিতা */
+        /* ওপরের দুই কোণার ঝালর */
         .bunting-left, .bunting-right {
             position: absolute;
             top: 0;
@@ -86,11 +86,11 @@
         }
         .bunting-left {
             left: 0;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 30"><path d="M0,0 Q25,20 50,0 Q75,20 100,0" fill="none" stroke="%23ff758f" stroke-width="1"/><polygon points="5,3 15,3 10,15" fill="%23ff4d6d"/><polygon points="25,5 35,5 30,18" fill="%23ff758f"/><polygon points="45,5 55,5 50,18" fill="%23ff4d6d"/><polygon points="65,5 75,5 70,18" fill="%23ff758f"/><polygon points="85,3 95,3 90,15" fill="%23ff4d6d"/></svg>');
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 30"><path d="M0,0 Q25,20 50,0 Q75,20 100,0" fill="none" stroke="%23ff758f" stroke-width="1"/><polygon points="5,3 15,3 10,15" fill="%23ff4d6d"/><polygon points="25,5 35,5 30,18" fill="%23ff758f"/><polygon points="45,5 55,5 50,18" fill="%23ff4d6d"/></svg>');
         }
         .bunting-right {
             right: 0;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 30"><path d="M0,0 Q25,20 50,0 Q75,20 100,0" fill="none" stroke="%23ff758f" stroke-width="1"/><polygon points="5,3 15,3 10,15" fill="%23ff4d6d"/><polygon points="25,5 35,5 30,18" fill="%23ff758f"/><polygon points="45,5 55,5 50,18" fill="%23ff4d6d"/><polygon points="65,5 75,5 70,18" fill="%23ff758f"/><polygon points="85,3 95,3 90,15" fill="%23ff4d6d"/></svg>');
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 30"><path d="M0,0 Q25,20 50,0 Q75,20 100,0" fill="none" stroke="%23ff758f" stroke-width="1"/><polygon points="5,3 15,3 10,15" fill="%23ff4d6d"/><polygon points="25,5 35,5 30,18" fill="%23ff758f"/><polygon points="45,5 55,5 50,18" fill="%23ff4d6d"/></svg>');
             transform: scaleX(-1);
         }
 
@@ -434,16 +434,61 @@
             line-height: 38px;
         }
 
-        /* 🌹 অ্যানিমেটেড থ্রিডি গোলাপ (Rose) স্টাইল */
+        /* 🌹 অ্যানিমেটেড থ্রিডি গোলাপ ফুল */
         .diary-rose {
             position: absolute;
             bottom: 25px;
-            right: 20px;
+            right: 25px;
             font-size: 50px;
             z-index: 10;
             filter: drop-shadow(3px 5px 4px rgba(0,0,0,0.2));
             animation: roseFloat 3s ease-in-out infinite alternate;
             transform-origin: bottom center;
+        }
+
+        /* 📌 রিয়্যালিস্টিক পিন-আপ বিগ রোস (Big Rose for Pinned Effect) */
+        .pin-up-rose {
+            position: absolute;
+            top: 50px;
+            right: -30px; /* ডায়েরির বাম পাতা ও ডান পাতা বা চিঠির মাঝখানে ফাঁকা জায়গায় থাকবে */
+            width: 140px; /* বড় সাইজ */
+            height: 350px; /* লম্বা ডাঁটা */
+            pointer-events: none;
+            z-index: 10; /* চিঠির ওপর দিয়ে ডাঁটাটা যাবে */
+        }
+
+        .big-rose-stem {
+            position: absolute;
+            top: 70px;
+            left: 60px;
+            width: 5px;
+            height: 280px;
+            background: linear-gradient(to top, #1a4d00, #2d8a00);
+            border-radius: 10px;
+            transform: rotate(-10deg);
+        }
+
+        .big-rose-head {
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-size: 110px; /* বড় ফুল */
+            color: red;
+            filter: drop-shadow(4px 6px 4px rgba(0,0,0,0.2));
+        }
+
+        /* কালো রঙের পিন ইফেক্ট */
+        .pin-head {
+            position: absolute;
+            top: 140px; /* পিনের পজিশন ডাঁটার ওপরে */
+            left: 45px;
+            width: 14px;
+            height: 14px;
+            background-color: #333; /* কালো পিন */
+            border-radius: 50%;
+            border: 3px solid #fff;
+            box-shadow: 3px 3px 0px rgba(0,0,0,0.15);
+            z-index: 11; /* ফুল ও ডাঁটার ওপরে থাকবে পিন */
         }
 
         @keyframes roseFloat {
@@ -666,6 +711,12 @@
                     </div>
                     
                     <div class="diary-rose">🌹</div>
+                    
+                    <div class="pin-up-rose">
+                        <div class="big-rose-stem"></div>
+                        <div class="big-rose-head">🌹</div>
+                        <div class="pin-head"></div>
+                    </div>
                 </div>
 
                 <div class="diary-right-page">
@@ -688,7 +739,7 @@
         <div id="p3" class="page">
             <div class="prayer-card">
                 <h1 style="font-family: 'Fredoka One'; color: #ff4d6d; font-size: 36px; margin-top: 0;">My Prayers 🤲</h1>
-                <div id="tw-wish" style="font-family: 'Pacifico'; font-size: 24px; color: #c9184a; min-height: 80px; margin: 20px 0;"></div>
+                <div id="tw-wish" style="font-family: 'Pacifico'; font-size: 22px; color: #c9184a; min-height: 80px; margin: 20px 0;"></div>
                 <button class="action-btn" id="wish-next" style="display:none; margin: 0 auto;" onclick="nextPage('p4')">Next 👸</button>
             </div>
         </div>
@@ -705,8 +756,8 @@
                 <div class="spotify-player">
                     <div class="spot-icon"><i class="fab fa-spotify"></i></div>
                     <div class="spot-details">
-                        <p class="spot-title">Hareya</p>
-                        <p class="spot-artist">Arijit Singh</p>
+                        <p class="spot-title">Good Looking</p>
+                        <p class="spot-artist">Suki Waterhouse</p>
                     </div>
                     <button class="spot-play-btn" onclick="toggleHareyaMusic(this)">
                         <i class="fas fa-play" id="play-icon"></i>
@@ -731,35 +782,34 @@
     const melody = document.getElementById('melody-music');
     const hareya = document.getElementById('hareya-music');
 
-    // সিকিউর পাসওয়ার্ড ফাংশন (কোনো অটো-রিলোড লুপ হবে না)
+    // পাসওয়ার্ড প্রোটেকশন লজিক (রিলোড লুপ বাগ-ফিক্সড)
     function checkPassword() {
-        const secretPassword = "saba15";
+        const secretPassword = "saba15"; 
         let userPass = prompt("Enter Password to Access the Website:");
         
         if (userPass === secretPassword) {
             document.getElementById('lock-screen').style.display = "none";
             document.getElementById('main-content').style.display = "flex";
-            createOptimizedConfetti(); // লাইটওয়েট ফাস্ট কনফেটি চালু
-            melody.play().catch(e => console.log("Audio waiting for user interaction..."));
+            createConfettiEffect(); // বার্থডে জরি বা ঝালর ইফেক্ট স্টার্ট হবে
+            melody.play().catch(e => console.log("Audio waiting for interaction:", e));
         } else if (userPass !== null) {
             alert("Wrong Password! Try Again.");
         }
     }
 
-    // অপ্টিমাইজড কনফেটি মেকার (নেট স্লো হলেও ল্যাগ করবে না)
-    function createOptimizedConfetti() {
+    // ব্যাকগ্রাউন্ডের ওপর থেকে রঙিন জরি/কনফেটি পড়ার ইফেক্ট
+    function createConfettiEffect() {
         const box = document.getElementById('confettiBox');
         const colors = ['#ff4d6d', '#ff758f', '#ffb3c1', '#3399ff', '#ffcc00', '#b39ddb'];
-        // সংখ্যা সামঞ্জস্যপূর্ণ রেখে স্মুথ পারফরম্যান্সের জন্য ৩৫টি করা হলো
-        for (let i = 0; i < 35; i++) {
+        for (let i = 0; i < 40; i++) {
             const confetti = document.createElement('div');
             confetti.className = 'confetti';
             confetti.style.left = Math.random() * 100 + '%';
             confetti.style.top = Math.random() * -20 + 'px';
             confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-            confetti.style.width = Math.random() * 8 + 6 + 'px';
+            confetti.style.width = Math.random() * 8 + 8 + 'px';
             confetti.style.height = Math.random() * 12 + 6 + 'px';
-            confetti.style.animationDuration = Math.random() * 2.5 + 2 + 's';
+            confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
             confetti.style.animationDelay = Math.random() * 2 + 's';
             box.appendChild(confetti);
         }
@@ -772,7 +822,7 @@
         melody.play().catch(e => {});
     }
 
-    // অল-ইন-ওয়ান পেজ নেভিগেশন রাউটার
+    // অল-ইন-ওয়ান পেজ নেভিগেশন রাউটার এবং সাউন্ড ট্র্যাক কন্ট্রোলার
     function nextPage(id) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
         
@@ -786,15 +836,19 @@
             targetPage.classList.add('active');
         }
 
-        // অডিও ট্র্যাকস স্মার্ট কন্ট্রোলার
+        // --- স্মার্ট অডিও ট্র্যাকিং রাউটার ---
         if (id === 'p4') {
-            melody.pause(); 
+            // পেজ ৪ এ আসলে ব্যাকগ্রাউন্ড মেলোডি একদম অফ হয়ে যাবে
+            melody.pause();
         } else if (id === 'p5') {
-            hareya.pause(); 
+            // পেজ ৫ এ গেলে Hareya গান বন্ধ হবে এবং পুরোনো মেলোডি আবার প্রথম থেকে শুরু হবে
+            hareya.pause();
             document.getElementById('play-icon').className = "fas fa-play"; 
+            
             melody.currentTime = 0; 
-            melody.play().catch(e => {}); 
+            melody.play().catch(e => {});
         } else {
+            // অন্য কোনো পেজে ফেরত আসলে মেলোডি ট্র্যাকিং সচল রাখা
             if (melody.paused) {
                 melody.play().catch(e => {});
             }
@@ -814,19 +868,20 @@
             if (j < wishText.length) {
                 targetEl.innerHTML += wishText.charAt(j);
                 j++; 
-                setTimeout(type, 50); 
+                setTimeout(type, 60); 
             } else { 
                 document.getElementById('wish-next').style.display = 'block'; 
             }
         }
-        setTimeout(type, 150);
+        setTimeout(type, 200);
     }
 
-    // স্পটিফাই প্লেয়ার মিউজিক কন্ট্রোল
+    // স্পটিফাই প্লেয়ার মিউজিক টগল
     function toggleHareyaMusic(btn) {
         const icon = document.getElementById('play-icon');
+        
         if (hareya.paused) {
-            hareya.play().catch(e => {});
+            hareya.play().catch(e => console.log("Audio play blocked:", e));
             icon.className = "fas fa-pause";
         } else {
             hareya.pause();
