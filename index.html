@@ -15,7 +15,7 @@
             background-color: #ffe5ec;
             background-image: linear-gradient(#ffccd5 1px, transparent 1px), linear-gradient(90deg, #ffccd5 1px, transparent 1px);
             background-size: 24px 24px;
-            display: none; /* পাসওয়ার্ড দেওয়ার আগে পুরো পেজ হাইড থাকবে */
+            display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
@@ -24,7 +24,56 @@
             position: relative;
         }
 
-        /* ওপরের দুই কোণার ঝালর */
+        /* লক স্ক্রিন ওভারলে ডিজাইন (রিলোড লুপ ও ক্র্যাশ আটকানোর জন্য) */
+        #lock-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffe5ec;
+            background-image: linear-gradient(#ffccd5 1px, transparent 1px), linear-gradient(90deg, #ffccd5 1px, transparent 1px);
+            background-size: 24px 24px;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lock-card {
+            background: white;
+            border: 4px solid #000;
+            padding: 35px;
+            border-radius: 24px;
+            box-shadow: 6px 6px 0px #000;
+            text-align: center;
+            max-width: 340px;
+        }
+
+        .lock-btn {
+            background: #ff4d6d;
+            color: white;
+            font-family: 'Fredoka One', cursive;
+            border: 3px solid #000;
+            padding: 12px 30px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 3px 3px 0px #000;
+            margin-top: 20px;
+            transition: 0.1s;
+        }
+        .lock-btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0px #000; }
+
+        /* মেইন কন্টেন্ট এরিয়া */
+        #main-content {
+            display: none;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* ওপরের দুই কোণার ঝালর বা রঙিন ফিতা */
         .bunting-left, .bunting-right {
             position: absolute;
             top: 0;
@@ -337,11 +386,11 @@
             height: 520px;
             display: flex;
             position: relative;
-            transform: rotate(-2deg); /* ডায়েরি হালকা বাঁকা বা Tilted করার জন্য */
+            transform: rotate(-2deg); 
             filter: drop-shadow(5px 15px 25px rgba(0,0,0,0.25));
         }
 
-        /* বাম পাতা (কাভার ব্যাকসাইড - পুরোপুরি মিররড বা উল্টো করা) */
+        /* বাম পাতা (কাভার ব্যাকসাইড - নো মিরর, একদম নরমাল ক্লিয়ার সোজা টেক্সট) */
         .diary-left-page {
             width: 50%;
             height: 100%;
@@ -355,11 +404,11 @@
             align-items: center;
             padding: 20px;
             box-shadow: -4px 10px 0px rgba(0,0,0,0.1);
+            position: relative;
         }
 
-        /* বাম পাতার ইমেজ ও টেক্সট মিররড বা উল্টানোর জন্য স্পেশাল ক্লাস */
-        .mirrored-content {
-            transform: scaleX(-1); /* ছবি ও লেখা হরিজন্টালি উল্টে যাবে */
+        /* কন্টেন্ট সোজা রাখার নরমাল লেআউট */
+        .normal-content {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -383,6 +432,23 @@
             text-align: center;
             text-shadow: 2px 2px 0px #000;
             line-height: 38px;
+        }
+
+        /* 🌹 অ্যানিমেটেড থ্রিডি গোলাপ (Rose) স্টাইল */
+        .diary-rose {
+            position: absolute;
+            bottom: 25px;
+            right: 20px;
+            font-size: 50px;
+            z-index: 10;
+            filter: drop-shadow(3px 5px 4px rgba(0,0,0,0.2));
+            animation: roseFloat 3s ease-in-out infinite alternate;
+            transform-origin: bottom center;
+        }
+
+        @keyframes roseFloat {
+            0% { transform: translateY(0) rotate(-5deg); }
+            100% { transform: translateY(-8px) rotate(5deg); }
         }
 
         /* ডান পাতা (চিঠির পাতা) */
@@ -426,7 +492,7 @@
         .navigation-guide-area {
             display: flex;
             flex-direction: column;
-            align-items: flex-end; /* ডান সাইডে পজিশনিং */
+            align-items: flex-end; 
             margin-top: 10px;
             gap: 4px;
         }
@@ -472,7 +538,7 @@
             text-align: center;
         }
 
-        /* ================= PAGE 4: SPOTIFY CARD ================= */
+        /* ================= PAGE 4: SPOTIFY CARD (gf_song.jpg) ================= */
         .insta-vibe-card {
             background: #fff;
             border: 4px solid #000;
@@ -531,151 +597,169 @@
         }
 
         /* ================= PAGE 5: FINAL PAGE ================= */
-        .annoy-card { display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .annoy-card { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            text-align: center; 
+        }
 
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
     </style>
 </head>
 <body>
 
-<div class="bunting-left"></div>
-<div class="bunting-right"></div>
+<div id="lock-screen">
+    <div class="lock-card">
+        <h2 style="font-family: 'Fredoka One'; color: #ff4d6d; margin-top:0;">🔒 Site Locked</h2>
+        <p style="font-size:14px; color:#555;">Click the button below to enter the password and unlock the birthday surprise!</p>
+        <button class="lock-btn" onclick="checkPassword()">Unlock Now</button>
+    </div>
+</div>
 
-<div class="confetti-container" id="confettiBox"></div>
+<div id="main-content">
+    <div class="bunting-left"></div>
+    <div class="bunting-right"></div>
 
-<audio id="melody-music" src="melody.mp3" loop></audio>
-<audio id="hareya-music" src="hareya.mp3" loop></audio>
+    <div class="confetti-container" id="confettiBox"></div>
 
-<div class="container">
-    
-    <div id="front-page-base" class="front-layout">
-        <div class="front-left">
-            <div class="text-block-wrapper">
-                <div class="happy-box">Happy</div><br>
-                <div class="birthday-box">Birthday</div>
-                <div class="birthday-cap-exact"></div>
-            </div>
-            
-            <div class="date-badge">📅 15 June</div>
-            <button class="action-btn" onclick="openDiaryView()">
-                Click Here Saba <i class="fas fa-envelope-open-text"></i>
-            </button>
-        </div>
+    <audio id="melody-music" src="melody.mp3" loop></audio>
+    <audio id="hareya-music" src="hareya.mp3" loop></audio>
+
+    <div class="container">
         
-        <div class="front-right">
-            <div class="profile-card-wrapper">
-                <div class="realistic-balloon bal-left"></div>
-                <div class="realistic-balloon bal-right"></div>
-                
-                <div class="deco-star" style="top:-30px; right:20px;">★</div>
-                <div class="deco-star" style="bottom:10px; left:-40px;">✦</div>
-
-                <img src="gf_pic.jpg" class="gf-circle-img" onerror="this.src='https://via.placeholder.com/280?text=Saba'">
-                <div class="name-tag">Dear Saba</div>
-            </div>
-        </div>
-    </div>
-
-    <div id="p2" class="page">
-        <div class="diary-open-view">
-            
-            <div class="diary-left-page">
-                <div class="mirrored-content">
-                    <img src="gf_pic.jpg" class="diary-pic" onerror="this.src='https://via.placeholder.com/100?text=Queen'">
-                    <div class="diary-left-title">HAPPY<br>BIRTHDAY<br>SABA! 🎂</div>
-                </div>
-            </div>
-
-            <div class="diary-right-page">
-                <h2 class="diary-headline">To You!</h2>
-                <div class="diary-body-text">
-                    Happy birthday jaan, the day you came into my life I was not really much attached to you but day by day you became close to my heart. And now you are truly my younger sister. I wish I could remove some of the pain from your life which you are bearing alone. But you're always welcome, you can talk anytime you want to talk specially those which you can't say to others. And this year your all dreams come true. I wish that your brother could wish you but if couldn't wish in him behalf I am wishing you happy birthday sana. Don't be Sad, ok be happy. 🥰
+        <div id="front-page-base" class="front-layout">
+            <div class="front-left">
+                <div class="text-block-wrapper">
+                    <div class="happy-box">Happy</div><br>
+                    <div class="birthday-box">Birthday</div>
+                    <div class="birthday-cap-exact"></div>
                 </div>
                 
-                <div class="navigation-guide-area">
-                    <span class="guide-text">Click arrow to go to the next page</span>
-                    <div class="android-forward-btn" onclick="triggerPrayerPage()">
-                        <i class="fas fa-arrow-right"></i>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <div id="p3" class="page">
-        <div class="prayer-card">
-            <h1 style="font-family: 'Fredoka One'; color: #ff4d6d; font-size: 36px; margin-top: 0;">My Prayers 🤲</h1>
-            <div id="tw-wish" style="font-family: 'Pacifico'; font-size: 24px; color: #c9184a; min-height: 80px; margin: 20px 0;"></div>
-            <button class="action-btn" id="wish-next" style="display:none; margin: 0 auto;" onclick="nextPage('p4')">Next 👸</button>
-        </div>
-    </div>
-
-    <div id="p4" class="page">
-        <div class="insta-vibe-card">
-            <div class="insta-photo-container">
-                <div class="insta-queen-crown">👑</div>
-                <img src="gf_pic.jpg" class="gf-rect-img" onerror="this.src='https://via.placeholder.com/290x290?text=Birthday+Queen'">
-            </div>
-            
-            <h2 class="vibe-text">My Birthday Queen</h2>
-            
-            <div class="spotify-player">
-                <div class="spot-icon"><i class="fab fa-spotify"></i></div>
-                <div class="spot-details">
-                    <p class="spot-title">Tujhme raab dikhta hain</p>
-                    <p class="spot-artist">Arijit Singh</p>
-                </div>
-                <button class="spot-play-btn" onclick="toggleHareyaMusic(this)">
-                    <i class="fas fa-play" id="play-icon"></i>
+                <div class="date-badge">📅 15 June</div>
+                <button class="action-btn" onclick="openDiaryView()">
+                    Click Here Saba <i class="fas fa-envelope-open-text"></i>
                 </button>
             </div>
+            
+            <div class="front-right">
+                <div class="profile-card-wrapper">
+                    <div class="realistic-balloon bal-left"></div>
+                    <div class="realistic-balloon bal-right"></div>
+                    
+                    <div class="deco-star" style="top:-30px; right:20px;">★</div>
+                    <div class="deco-star" style="bottom:10px; left:-40px;">✦</div>
 
-            <button class="action-btn" style="background:#b39ddb; color:#2a1b40; border-color:#000; box-shadow:3px 3px 0px #000;" onclick="nextPage('p5')">Continue</button>
+                    <img src="gf_front.jpg" class="gf-circle-img" onerror="this.src='https://via.placeholder.com/280?text=Saba+Front'">
+                    <div class="name-tag">Dear Saba</div>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <div id="p5" class="page">
-        <div class="annoy-card">
-            <h1 style="font-family: 'Fredoka One'; font-size: 36px; color: #ff4d6d; text-shadow: 2px 2px #fff; margin: 0 0 20px 0;">I WANT TO ANNOY YOU FOREVER! ❤️</h1>
-            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHYwdWp3eGZ3eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/KztT2c4u8mYYUiMKdJ/giphy.gif" style="width:260px; border: 4px solid #000; border-radius: 12px; box-shadow: 5px 5px 0px #000;">
+        <div id="p2" class="page">
+            <div class="diary-open-view">
+                
+                <div class="diary-left-page">
+                    <div class="normal-content">
+                        <img src="gf_front.jpg" class="diary-pic" onerror="this.src='https://via.placeholder.com/105?text=Saba+Front'">
+                        <div class="diary-left-title">HAPPY<br>BIRTHDAY<br>SABA! 🎂</div>
+                    </div>
+                    
+                    <div class="diary-rose">🌹</div>
+                </div>
+
+                <div class="diary-right-page">
+                    <h2 class="diary-headline">To You!</h2>
+                    <div class="diary-body-text">
+                        Happy birthday chanda, the day you came into my life I was not really much attached to you but day by day you became close to my heart. And now you are truly my younger sister. I wish I could remove some of the pain from your life which you are bearing alone. But you're always welcome, you can talk anytime you want to talk specially those which you can't say to others. And this year your all dreams come true. I wish that your brother could wish you but if couldn't wish in him behalf I am wishing you happy birthday sana. Don't be Sad, ok be happy. 🥰
+                    </div>
+                    
+                    <div class="navigation-guide-area">
+                        <span class="guide-text">Click arrow to go to the next page</span>
+                        <div class="android-forward-btn" onclick="triggerPrayerPage()">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
-    </div>
 
+        <div id="p3" class="page">
+            <div class="prayer-card">
+                <h1 style="font-family: 'Fredoka One'; color: #ff4d6d; font-size: 36px; margin-top: 0;">My Prayers 🤲</h1>
+                <div id="tw-wish" style="font-family: 'Pacifico'; font-size: 24px; color: #c9184a; min-height: 80px; margin: 20px 0;"></div>
+                <button class="action-btn" id="wish-next" style="display:none; margin: 0 auto;" onclick="nextPage('p4')">Next 👸</button>
+            </div>
+        </div>
+
+        <div id="p4" class="page">
+            <div class="insta-vibe-card">
+                <div class="insta-photo-container">
+                    <div class="insta-queen-crown">👑</div>
+                    <img src="gf_song.jpg" class="gf-rect-img" onerror="this.src='https://via.placeholder.com/290x290?text=Saba+Song'">
+                </div>
+                
+                <h2 class="vibe-text">For you? 😉</h2>
+                
+                <div class="spotify-player">
+                    <div class="spot-icon"><i class="fab fa-spotify"></i></div>
+                    <div class="spot-details">
+                        <p class="spot-title">Hareya</p>
+                        <p class="spot-artist">Arijit Singh</p>
+                    </div>
+                    <button class="spot-play-btn" onclick="toggleHareyaMusic(this)">
+                        <i class="fas fa-play" id="play-icon"></i>
+                    </button>
+                </div>
+
+                <button class="action-btn" style="background:#b39ddb; color:#2a1b40; border-color:#000; box-shadow:3px 3px 0px #000;" onclick="nextPage('p5')">Continue</button>
+            </div>
+        </div>
+
+        <div id="p5" class="page">
+            <div class="annoy-card">
+                <h1 style="font-family: 'Fredoka One'; font-size: 36px; color: #ff4d6d; text-shadow: 2px 2px #fff; margin: 0 0 20px 0;">I WANT TO ANNOY YOU FOREVER! ❤️</h1>
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHYwdWp3eGZ3eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/KztT2c4u8mYYUiMKdJ/giphy.gif" style="width:260px; border: 4px solid #000; border-radius: 12px; box-shadow: 5px 5px 0px #000;">
+            </div>
+        </div>
+
+    </div>
 </div>
 
 <script>
     const melody = document.getElementById('melody-music');
     const hareya = document.getElementById('hareya-music');
 
-    // পাসওয়ার্ড প্রোটেকশন লজিক
-    window.onload = function() {
-        const secretPassword = "saba15"; 
+    // সিকিউর পাসওয়ার্ড ফাংশন (কোনো অটো-রিলোড লুপ হবে না)
+    function checkPassword() {
+        const secretPassword = "saba15";
         let userPass = prompt("Enter Password to Access the Website:");
         
         if (userPass === secretPassword) {
-            document.body.style.display = "flex"; 
-            createConfettiEffect(); // বার্থডে জরি বা ঝালর ইফেক্ট স্টার্ট হবে
-            melody.play().catch(e => console.log("Audio waiting for interaction:", e));
-        } else {
-            alert("Wrong Password! Access Denied.");
-            window.location.reload();
+            document.getElementById('lock-screen').style.display = "none";
+            document.getElementById('main-content').style.display = "flex";
+            createOptimizedConfetti(); // লাইটওয়েট ফাস্ট কনফেটি চালু
+            melody.play().catch(e => console.log("Audio waiting for user interaction..."));
+        } else if (userPass !== null) {
+            alert("Wrong Password! Try Again.");
         }
     }
 
-    // ব্যাকগ্রাউন্ডের ওপর থেকে রঙিন জরি/কনফেটি পড়ার ডাইনামিক ইফেক্ট
-    function createConfettiEffect() {
+    // অপ্টিমাইজড কনফেটি মেকার (নেট স্লো হলেও ল্যাগ করবে না)
+    function createOptimizedConfetti() {
         const box = document.getElementById('confettiBox');
         const colors = ['#ff4d6d', '#ff758f', '#ffb3c1', '#3399ff', '#ffcc00', '#b39ddb'];
-        for (let i = 0; i < 60; i++) {
+        // সংখ্যা সামঞ্জস্যপূর্ণ রেখে স্মুথ পারফরম্যান্সের জন্য ৩৫টি করা হলো
+        for (let i = 0; i < 35; i++) {
             const confetti = document.createElement('div');
             confetti.className = 'confetti';
             confetti.style.left = Math.random() * 100 + '%';
             confetti.style.top = Math.random() * -20 + 'px';
             confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-            confetti.style.width = Math.random() * 8 + 8 + 'px';
+            confetti.style.width = Math.random() * 8 + 6 + 'px';
             confetti.style.height = Math.random() * 12 + 6 + 'px';
-            confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
+            confetti.style.animationDuration = Math.random() * 2.5 + 2 + 's';
             confetti.style.animationDelay = Math.random() * 2 + 's';
             box.appendChild(confetti);
         }
@@ -730,12 +814,12 @@
             if (j < wishText.length) {
                 targetEl.innerHTML += wishText.charAt(j);
                 j++; 
-                setTimeout(type, 60); 
+                setTimeout(type, 50); 
             } else { 
                 document.getElementById('wish-next').style.display = 'block'; 
             }
         }
-        setTimeout(type, 200);
+        setTimeout(type, 150);
     }
 
     // স্পটিফাই প্লেয়ার মিউজিক কন্ট্রোল
