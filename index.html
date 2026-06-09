@@ -106,7 +106,7 @@
             100% { transform: translateY(100vh) rotate(720deg); opacity: 0.4; }
         }
 
-        /* 🎈 রিয়েলিস্টিক ফ্লোটিং বেলুন স্টাইল (Page 1 এর জন্য) */
+        /* 🎈 রিয়েলিস্টিক ফ্লোটিং বেলুন স্টাইল */
         .balloon-wrapper {
             position: absolute;
             bottom: -150px;
@@ -242,7 +242,7 @@
         @keyframes FloatOnly { from { transform: translateY(0px); } to { transform: translateY(-12px); } }
 
         /* ==========================================================================
-           📖 ৬. PAGE 2: অরিজিনাল ওপেন ডায়েরি ভিউ
+           📖 6. PAGE 2: অরিজিনাল ওপেন ডায়েরি ভিউ
            ========================================================================== */
         .diary-open-view { width: 820px; height: 520px; display: flex; transform: rotate(-1deg); filter: drop-shadow(5px 15px 25px rgba(0,0,0,0.15)); }
         .diary-left-page { width: 50%; height: 100%; background: #ff85a1; border: 4px solid #000000; border-radius: 16px 0 0 16px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; position: relative; }
@@ -271,20 +271,23 @@
         .prayer-card { background: #ffffff; border: 4px solid #000000; border-radius: 20px; box-shadow: 8px 8px 0px #000000; padding: 35px; width: 100%; max-width: 650px; text-align: center; }
 
         /* ==========================================================================
-           🎵 ৮. PAGE 4: স্পটিফাই ভাইব কার্ড (ফিক্সড লেআউট)
+           🎵 ৮. PAGE 4: স্পটিফাই ভাইব কার্ড (ক্রাউন একদম সেন্টারে ফিক্সড)
            ========================================================================== */
         .insta-vibe-card { 
             background: #ffffff; border: 4px solid #000000; border-radius: 24px; box-shadow: 8px 8px 0px #000000; 
             padding: 30px; width: 100%; max-width: 400px; display: flex; flex-direction: column; align-items: center; 
         }
         
-        /* ফিক্সড: "For you?" লেখা এখন অরিজিনাল ডিজাইনের মতো ঠিক ছবির ওপরে থাকবে */
         .vibe-text { 
             font-family: 'Fredoka One', cursive; font-size: 26px; color: #ff4d6d; margin-bottom: 12px; text-align: center;
         }
         
         .insta-photo-container { position: relative; width: 270px; height: 270px; margin-bottom: 20px; }
-        .insta-queen-crown { position: absolute; top: -22px; left: 48%; transform: translateX(-50%); font-size: 42px; z-index: 10; }
+        
+        /* ক্রাউন পজিশন ফিক্সড মাথার ঠিক ওপরে */
+        .insta-queen-crown { 
+            position: absolute; top: -22px; left: 48%; transform: translateX(-50%); font-size: 42px; z-index: 10; 
+        }
         .gf-rect-img { width: 100%; height: 100%; object-fit: cover; border-radius: 24px; border: 4px solid #000000; }
         
         .spotify-player { 
@@ -303,7 +306,7 @@
         .annoy-card { display: flex; flex-direction: column; align-items: center; text-align: center; }
 
         /* ==========================================================================
-           🎂 ১০. PAGE 6: সিনেমাটিক ড্রিমি কেক পেজ (৩ মোমবাতি + আই ব্লিংক অ্যানিমেশন)
+           🎂 ১০. PAGE 6: সিনেমাটিক ড্রিমি কেক পেজ (নতুন ২য় ব্যানার সহ)
            ========================================================================== */
         .cake-stage {
             position: relative; width: 100%; max-width: 500px; height: 500px;
@@ -314,7 +317,7 @@
         .cartoon-cake {
             position: relative; width: 250px; height: 140px; background: #ff758f;
             border: 5px solid #000000; border-radius: 120px / 40px;
-            box-shadow: 0 12px 0 #ff4d6d, 0 20px 0px rgba(0,0,0,0.15); margin-top: 100px;
+            box-shadow: 0 12px 0 #ff4d6d, 0 20px 0px rgba(0,0,0,0.15); margin-top: 60px;
             opacity: 0; transform: translateY(250px);
             transition: transform 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 1.2s ease, box-shadow 1.5s ease;
         }
@@ -330,24 +333,24 @@
             background-image: radial-gradient(circle at 15px 0, #fff0f3 18px, transparent 20px); background-size: 30px 40px; z-index: 2;
         }
 
-        /* 👁️ ফেস এবং আই ব্লিংক (Blink) অ্যানিমেশন */
+        /* ফেস এবং আই ব্লিংক অ্যানিমেশন */
         .cake-face {
             position: absolute; top: 55px; left: 50%; transform: translateX(-50%);
             width: 100px; height: 40px; display: flex; justify-content: space-between; align-items: center; z-index: 3;
         }
         .cake-eye { 
             width: 16px; height: 16px; background: #000000; border-radius: 50%; position: relative; 
-            animation: blinkEye 4s infinite; /* ৪ সেকেন্ড পর পর ব্লিংক করবে */
+            animation: blinkEye 4s infinite;
         }
         .cake-eye::after { content: ''; position: absolute; top: 2px; left: 3px; width: 5px; height: 5px; background: #ffffff; border-radius: 50%; }
         .cake-smile { width: 24px; height: 14px; border: 4px solid #000000; border-top: none; border-radius: 0 0 20px 20px; margin-top: 10px; }
 
         @keyframes blinkEye {
             0%, 90%, 100% { transform: scaleY(1); }
-            93%, 96% { transform: scaleY(0.1); } /* চোখ বন্ধ হবে */
+            93%, 96% { transform: scaleY(0.1); }
         }
 
-        /* 🕯️ ৩টি মোমবাতির কন্টেইনার এবং পজিশন */
+        /* ৩টি মোমবাতি */
         .candles-row {
             position: absolute; top: -45px; left: 50%; transform: translateX(-50%);
             width: 90px; display: flex; justify-content: space-between; z-index: 4;
@@ -356,10 +359,8 @@
             width: 12px; height: 55px; background: linear-gradient(90deg, #3399ff 50%, #66b2ff 50%);
             background-size: 10px 10px; border: 3px solid #000000; border-radius: 4px; position: relative;
         }
-        /* মাঝখানের মোমবাতিটা একটু ওপরে থাকবে সৌন্দর্যের জন্য */
         .single-candle.middle { transform: translateY(-5px); }
 
-        /* মোমবাতির শিখা */
         .candle-flame {
             position: absolute; top: -24px; left: 50%; transform: translateX(-50%) scale(0);
             width: 12px; height: 22px; background: #ffcc00; border-radius: 50% 50% 20% 20% / 60% 60% 40% 40%;
@@ -375,12 +376,10 @@
             to { transform: translateX(-50%) scale(1.05) rotate(2deg); }
         }
 
-        body.dreamy-active .candle-flame.ignited {
-            box-shadow: 0 0 20px #ffcc00, 0 0 40px #ff9900;
-        }
+        body.dreamy-active .candle-flame.ignited { box-shadow: 0 0 20px #ffcc00, 0 0 40px #ff9900; }
         body.dreamy-active .cartoon-cake { box-shadow: 0 0 45px rgba(255, 204, 0, 0.35), 0 12px 0 #ff4d6d; }
 
-        /* 🎏 দুলন্ত ব্যানার */
+        /* 🎏 ১ম ব্যানার (Happy Birthday) */
         .hanging-banner {
             position: absolute; top: -180px; display: flex; gap: 12px; z-index: 25;
             transform-origin: top center; transition: top 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.15);
@@ -397,6 +396,35 @@
         .banner-flag.purple { background: #b39ddb; color: #2a1b40; }
 
         @keyframes bannerSwing { 0% { transform: rotate(-4deg); } 100% { transform: rotate(4deg); } }
+
+        /* ❤️ ২য় ব্যানার (I Love You) - কেকের ঠিক নিচে আসার জন্য স্টাইল */
+        .love-banner {
+            margin-top: 35px;
+            background: #ffffff;
+            color: #ff4d6d;
+            font-family: 'Fredoka One', cursive;
+            font-size: 24px;
+            padding: 10px 30px;
+            border: 4px solid #000000;
+            border-radius: 50px;
+            box-shadow: 5px 5px 0px #000000;
+            z-index: 26;
+            
+            /* শুরুতে হাইড থাকবে এবং ছোট হয়ে থাকবে */
+            opacity: 0;
+            transform: scale(0);
+            transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 1s ease;
+        }
+        /* ২য় ব্যানার ড্রপ ট্রিগার হলে একটিভ হবে */
+        .cake-stage.love-dropped .love-banner {
+            opacity: 1;
+            transform: scale(1);
+            animation: pulseLove 2s infinite alternate;
+        }
+        @keyframes pulseLove {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); box-shadow: 7px 7px 0px #000000; }
+        }
 
         /* রেসপন্সিভ মিডিয়া কুয়েরি */
         @media (max-width: 768px) {
@@ -419,7 +447,7 @@
 <div id="lock-screen">
     <div class="lock-card">
         <h2 style="font-family: 'Fredoka One'; color: #ff4d6d; margin-top:0;">🔒 Site Locked</h2>
-        <p style="font-size:14px; color:#555; margin-top: 10px;">Enter the password to experience the magic setup for Saba!</p>
+        <p style="font-size:14px; color:#555; margin-top: 10px;">Enter the password to experience the magic setup for my Saba!</p>
         <button class="lock-btn" onclick="checkPassword()">Unlock Now</button>
     </div>
 </div>
@@ -471,7 +499,7 @@
                 <div class="diary-right-page">
                     <h2 class="diary-headline">To You!</h2>
                     <div class="diary-body-text">
-                        Happy birthday chanda, the day you came into my life I was not really much attached to you but day by day you became close to my heart. And now you are truly my younger sister. I wish I could remove some of the pain from your life which you are bearing alone. But you're always welcome, you can talk anytime you want to talk specially those which you can't say to others. And this year your all dreams come true. I wish that your brother could wish you but if couldn't wish in him behalf I am wishing you happy birthday sana. Don't be Sad, ok be happy. 🥰
+                        Happy birthday jaan, the day you came into my life I was not really much attached to you but day by day you became close to my heart. I wish I could remove some of the pain from your life which you are bearing alone. But you're always welcome, you can talk anytime you want to talk specially those which you can't say to others. And this year your all dreams come true. Don't be Sad, ok? be happy. 🥰
                     </div>
                     <div class="navigation-guide-area">
                         <span class="guide-text">Click arrow to see prayers</span>
@@ -494,7 +522,6 @@
         <div id="p4" class="page">
             <div class="insta-vibe-card">
                 <h2 class="vibe-text">My Birthday Queen</h2>
-                
                 <div class="insta-photo-container">
                     <div class="insta-queen-crown">👑</div>
                     <img src="gf_song.jpg" class="gf-rect-img" onerror="this.src='gf_pic.jpg'">
@@ -503,7 +530,7 @@
                 <div class="spotify-player">
                     <div class="spot-icon"><i class="fab fa-spotify"></i></div>
                     <div class="spot-details">
-                        <p class="spot-title">TUjhme Raab Dikhta hain</p>
+                        <p class="spot-title">Tujhme Raab Dikhta Hain</p>
                         <p class="spot-artist">Roopkumar Rathode</p>
                     </div>
                     <button class="spot-play-btn" onclick="toggleSong(this)">
@@ -518,7 +545,7 @@
             <div class="annoy-card">
                 <h1 style="font-family: 'Fredoka One'; font-size: 36px; color: #ff4d6d; text-shadow: 2px 2px #fff; margin-bottom: 20px;">I WANT TO ANNOY YOU FOREVER! ❤️</h1>
                 <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHYwdWp3eGZ3eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/KztT2c4u8mYYUiMKdJ/giphy.gif" style="width:260px; border: 4px solid #000; border-radius: 12px; box-shadow: 4px 4px 0px #000; margin-bottom: 25px;">
-                <button class="action-btn" onclick="triggerCinematicCakePage()">Celebration🎉</button>
+                <button class="action-btn" onclick="triggerCinematicCakePage()">Celebration<🎉/button>
             </div>
         </div>
 
@@ -528,7 +555,7 @@
                 <div class="hanging-banner">
                     <div class="banner-flag">Happy</div>
                     <div class="banner-flag blue">Birthday</div>
-                    <div class="banner-flag purple">Saba ✨</div>
+                    <div class="banner-flag purple">Saba </div>
                 </div>
 
                 <div class="cartoon-cake">
@@ -546,6 +573,10 @@
                     </div>
                 </div>
 
+                <div class="love-banner" id="loveBanner">
+                    I Love You ❤️
+                </div>
+
             </div>
         </div>
 
@@ -556,7 +587,6 @@
     const melody = document.getElementById('melody-music');
     const hareya = document.getElementById('hareya-music');
 
-    // 🔒 পাসওয়ার্ড ভেরিফিকেশন
     function checkPassword() {
         const secret = "saba15";
         let userPass = prompt("Enter Password to Access the Website:");
@@ -564,14 +594,13 @@
             document.getElementById('lock-screen').style.display = "none";
             createConfetti();
             generateStars();
-            spawnBalloons(); // ফ্রন্ট পেজের বেলুন জেনারেট হবে
+            spawnBalloons();
             melody.play().catch(e => console.log("Audio play deferred:", e));
         } else if (userPass !== null) {
             alert("Wrong Password! Try Again.");
         }
     }
 
-    // 🎉 কনফেটি জেনারেটর
     function createConfetti() {
         const box = document.getElementById('confettiBox');
         const colors = ['#ff4d6d', '#ff758f', '#ffb3c1', '#3399ff', '#ffcc00', '#b39ddb'];
@@ -589,7 +618,6 @@
         }
     }
 
-    // 🌌 তারা জেনারেটর
     function generateStars() {
         const sky = document.getElementById('starSky');
         for (let i = 0; i < 60; i++) {
@@ -606,7 +634,6 @@
         }
     }
 
-    // 🎈 রিয়েলিস্টিক বেলুন স্পনার ফাংশন (Page 1 এর জন্য)
     function spawnBalloons() {
         const container = document.getElementById('balloonLayer');
         const colors = ['#ff4d6d', '#ff758f', '#3399ff', '#ffcc00', '#b39ddb'];
@@ -621,12 +648,6 @@
             balloon.className = 'realistic-balloon';
             const randomColor = colors[Math.floor(Math.random() * colors.length)];
             balloon.style.backgroundColor = randomColor;
-            balloon.style.setProperty('--balloon-base-color', randomColor);
-
-            // বেলুনের নিচের গিঁট দেওয়ার জন্য স্টাইল ডায়নামিকালি ইনজেক্ট
-            const style = document.createElement('style');
-            style.innerHTML = `.realistic-balloon::before { border-bottom: 7px solid ${randomColor}; }`;
-            document.head.appendChild(style);
 
             const string = document.createElement('div');
             string.className = 'balloon-string';
@@ -637,17 +658,15 @@
         }
     }
 
-    // 🔄 পেজ রাউটার
     function nextPage(id) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
         
         if (id !== 'p6') {
             document.body.classList.remove('dreamy-active');
-            document.getElementById('cakeStage').classList.remove('cake-entered', 'banner-dropped');
+            document.getElementById('cakeStage').classList.remove('cake-entered', 'banner-dropped', 'love-dropped');
             document.querySelectorAll('.candle-flame').forEach(f => f.classList.remove('ignited'));
         }
 
-        // বেলুন শুধুমাত্র প্রথম পেজেই দেখা যাবে
         if (id === 'p1') {
             document.getElementById('balloonLayer').style.display = 'block';
         } else {
@@ -656,7 +675,6 @@
 
         document.getElementById(id).classList.add('active');
 
-        // মিউজিক কন্ট্রোল
         if (id === 'p4') {
             melody.pause();
         } else if (id === 'p5' || id === 'p6') {
@@ -669,7 +687,6 @@
         }
     }
 
-    // 🤲 উইশ টাইপিং ইফেক্ট
     function triggerPrayerPage() {
         nextPage('p3');
         const text = "May God bless you, take care of your health, and stay happy always! ✨";
@@ -689,7 +706,6 @@
         setTimeout(type, 300);
     }
 
-    // 🎵 স্পটিফাই প্লে/পজ
     function toggleSong(btn) {
         const icon = document.getElementById('play-icon');
         if (hareya.paused) {
@@ -702,7 +718,7 @@
     }
 
     // ==========================================================================
-    // 🎬 PAGE 6 TIMELINE CONTROLLER: ৩ মোমবাতির পারফেক্ট সিন
+    // 🎬 PAGE 6 TIMELINE CONTROLLER: পারফেক্ট ৪ সেকেন্ড ডিলে সিকোয়েন্স
     // ==========================================================================
     function triggerCinematicCakePage() {
         nextPage('p6');
@@ -715,18 +731,21 @@
             stage.classList.add('cake-entered');
         }, 300);
 
-        // স্টেপ ২: কেক আসার পর ৩টি মোমবাতি একসাথে জ্বলে উঠবে
+        // স্টেপ ২: কেক আসার পর মোমবাতি জ্বলবে এবং ব্যাকগ্রাউন্ড ড্রিমি ডার্ক হবে
         setTimeout(() => {
             flames.forEach(flame => flame.classList.add('ignited'));
-            
-            // স্টেপ ৩: মোমবাতি জ্বলার ঠিক সাথে সাথে ব্যাকগ্রাউন্ড স্মুথলি ড্রিমি ডার্ক হবে
             document.body.classList.add('dreamy-active');
         }, 1800);
 
-        // স্টেপ ৪: রাতের ড্রিমি ব্যাকগ্রাউন্ড অন হওয়ার পর ব্যানারটি দুলতে দুলতে নামবে
+        // স্টেপ ৩: মোমবাতি জ্বলার ঠিক ৪ সেকেন্ড পর ১ম ব্যানার (Happy Birthday) নামবে
         setTimeout(() => {
             stage.classList.add('banner-dropped');
-        }, 2800);
+        }, 5800); // (১৮০০ + ৪০০০) = ৫৮০০ মিলিসেকেন্ড
+
+        // স্টেপ ৪: ১ম ব্যানার নামার ঠিক ৪ সেকেন্ড পর ২য় ব্যানার (I Love You) কেকের নিচে পপ-আপ করবে
+        setTimeout(() => {
+            stage.classList.add('love-dropped');
+        }, 9800); // (৫৮০০ + ৪০০০) = ৯৮০০ মিলিসেকেন্ড
     }
 </script>
 
